@@ -48,9 +48,9 @@ void Vertex::addEdges(Edge *edge)
 	this->edges.push_back(edge);
 }
 
-void Vertex::setPath(Vertex **vertex)
+void Vertex::setPath(Vertex *vertex)
 {
-	this->path = *vertex;
+	this->path = vertex;
 }
 
 bool Vertex::operator<(const Vertex &vertex) const

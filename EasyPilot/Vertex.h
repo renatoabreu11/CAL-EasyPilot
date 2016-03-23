@@ -32,7 +32,7 @@ public:
 	void setName(string name);
 	void setDist(int dist);
 	void addEdges(Edge *edge);
-	void setPath(Vertex **vertex);
+	void setPath(Vertex *vertex);
 
 	bool operator<(const Vertex &vertex) const;
 	bool operator==(const Vertex &vertex) const;

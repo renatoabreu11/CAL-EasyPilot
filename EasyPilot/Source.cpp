@@ -82,7 +82,7 @@ int main()
 			{
 				cout << v.getDist() + v.getEdges()[i]->getWeight() << endl;
 				w->setDist(v.getDist() + v.getEdges()[i]->getWeight());
-				w->setPath(v);
+				w->setPath(&v);
 
 				if (!check(q, w))
 					q.push(*w);
