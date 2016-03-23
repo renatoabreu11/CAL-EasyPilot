@@ -6,13 +6,13 @@
 
 using namespace std;
 
-bool check(priority_queue<Vertex> q, Vertex *w)
+bool check(priority_queue<Vertex<string>> q, Vertex<string> *w)
 {
-	priority_queue<Vertex> a = q;
+	priority_queue<Vertex<string>> a = q;
 
 	while (!a.empty())
 	{
-		Vertex v = a.top();
+		Vertex<string> v = a.top();
 		a.pop();
 
 		if (&v == w)
@@ -24,7 +24,7 @@ bool check(priority_queue<Vertex> q, Vertex *w)
 
 int main()
 {
-	Vertex v1("v1"), v2("v2"), v3("v3"), v4("v4"), 
+	Vertex<string> v1("v1"), v2("v2"), v3("v3"), v4("v4"),
 		v5("v5"), v6("v6"), v7("v7");
 
 	//Edge *a = new Edge(&v1, &v2, 2);
@@ -47,7 +47,7 @@ int main()
 
 	v7.addEdges(new Edge(&v7, &v6, 1));
 
-	vector<Vertex> vertexes;
+	vector<Vertex<string>> vertexes;
 	vertexes.push_back(v1);
 	vertexes.push_back(v2);
 	vertexes.push_back(v3);
@@ -64,16 +64,16 @@ int main()
 
 	vertexes[0].setDist(0);
 
-	priority_queue<Vertex> q;
+	priority_queue<Vertex<string>> q;
 	q.push(vertexes[0]);
 
 	while (!q.empty())
 	{
-		Vertex v = q.top();
+		Vertex<string> v = q.top();
 		q.pop();
 		for (int i = 0; i < v.getEdges().size(); i++)
 		{
-			Vertex *w = v.getEdges()[i]->getTo();
+			Vertex<string> *w = v.getEdges()[i]->getTo();
 			
 			//cout << w->getDist() << endl;
 			//cout << *w;

@@ -1,28 +1,24 @@
 #include "Edge.h"
 
-Edge::Edge()
-{
-
+template<class T>
+Edge<T>::Edge(){
+	this->dest = NULL;
 }
 
-Edge::Edge(Vertex *from, Vertex *to, int weight)
-{
-	this->from = from;
-	this->to = to;
+template<class T>
+Edge<T>::Edge(Vertex<T> *dest, int weight){
+	this->dest = dest;
 	this->weight = weight;
 }
 
-Vertex* Edge::getFrom() const
+template<class T>
+Vertex<T>* Edge<T>::getDest() const
 {
-	return this->from;
+	return this->dest;
 }
 
-Vertex* Edge::getTo() const
-{
-	return this->to;
-}
-
-int Edge::getWeight() const
+template<class T>
+int Edge<T>::getWeight() const
 {
 	return this->weight;
 }

@@ -7,37 +7,41 @@
 #include <cstdint>
 #include <string>
 #include <vector>
+#include <limits.h>
+
+const int INFINITY = INT_MAX;
 
 using namespace std;
 
-class Edge;
+template<class T> class Edge;
 
-class Vertex
-{
+template<class T> class Vertex {
 private:
-	string name;
+	T data;
 	int dist;
-	vector<Edge *> edges;
-	Vertex *path;
+	bool visited;
+	vector<Edge<T>*> edges;
 
 public:
 	Vertex();
-	Vertex(string name);
+	Vertex(T data);
 
-	string getName() const;
+	T getData() const;
 	int getDist() const;
 	vector<Edge *> getEdges() const;
 	Vertex *getPath() const;
-	
-	void setName(string name);
-	void setDist(int dist);
-	void addEdges(Edge *edge);
-	void setPath(Vertex *vertex);
+	bool getVisited();
 
-	bool operator<(const Vertex &vertex) const;
-	bool operator==(const Vertex &vertex) const;
+	void setVisited(bool b);
+	void setData(T data);
+	void setDist(int dist);
+	void addEdge(Edge<T> *edge);
+
+	bool operator<(const Vertex<T> &vertex) const;
+	bool operator==(const Vertex<T> &vertex) const;
 };
 
-ostream& operator<<(ostream &out, const Vertex &vertex);
+template<class T>
+ostream& operator<<(ostream &out, const Vertex<T> &vertex);
 
 #endif

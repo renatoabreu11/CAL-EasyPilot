@@ -2,69 +2,80 @@
 
 #include "Vertex.h"
 
-Vertex::Vertex()
+template<class T>
+Vertex<T>::Vertex()
 {
 
 }
 
-Vertex::Vertex(string name)
+template<class T>
+Vertex<T>::Vertex(T data)
 {
-	this->name = name;
-	this->dist = 9999;
+	this->data = data;
+	this->dist = INFINITY;
 }
 
-string Vertex::getName() const
+template<class T>
+T Vertex<T>::getData() const
 {
-	return this->name;
+	return this->data;
 }
 
-int Vertex::getDist() const
+template<class T>
+int Vertex<T>::getDist() const
 {
 	return this->dist;
 }
 
-vector<Edge *> Vertex::getEdges() const
+template<class T>
+bool  Vertex<T>::getVisited(){
+	return this->visited;
+}
+
+template<class T>
+vector<Edge *> Vertex<T>::getEdges() const
 {
 	return this->edges;
 }
 
-Vertex* Vertex::getPath() const
+template<class T>
+void Vertex<T>::setData(T data)
 {
-	return this->path;
+	this->data = data;
 }
 
-void Vertex::setName(string name)
-{
-	this->name = name;
+template<class T>
+void Vertex<T>::setVisited(bool b){
+	this->visited = b;
 }
 
-void Vertex::setDist(int dist)
+template<class T>
+void Vertex<T>::setDist(int dist)
 {
 	this->dist = dist;
 }
 
-void Vertex::addEdges(Edge *edge)
+template<class T>
+void Vertex<T>::addEdge(Edge<T> *edge)
 {
 	this->edges.push_back(edge);
 }
 
-void Vertex::setPath(Vertex *vertex)
-{
-	this->path = vertex;
-}
-
-bool Vertex::operator<(const Vertex &vertex) const
+template<class T>
+bool Vertex<T>::operator<(const Vertex<T> &vertex) const
 {
 	return this->dist > vertex.getDist();
 }
 
-bool Vertex::operator==(const Vertex &vertex) const
+template<class T>
+bool Vertex<T>::operator==(const Vertex<T> &vertex) const
 {
-	return this->name == vertex.getName();
+	return this->data == vertex.getData();
 }
 
-ostream& operator<<(ostream &out, const Vertex &vertex)
+template<class T>
+ostream& operator<<(ostream &out, const Vertex<T> &vertex)
 {
-	out << "Name: " << vertex.getName() << ", dist = " << vertex.getDist() << endl;
+	out << "Name: " << vertex.getData() << ", dist = " << vertex.getDist() << endl;
 	return out;
 }

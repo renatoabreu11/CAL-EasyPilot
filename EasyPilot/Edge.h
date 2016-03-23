@@ -9,21 +9,19 @@
 
 using namespace std;
 
-class Vertex;
+template<class T> class Vertex<T>;
 
-class Edge
+template<class T> class Edge
 {
 private:
-	Vertex *from;
-	Vertex *to;
-	int weight;
+	Vertex<T> *dest;
+	double weight;
 
 public:
 	Edge();
-	Edge(Vertex *from, Vertex *to, int weight);
+	Edge(Vertex<T> *dest, int weight);
 
-	Vertex *getFrom() const;
-	Vertex *getTo() const;
+	Vertex<T> *getDest() const;
 	int getWeight() const;
 };
 
