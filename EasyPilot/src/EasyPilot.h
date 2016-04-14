@@ -5,6 +5,9 @@
 #include "Graph.h"
 #include "graphviewer.h"
 #include "menu.h"
+#include "iostream"
+#include "fstream"
+#include "string"
 
 class EasyPilot {
 public:
