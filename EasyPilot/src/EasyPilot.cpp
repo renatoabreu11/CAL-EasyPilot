@@ -2,8 +2,27 @@
 #include "EasyPilot.h"
 
 EasyPilot::EasyPilot() {
-	// TODO Auto-generated constructor stub
 
+	GraphViewer *gv = new GraphViewer(600, 600, true);
+	gv->createWindow(600, 600);
+	gv->defineVertexColor("blue");
+	gv->defineEdgeColor("black");
+
+	for(unsigned int i = 0; i < graph.getNumVertex(); i++)
+		gv->addNode(graph.getVertexSet()[i]->getNodeId());
+
+	for(unsigned int i = 0; i < graph.getNumVertex(); i++)
+	{
+		for(unsigned int j = 0; j < graph.getVertexSet()[i]->getAdj().size(); j++)
+		{
+			if(graph.getVertexSet()[i]->getAdj()[j].getTtwoWays())
+				gv->addEdge(graph.getVertexSet()[i]->getAdj()[j].getId(), graph.getVertexSet()[i]->getNodeId(), graph.getVertexSet()[i]->getAdj()[j].getDest()->getNodeId(), EdgeType::UNDIRECTED);
+			else
+				gv->addEdge(graph.getVertexSet()[i]->getAdj()[j].getId(), graph.getVertexSet()[i]->getNodeId(), graph.getVertexSet()[i]->getAdj()[j].getDest()->getNodeId(), EdgeType::DIRECTED);
+
+			gv->setEdgeLabel(graph.getVertexSet()[i]->getAdj()[j].getId(), graph.getVertexSet()[i]->getAdj()[j].getName());
+		}
+	}
 }
 
 EasyPilot::~EasyPilot() {

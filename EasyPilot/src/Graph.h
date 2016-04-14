@@ -16,6 +16,10 @@ class Vertex {
 	T info;
 	vector<Edge<T>  > adj;
 	bool visited;
+	int nodeId;
+	float latitude;
+	float longitude;
+
 	void addEdge(Vertex<T> *dest, double w);
 	bool removeEdgeTo(Vertex<T> *d);
 public:
@@ -23,6 +27,8 @@ public:
 	friend class Graph<T>;
 
 	T getInfo() const;
+	vector<Edge<T> > getAdj();
+	int getNodeId();
 };
 
 
@@ -56,17 +62,76 @@ void Vertex<T>::addEdge(Vertex<T> *dest, double w) {
 }
 
 template <class T>
+int Vertex<T>::getNodeId()
+{
+	return nodeId;
+}
+
+template <class T>
+vector<Edge<T> > Vertex<T>::getAdj()
+{
+	return adj;
+}
+
+
+
+
+
+
+
+
+template <class T>
 class Edge {
 	Vertex<T> * dest;
 	double weight;
+	int id;
+	string name;
+	bool twoWays;
 public:
 	Edge(Vertex<T> *d, double w);
 	friend class Graph<T>;
 	friend class Vertex<T>;
+
+	Vertex<T> * getDest();
+	int getId();
+	bool getTtwoWays();
+	string getName();
 };
 
 template <class T>
 Edge<T>::Edge(Vertex<T> *d, double w): dest(d), weight(w){}
+
+template <class T>
+Vertex<T> * Edge<T>::getDest()
+{
+	return dest;
+}
+
+template <class T>
+int Edge<T>::getId()
+{
+	return id;
+}
+
+template <class T>
+bool Edge<T>::getTtwoWays()
+{
+	return twoWays;
+}
+
+template <class T>
+string Edge<T>::getName()
+{
+	return name;
+}
+
+
+
+
+
+
+
+
 
 template <class T>
 class Graph {
@@ -249,3 +314,4 @@ int Graph<T>::maxNewChildren(Vertex<T> *v, T &inf) const {
 
 
 #endif /* GRAPH_H_ */
+
