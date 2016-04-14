@@ -18,16 +18,11 @@ class Vertex {
 	bool visited;
 	void addEdge(Vertex<T> *dest, double w);
 	bool removeEdgeTo(Vertex<T> *d);
-	void removeEdgeFrom();
-	int indegree;
 public:
 	Vertex(T in);
 	friend class Graph<T>;
 
 	T getInfo() const;
-	int getIndegree() const;
-	void incIndegree();
-	void decIndegree();
 };
 
 
@@ -37,7 +32,6 @@ bool Vertex<T>::removeEdgeTo(Vertex<T> *d) {
 	typename vector<Edge<T> >::iterator ite= adj.end();
 	while (it!=ite) {
 		if (it->dest == d) {
-			it->dest->decIndegree();
 			adj.erase(it);
 			return true;
 		}
@@ -47,15 +41,7 @@ bool Vertex<T>::removeEdgeTo(Vertex<T> *d) {
 }
 
 template <class T>
-void Vertex<T>::removeEdgeFrom() {
-	while (!adj.empty()) {
-		adj.back().dest->decIndegree();
-		adj.pop_back();
-	}
-}
-
-template <class T>
-Vertex<T>::Vertex(T in): info(in), visited(false), indegree(0){}
+Vertex<T>::Vertex(T in): info(in), visited(false){}
 
 template <class T>
 T Vertex<T>::getInfo() const {
@@ -65,7 +51,6 @@ T Vertex<T>::getInfo() const {
 
 template <class T>
 void Vertex<T>::addEdge(Vertex<T> *dest, double w) {
-	dest->incIndegree();
 	Edge<T> edgeD(dest,w);
 	adj.push_back(edgeD);
 }
@@ -97,9 +82,6 @@ public:
 	int maxNewChildren(Vertex<T> *v, T &inf) const;
 	vector<Vertex<T> * > getVertexSet() const;
 	int getNumVertex() const;
-	vector<Vertex<T>*> getSources() const;
-	void resetIndegrees();
-	bool isDAG();
 };
 
 template <class T>
@@ -134,7 +116,6 @@ bool Graph<T>::removeVertex(const T &in) {
 			typename vector<Vertex<T>*>::iterator it1e= vertexSet.end();
 			for (; it1!=it1e; it1++) {
 				(*it1)->removeEdgeTo(v);
-				(v)->removeEdgeFrom();
 			}
 			delete v;
 			return true;
@@ -264,46 +245,6 @@ int Graph<T>::maxNewChildren(Vertex<T> *v, T &inf) const {
 	}
 	return maxChildren;
 }
-
-template <class T>
-int Vertex<T>::getIndegree() const{
-	return this->indegree;
-}
-
-template <class T>
-void Vertex<T>::incIndegree(){
-	this->indegree++;
-}
-
-template <class T>
-void Vertex<T>::decIndegree(){
-	this->indegree--;
-}
-
-template <class T>
-vector<Vertex<T>*> Graph<T>::getSources() const{
-	vector<Vertex<T>*> ret;
-
-	typename vector<Vertex<T>*>::const_iterator it = vertexSet.begin();
-	typename vector<Vertex<T>*>::const_iterator ite = vertexSet.end();
-	for (; it != ite; it++) {
-		if ((*it)->indegree == 0) {
-			ret.push_back(*it);
-		}
-	}
-
-	return ret;
-}
-
-template<class T>
-void Graph<T>::resetIndegrees() {
-	typename vector<Vertex<T>*>::const_iterator it = vertexSet.begin();
-	typename vector<Vertex<T>*>::const_iterator ite = vertexSet.end();
-	for (; it != ite; it++) {
-		(*it)->indegree = 0;
-	}
-}
-
 
 
 

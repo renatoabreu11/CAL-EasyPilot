@@ -4,6 +4,7 @@
 #include <string>
 #include <windows.h>
 #include <iostream>
+using namespace std;
 
 /**
  * Prints all the options and allows the user to choose one of them
