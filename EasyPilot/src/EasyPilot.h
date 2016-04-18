@@ -10,13 +10,14 @@
 #include "string"
 
 class EasyPilot {
+private:
+	Graph<unsigned> graph;
+	GraphViewer * gv;
 public:
 	EasyPilot();
 	virtual ~EasyPilot();
 	bool readOSM(string filename);
-
-private:
-	Graph<int> graph;
+	void graphInfoToGV();
 };
 
 #endif /* SRC_EASYPILOT_H_ */
