@@ -119,22 +119,24 @@ void EasyPilot::graphInfoToGV(){
 	for (int i = 0; i < graph.getNumVertex(); i++)
 		gv->addNode(vertex[i]->getInfo(), vertex[i]->getLongitude(), vertex[i]->getLatitude());
 
+	int counter = 0;
 	for (int i = 0; i < graph.getNumVertex(); i++) {
 		vector<Edge<unsigned>  > adjEdges = vertex[i]->getAdj();
 		for (unsigned int j = 0; j < adjEdges.size(); j++) {
 			if (adjEdges[j].getTwoWays()){
-				gv->addEdge(adjEdges[j].getId(), vertex[i]->getInfo(),
+				gv->addEdge(counter, vertex[i]->getInfo(),
 						adjEdges[j].getDest()->getInfo(),
 						EdgeType::UNDIRECTED);
 			}
 			else
-				gv->addEdge(adjEdges[j].getId(),
+				gv->addEdge(counter,
 						vertex[i]->getInfo(),
 						adjEdges[j].getDest()->getInfo(),
 						EdgeType::DIRECTED);
 
-			gv->setEdgeLabel(graph.getVertexSet()[i]->getAdj()[j].getId(),
-					graph.getVertexSet()[i]->getAdj()[j].getName());
+			gv->setEdgeLabel(counter,
+					adjEdges[j].getName());
+			counter++;
 		}
 	}
 	gv->rearrange();
