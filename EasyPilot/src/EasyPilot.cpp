@@ -7,10 +7,7 @@ struct Link{
 };
 
 EasyPilot::EasyPilot() {
-	gv = new GraphViewer(1600, 700, true);
-	gv->createWindow(1600, 700);
-	gv->defineVertexColor("blue");
-	gv->defineEdgeColor("black");
+
 }
 
 EasyPilot::~EasyPilot() {
@@ -43,7 +40,6 @@ bool EasyPilot::readOSM(string filename) {
 			aux = line.substr(lastSemicolon + 1, line.size());
 			longitudeInDegrees = atof(aux.c_str());
 			graph.addVertex(nodeId, longitudeInDegrees, latitudeInDegrees);
-			cout << nodeId << endl;
 		}
 	} catch (ifstream::failure &e) {
 		cout << "Error while opening " << nodesFile << endl;
@@ -93,7 +89,6 @@ bool EasyPilot::readOSM(string filename) {
 			roadId = atol(aux.c_str());
 			aux = line.substr(firstSemicolon + 1, lastSemicolon - firstSemicolon - 1);
 			roadName = aux.c_str();
-			cout << roadName << endl;
 			aux = line.substr(lastSemicolon + 1, line.size());
 			if(aux == "False")
 				isTwoWay = false;
@@ -115,6 +110,11 @@ bool EasyPilot::readOSM(string filename) {
 }
 
 void EasyPilot::graphInfoToGV(){
+	gv = new GraphViewer(1600, 700, true);
+	gv->createWindow(1600, 700);
+	gv->defineVertexColor("blue");
+	gv->defineEdgeColor("black");
+
 	vector<Vertex<unsigned> * > vertex = graph.getVertexSet();
 	for (int i = 0; i < graph.getNumVertex(); i++)
 		gv->addNode(vertex[i]->getInfo(), vertex[i]->getLongitude(), vertex[i]->getLatitude());

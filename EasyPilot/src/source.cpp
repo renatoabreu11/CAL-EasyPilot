@@ -29,7 +29,7 @@ void menuManager()
 				gps.graphInfoToGV();
 				break;
 			case 2:
-				gps.readOSM("Mortosa");
+				gps.readOSM("Murtosa");
 				gps.graphInfoToGV();
 				break;
 			case 3:
