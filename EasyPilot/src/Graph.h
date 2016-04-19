@@ -237,6 +237,8 @@ public:
 	int edgeCost(int vOrigIndex, int vDestIndex);
 	vector<T> getfloydWarshallPath(const T &origin, const T &dest);
 	void getfloydWarshallPathAux(int index1, int index2, vector<T> & res);
+
+	int getNumEdge() const;
 };
 
 
@@ -486,6 +488,17 @@ vector<Vertex<T>*> Graph<T>::getSources() const {
 		if( vertexSet[i]->indegree == 0 ) buffer.push_back( vertexSet[i] );
 	}
 	return buffer;
+}
+
+template <class T>
+int Graph<T>::getNumEdge() const
+{
+	int counter = 0;
+
+	for(unsigned int i = 0; i < vertexSet.size(); i++)
+		counter += vertexSet[i]->adj.size();
+
+	return counter;
 }
 
 
