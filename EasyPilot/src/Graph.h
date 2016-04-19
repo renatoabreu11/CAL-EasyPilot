@@ -151,6 +151,7 @@ public:
 	Edge(Vertex<T> *d, double w, bool tw, T id, string name);
 	bool getTwoWays() const;
 	T getId() const;
+	int getWeight() const;
 	string getName() const;
 	friend class Graph<T>;
 	friend class Vertex<T>;
@@ -168,6 +169,12 @@ bool Edge<T>::getTwoWays() const{
 template <class T>
 T Edge<T>::getId() const{
 	return this->id;
+}
+
+template <class T>
+int Edge<T>::getWeight() const
+{
+	return this->weight;
 }
 
 template <class T>
@@ -211,6 +218,7 @@ public:
 	vector<Vertex<T> * > getVertexSet() const;
 	int getNumVertex() const;
 	int getVertexIndex(T id) const;
+	int calculateEdgeWeight(T id1, T id2) const;
 
 	//exercicio 5
 	Vertex<T>* getVertex(const T &v) const;
@@ -427,6 +435,26 @@ int Graph<T>::getVertexIndex(T id) const{
 			return i;
 
 	return -1;
+}
+
+template<class T>
+int Graph<T>::calculateEdgeWeight(T id1, T id2) const
+{
+	Vertex<T> v1 = getVertex(id1);
+	Vertex<T> v2 = getVertex(id2);
+
+	double lon1, lon2, lat1, lat2;
+
+	lon1 = v1->getLongitude();
+	lat1 = v1->getLatitude();
+	lon2 = v2->getLongitude();
+	lat2 = v2->getLatitude();
+
+	double dist = sqrt(pow((lon1 - lon2), 2) + pow((lat1 - lat2), 2));
+
+	dist = dist * 100000; // to return an int
+
+	return floor(dist);
 }
 
 template <class T>
