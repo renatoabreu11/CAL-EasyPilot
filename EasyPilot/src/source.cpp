@@ -3,7 +3,7 @@
 
 void loadMap(string location, EasyPilot &gps)
 {
-	int fromNodeID, toNodeID, passThough;
+	int fromNodeID, toNodeID, passThrough;
 	cout << "Wait for the map to load...\n";
 	cout.flush();
 
@@ -15,8 +15,14 @@ void loadMap(string location, EasyPilot &gps)
 	cout << "Type the node ID from where to end: ";
 	cin >> toNodeID;
 	cout << "If you want to go though any part of the city, type it's node ID, if not, type '-1': ";
-	cin >> passThough;
+	cin >> passThrough;
 	cout << endl;
+
+	gps.highlightNode(fromNodeID);
+	gps.highlightNode(toNodeID);
+
+	if(passThrough != -1)
+		gps.highlightNode(passThrough);
 
 	gps.updateMap();
 

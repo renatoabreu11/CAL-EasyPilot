@@ -135,12 +135,12 @@ void EasyPilot::graphInfoToGV() {
 		for (unsigned int j = 0; j < adjEdges.size(); j++) {
 			srcNode = graph.getVertexIndex(vertex[i]->getInfo());
 			dstNode = graph.getVertexIndex(adjEdges[j].getDest()->getInfo());
-			if (adjEdges[j].getTwoWays()) {
+			if (adjEdges[j].getTwoWays())
 				gv->addEdge(counter, srcNode, dstNode, EdgeType::UNDIRECTED);
-				gv->setEdgeWeight(counter, adjEdges[j].getWeight());
-			} else
+			else
 				gv->addEdge(counter, srcNode, dstNode, EdgeType::DIRECTED);
 
+			gv->setEdgeWeight(counter, adjEdges[j].getWeight());
 			gv->setEdgeLabel(counter, adjEdges[j].getName());
 			counter++;
 		}
