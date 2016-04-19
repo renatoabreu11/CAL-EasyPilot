@@ -210,6 +210,7 @@ public:
 	int maxNewChildren(Vertex<T> *v, T &inf) const;
 	vector<Vertex<T> * > getVertexSet() const;
 	int getNumVertex() const;
+	int getVertexIndex(T id) const;
 
 	//exercicio 5
 	Vertex<T>* getVertex(const T &v) const;
@@ -419,6 +420,14 @@ int Graph<T>::maxNewChildren(Vertex<T> *v, T &inf) const {
 	return maxChildren;
 }
 
+template <class T>
+int Graph<T>::getVertexIndex(T id) const{
+	for (int i = 0; i < this->vertexSet.size(); i++)
+		if(this->vertexSet[i]->info == id)
+			return i;
+
+	return -1;
+}
 
 template <class T>
 Vertex<T>* Graph<T>::getVertex(const T &v) const {
