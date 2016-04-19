@@ -23,6 +23,8 @@ public:
 	virtual ~EasyPilot();
 	bool readOSM(string filename);
 	void graphInfoToGV();
+	bool highlightNode(int id);
+	bool highlightEdge(int id);
 	void eraseMap();
 	void updateMap();
 };

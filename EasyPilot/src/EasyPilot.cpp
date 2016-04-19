@@ -97,7 +97,8 @@ bool EasyPilot::readOSM(string filename) {
 				isTwoWay = true;
 			for (unsigned int i = 0; i < links.size(); i++) {
 				if (links[i]->roadId == roadId) {
-					graph.addEdge(links[i]->node1Id, links[i]->node2Id, 1,
+					int weight = = calculateEdgeWeigth(links[i]->node1Id, links[i]->node2Id);
+					graph.addEdge(links[i]->node1Id, links[i]->node2Id, weight,
 							isTwoWay, roadId, roadName);
 				}
 			}
@@ -137,6 +138,7 @@ void EasyPilot::graphInfoToGV() {
 			dstNode = graph.getVertexIndex(adjEdges[j].getDest()->getInfo());
 			if (adjEdges[j].getTwoWays()) {
 				gv->addEdge(counter, srcNode, dstNode, EdgeType::UNDIRECTED);
+				gv->setEdgeWeight(counter, adjEdges[j].getWeight());
 			} else
 				gv->addEdge(counter, srcNode, dstNode, EdgeType::DIRECTED);
 
@@ -145,6 +147,27 @@ void EasyPilot::graphInfoToGV() {
 		}
 	}
 	gv->rearrange();
+}
+
+bool EasyPilot::highlightNode(int id){
+	if(id < 0 || id > graph.getNumVertex()){
+		return false;
+	} else{
+		gv->setVertexColor(id, "yellow");
+		updateMap();
+		return true;
+	}
+}
+
+bool EasyPilot::highlightEdge(int id){
+	if(id < 0 || id > graph.getNumEdge()){
+		return false;
+	} else{
+		gv->setEdgeColor(id, "pink");
+		gv->setEdgeThickness(id, 10);
+		updateMap();
+		return true;
+	}
 }
 
 void EasyPilot::updateMap()
