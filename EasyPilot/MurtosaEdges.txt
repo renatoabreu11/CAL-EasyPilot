@@ -1,4 +1,4 @@
-250018286;Avenida do Emigrante;False
+﻿250018286;Avenida do Emigrante;False
 250018287;;False
 250018288;;False
 250018650;;False
