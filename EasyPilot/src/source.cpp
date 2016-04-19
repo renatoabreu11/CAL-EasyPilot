@@ -1,6 +1,19 @@
 #include "EasyPilot.h"
+#include <unistd.h>
 
-void menuManager()
+void loadMap(string location, EasyPilot &gps)
+{
+	cout << "Wait for the map to load...\n";
+
+	gps.readOSM(location);
+	gps.graphInfoToGV();
+
+	cout << "Press enter to close the map\n";
+	cin.ignore();
+	gps.eraseMap();
+}
+
+void menuManager(EasyPilot *gps)
 {
 	vector<string> menuPrincipal;
 	menuPrincipal.push_back("Menu principal");
@@ -15,8 +28,6 @@ void menuManager()
 	escolherMapa.push_back("Test");
 	escolherMapa.push_back("Sair");
 
-	EasyPilot gps;
-
 	int select = menuOptions(menuPrincipal);
 
 	while (true) {
@@ -26,26 +37,21 @@ void menuManager()
 
 			switch (select) {
 			case 1:
-				gps.readOSM("Esposende");
-				gps.graphInfoToGV();
+				loadMap("Esposende", *gps);
 				break;
 			case 2:
-				gps.readOSM("Murtosa");
-				gps.graphInfoToGV();
+				loadMap("Murtosa", *gps);
 				break;
 			case 3:
-				gps.readOSM("Alpendorada");
-				gps.graphInfoToGV();
+				loadMap("Alpendorada", *gps);
 				break;
 			case 4:
-				gps.readOSM("Test");
-				gps.graphInfoToGV();
+				loadMap("Test", *gps);
 				break;
 			default: break;
 			}
 
 			break;
-
 		case 2:
 			cout << "Bye!\n";
 			exit(0);
@@ -56,8 +62,8 @@ void menuManager()
 }
 
 int main() {
-
-	menuManager();
+	EasyPilot gps;
+	menuManager(&gps);
 
 	return 0;
 }

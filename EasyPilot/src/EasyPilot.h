@@ -23,6 +23,7 @@ public:
 	virtual ~EasyPilot();
 	bool readOSM(string filename);
 	void graphInfoToGV();
+	void eraseMap();
 };
 
 /*Utility functions and classes to adapt nodes position in GV*/

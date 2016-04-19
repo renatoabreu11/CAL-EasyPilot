@@ -126,8 +126,6 @@ void EasyPilot::graphInfoToGV() {
 		int x = resizeLong(vertex[i]->getLongitude(), l, GV_WINDOW_WIDTH);
 		int y = resizeLat(vertex[i]->getLatitude(), l, GV_WINDOW_HEIGHT);
 
-		cout << x << "," << y << endl;
-
 		gv->addNode(i, x, y);
 	}
 
@@ -147,6 +145,11 @@ void EasyPilot::graphInfoToGV() {
 		}
 	}
 	gv->rearrange();
+}
+
+void EasyPilot::eraseMap()
+{
+	gv->closeWindow();
 }
 
 /***UTILITY FUNCTIONS***/
