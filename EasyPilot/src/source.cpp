@@ -12,6 +12,7 @@ void menuManager()
 	escolherMapa.push_back("Esposende");
 	escolherMapa.push_back("Mortosa");
 	escolherMapa.push_back("Alpendorada");
+	escolherMapa.push_back("Test");
 	escolherMapa.push_back("Sair");
 
 	EasyPilot gps;
@@ -29,7 +30,7 @@ void menuManager()
 				gps.graphInfoToGV();
 				break;
 			case 2:
-				gps.readOSM("Mortosa");
+				gps.readOSM("Murtosa");
 				gps.graphInfoToGV();
 				break;
 			case 3:
@@ -37,7 +38,10 @@ void menuManager()
 				gps.graphInfoToGV();
 				break;
 			case 4:
+				gps.readOSM("Test");
+				gps.graphInfoToGV();
 				break;
+			default: break;
 			}
 
 			break;
