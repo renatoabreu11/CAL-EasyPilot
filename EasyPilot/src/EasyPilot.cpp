@@ -1,4 +1,3 @@
-
 #include "EasyPilot.h"
 
 struct Link{
