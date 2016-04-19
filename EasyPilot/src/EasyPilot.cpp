@@ -43,6 +43,7 @@ bool EasyPilot::readOSM(string filename) {
 			aux = line.substr(lastSemicolon + 1, line.size());
 			longitudeInDegrees = atof(aux.c_str());
 			graph.addVertex(nodeId, longitudeInDegrees, latitudeInDegrees);
+			cout << nodeId << endl;
 		}
 	} catch (ifstream::failure &e) {
 		cout << "Error while opening " << nodesFile << endl;
@@ -85,13 +86,14 @@ bool EasyPilot::readOSM(string filename) {
 	try {
 		edges.open(edgesFile.c_str(), ifstream::in);
 		while (!edges.eof()) {
-			edges >> line;
+			getline(edges, line);
 			firstSemicolon = line.find(';');
 			lastSemicolon = line.find(';', firstSemicolon + 1);
 			aux = line.substr(0, firstSemicolon);
 			roadId = atol(aux.c_str());
-			aux = line.substr(firstSemicolon + 1, lastSemicolon - 1);
+			aux = line.substr(firstSemicolon + 1, lastSemicolon - firstSemicolon - 1);
 			roadName = aux.c_str();
+			cout << roadName << endl;
 			aux = line.substr(lastSemicolon + 1, line.size());
 			if(aux == "False")
 				isTwoWay = false;
@@ -115,24 +117,26 @@ bool EasyPilot::readOSM(string filename) {
 void EasyPilot::graphInfoToGV(){
 	vector<Vertex<unsigned> * > vertex = graph.getVertexSet();
 	for (int i = 0; i < graph.getNumVertex(); i++)
-		gv->addNode(i, vertex[i]->getLongitude(), vertex[i]->getLatitude());
+		gv->addNode(vertex[i]->getInfo(), vertex[i]->getLongitude(), vertex[i]->getLatitude());
 
+	int counter = 0;
 	for (int i = 0; i < graph.getNumVertex(); i++) {
 		vector<Edge<unsigned>  > adjEdges = vertex[i]->getAdj();
 		for (unsigned int j = 0; j < adjEdges.size(); j++) {
 			if (adjEdges[j].getTwoWays()){
-				gv->addEdge(adjEdges[j].getId(), vertex[i]->getInfo(),
+				gv->addEdge(counter, vertex[i]->getInfo(),
 						adjEdges[j].getDest()->getInfo(),
 						EdgeType::UNDIRECTED);
 			}
 			else
-				gv->addEdge(adjEdges[j].getId(),
+				gv->addEdge(counter,
 						vertex[i]->getInfo(),
 						adjEdges[j].getDest()->getInfo(),
 						EdgeType::DIRECTED);
 
-			gv->setEdgeLabel(graph.getVertexSet()[i]->getAdj()[j].getId(),
-					graph.getVertexSet()[i]->getAdj()[j].getName());
+			gv->setEdgeLabel(counter,
+					adjEdges[j].getName());
+			counter++;
 		}
 	}
 	gv->rearrange();
