@@ -9,10 +9,12 @@ void menuManager()
 
 	vector<string> escolherMapa;
 	escolherMapa.push_back("Escolher mapa");
-	escolherMapa.push_back("Porto");
-	escolherMapa.push_back("Maia");
-	escolherMapa.push_back("Algarve");
+	escolherMapa.push_back("Esposende");
+	escolherMapa.push_back("Mortosa");
+	escolherMapa.push_back("Alpendorada");
 	escolherMapa.push_back("Sair");
+
+	EasyPilot gps;
 
 	int select = menuOptions(menuPrincipal);
 
@@ -23,8 +25,17 @@ void menuManager()
 
 			switch (select) {
 			case 1:
+				gps.readOSM("Esposende");
+				gps.graphInfoToGV();
+				break;
 			case 2:
+				gps.readOSM("Mortosa");
+				gps.graphInfoToGV();
+				break;
 			case 3:
+				gps.readOSM("Alpendorada");
+				gps.graphInfoToGV();
+				break;
 			case 4:
 				break;
 			}
@@ -41,9 +52,7 @@ void menuManager()
 }
 
 int main() {
-	EasyPilot * ep = new EasyPilot();
-	ep->readOSM("Esposende");
-	ep->graphInfoToGV();
+
 	menuManager();
 
 	return 0;
