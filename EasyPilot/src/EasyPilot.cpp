@@ -147,6 +147,11 @@ void EasyPilot::graphInfoToGV() {
 	gv->rearrange();
 }
 
+void EasyPilot::reloadMap()
+{
+	gv->rearrange();
+}
+
 void EasyPilot::eraseMap()
 {
 	gv->closeWindow();

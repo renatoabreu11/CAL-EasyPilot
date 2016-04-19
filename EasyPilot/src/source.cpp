@@ -3,12 +3,25 @@
 
 void loadMap(string location, EasyPilot &gps)
 {
+	int fromNodeID, toNodeID, passThough;
 	cout << "Wait for the map to load...\n";
+	cout.flush();
 
 	gps.readOSM(location);
 	gps.graphInfoToGV();
 
+	cout << "\nType the node ID from where to start: ";
+	cin >> fromNodeID;
+	cout << "Type the node ID from where to end: ";
+	cin >> toNodeID;
+	cout << "If you want to go though any part of the city, type it's node ID, if not, type '-1': ";
+	cin >> passThough;
+	cout << endl;
+
+	gps.reloadMap();
+
 	cout << "Press enter to close the map\n";
+	cin.ignore();
 	cin.ignore();
 	gps.eraseMap();
 }

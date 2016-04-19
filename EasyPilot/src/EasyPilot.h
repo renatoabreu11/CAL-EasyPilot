@@ -24,6 +24,7 @@ public:
 	bool readOSM(string filename);
 	void graphInfoToGV();
 	void eraseMap();
+	void reloadMap();
 };
 
 /*Utility functions and classes to adapt nodes position in GV*/
