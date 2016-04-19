@@ -42,7 +42,7 @@ struct LimitCoords
  * Stores in a LimitCoords struct the max coordinate values of map graph g
  */
 LimitCoords getLimitCoords(Graph<unsigned> g);
-double resizeLat(double lat, LimitCoords l, float windowH);
-double resizeLong(double lon, LimitCoords l, float windowW);
+int resizeLat(double lat, LimitCoords l, float windowH);
+int resizeLong(double lon, LimitCoords l, float windowW);
 
 #endif /* SRC_EASYPILOT_H_ */

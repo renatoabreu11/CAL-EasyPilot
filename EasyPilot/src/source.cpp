@@ -10,7 +10,7 @@ void menuManager()
 	vector<string> escolherMapa;
 	escolherMapa.push_back("Escolher mapa");
 	escolherMapa.push_back("Esposende");
-	escolherMapa.push_back("Mortosa");
+	escolherMapa.push_back("Murtosa");
 	escolherMapa.push_back("Alpendorada");
 	escolherMapa.push_back("Test");
 	escolherMapa.push_back("Sair");

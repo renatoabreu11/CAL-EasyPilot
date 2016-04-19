@@ -1,9 +1,10 @@
-
 #include "EasyPilot.h"
 
-struct Link{
+struct Link {
 	unsigned node1Id, node2Id, roadId;
-	Link(unsigned r, unsigned n1, unsigned n2) : roadId(r), node1Id(n1), node2Id(n2){}
+	Link(unsigned r, unsigned n1, unsigned n2) :
+			roadId(r), node1Id(n1), node2Id(n2) {
+	}
 };
 
 EasyPilot::EasyPilot() {
@@ -50,7 +51,7 @@ bool EasyPilot::readOSM(string filename) {
 	unsigned node1Id, node2Id, roadId;
 	vector<Link *> links;
 
-	connections.exceptions( ifstream::badbit | ifstream::failbit);
+	connections.exceptions(ifstream::badbit | ifstream::failbit);
 
 	try {
 		connections.open(connectionsFile.c_str(), ifstream::in);
@@ -86,15 +87,18 @@ bool EasyPilot::readOSM(string filename) {
 			lastSemicolon = line.find(';', firstSemicolon + 1);
 			aux = line.substr(0, firstSemicolon);
 			roadId = atol(aux.c_str());
-			aux = line.substr(firstSemicolon + 1, lastSemicolon - firstSemicolon - 1);
+			aux = line.substr(firstSemicolon + 1,
+					lastSemicolon - firstSemicolon - 1);
 			roadName = aux.c_str();
 			aux = line.substr(lastSemicolon + 1, line.size());
-			if(aux == "False")
+			if (aux == "False")
 				isTwoWay = false;
-			else isTwoWay = true;
-			for(unsigned int i = 0; i < links.size(); i++){
-				if(links[i]->roadId == roadId){
-					graph.addEdge(links[i]->node1Id, links[i]->node2Id, 1, isTwoWay, roadId, roadName);
+			else
+				isTwoWay = true;
+			for (unsigned int i = 0; i < links.size(); i++) {
+				if (links[i]->roadId == roadId) {
+					graph.addEdge(links[i]->node1Id, links[i]->node2Id, 1,
+							isTwoWay, roadId, roadName);
 				}
 			}
 
@@ -108,44 +112,46 @@ bool EasyPilot::readOSM(string filename) {
 	return true;
 }
 
-void EasyPilot::graphInfoToGV(){
-	gv = new GraphViewer(GV_WINDOW_WIDTH, GV_WINDOW_HEIGHT, true);
+void EasyPilot::graphInfoToGV() {
+	gv = new GraphViewer(GV_WINDOW_WIDTH, GV_WINDOW_HEIGHT, false);
 	gv->createWindow(GV_WINDOW_WIDTH, GV_WINDOW_HEIGHT);
 	gv->defineVertexColor("blue");
 	gv->defineEdgeColor("black");
 
-//	LimitCoords l = getLimitCoords(graph);	// gets max and min coords
-//	cout << l.maxLat << ',' << l.minLat << ',' << l.maxLong << ',' << l.minLong << endl;
+	LimitCoords l = getLimitCoords(graph);	// gets max and min coords
 
-	vector<Vertex<unsigned> * > vertex = graph.getVertexSet();
-	for (int i = 0; i < graph.getNumVertex(); i++)
-		gv->addNode(i, vertex[i]->getLongitude(), vertex[i]->getLatitude());
+	vector<Vertex<unsigned> *> vertex = graph.getVertexSet();
+	//Adds each node with resized coordinates to match window setup
+	for (int i = 0; i < graph.getNumVertex(); i++) {
+		int x = resizeLong(vertex[i]->getLongitude(), l, GV_WINDOW_WIDTH);
+		int y = resizeLat(vertex[i]->getLatitude(), l, GV_WINDOW_HEIGHT);
+
+		cout << x << "," << y << endl;
+
+		gv->addNode(i, x, y);
+	}
 
 	int srcNode, dstNode, counter = 0;
 	for (int i = 0; i < graph.getNumVertex(); i++) {
-		vector<Edge<unsigned>  > adjEdges = vertex[i]->getAdj();
+		vector<Edge<unsigned> > adjEdges = vertex[i]->getAdj();
 		for (unsigned int j = 0; j < adjEdges.size(); j++) {
 			srcNode = graph.getVertexIndex(vertex[i]->getInfo());
 			dstNode = graph.getVertexIndex(adjEdges[j].getDest()->getInfo());
-			if (adjEdges[j].getTwoWays()){
+			if (adjEdges[j].getTwoWays()) {
 				gv->addEdge(counter, srcNode, dstNode, EdgeType::UNDIRECTED);
-			}
-			else
+			} else
 				gv->addEdge(counter, srcNode, dstNode, EdgeType::DIRECTED);
 
-			gv->setEdgeLabel(counter,
-					adjEdges[j].getName());
+			gv->setEdgeLabel(counter, adjEdges[j].getName());
 			counter++;
 		}
 	}
 	gv->rearrange();
 }
 
-
 /***UTILITY FUNCTIONS***/
 
-LimitCoords getLimitCoords(Graph<unsigned> g)
-{
+LimitCoords getLimitCoords(Graph<unsigned> g) {
 	LimitCoords l;
 
 	//Initializes minimum value with highest possible
@@ -155,19 +161,18 @@ LimitCoords getLimitCoords(Graph<unsigned> g)
 	double maxLat = -FLT_MAX;
 	double maxLong = -FLT_MAX;
 
-	vector<Vertex<unsigned> * > vertex = g.getVertexSet();
-	for (int i = 0; i < g.getNumVertex(); i++)
-	{
-		if(vertex[i]->getLatitude() < minLat)
+	vector<Vertex<unsigned> *> vertex = g.getVertexSet();
+	for (int i = 0; i < g.getNumVertex(); i++) {
+		if (vertex[i]->getLatitude() < minLat)
 			minLat = vertex[i]->getLatitude();
 
-		if(vertex[i]->getLongitude() < minLong)
+		if (vertex[i]->getLongitude() < minLong)
 			minLong = vertex[i]->getLongitude();
 
-		if(vertex[i]->getLatitude() > maxLat)
+		if (vertex[i]->getLatitude() > maxLat)
 			maxLat = vertex[i]->getLatitude();
 
-		if(vertex[i]->getLongitude() > maxLong)
+		if (vertex[i]->getLongitude() > maxLong)
 			maxLong = vertex[i]->getLongitude();
 	}
 
@@ -179,12 +184,10 @@ LimitCoords getLimitCoords(Graph<unsigned> g)
 	return l;
 }
 
-double resizeLat(double lat, LimitCoords l, float windowH)
-{
-	return (windowH/(l.maxLat-l.minLat)*lat);
+int resizeLat(double lat, LimitCoords l, float windowH) {
+	return (windowH - (round(windowH / (l.maxLat - l.minLat) * (lat - l.minLat))));
 }
 
-double resizeLong(double lon, LimitCoords l, float windowW)
-{
-	return (windowW/(l.maxLong-l.minLong)* lon);
+int resizeLong(double lon, LimitCoords l, float windowW) {
+	return (round(windowW / (l.maxLong - l.minLong) * (lon - l.minLong)));
 }
