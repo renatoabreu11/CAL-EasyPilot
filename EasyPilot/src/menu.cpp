@@ -8,7 +8,7 @@ using namespace std;
 int menuOptions(vector<string> options){
 	if (options[0] != "")
 		cout << options[0];
-	cout << "\n";
+	cout << "\n\n";
 
 	for(unsigned int i = 1; i < options.size() ;i++){
 		cout << i << " - " << options[i] << endl;
