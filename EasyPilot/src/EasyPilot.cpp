@@ -1,5 +1,7 @@
 #include "EasyPilot.h"
 
+//tentem passar esta struct para o ficheiro .h, a mim dá-me erro
+//até amanhã, beijinhos e abraços <3
 struct Link {
 	unsigned node1Id, node2Id, roadId;
 	Link(unsigned r, unsigned n1, unsigned n2) :
@@ -8,16 +10,19 @@ struct Link {
 };
 
 EasyPilot::EasyPilot() {
+	map = "Test"; //default map
+	destinyID = 1;
+	sourceID = 0;
 }
 
 EasyPilot::~EasyPilot() {
 	// TODO Auto-generated destructor stub
 }
 
-bool EasyPilot::readOSM(string filename) {
-	string edgesFile = filename + "Edges.txt";
-	string connectionsFile = filename + "Connections.txt";
-	string nodesFile = filename + "Nodes.txt";
+bool EasyPilot::readOSM() {
+	string edgesFile = map + "Edges.txt";
+	string connectionsFile = map + "Connections.txt";
+	string nodesFile = map + "Nodes.txt";
 
 	ifstream nodes, edges, connections;
 	string line, aux;
@@ -177,6 +182,28 @@ void EasyPilot::updateMap()
 void EasyPilot::eraseMap()
 {
 	gv->closeWindow();
+	gv->rearrange();
+	delete(gv);
+}
+
+bool EasyPilot::highlightPath(int srcId, int destId){
+	if(srcId < 0 || srcId > graph.getNumVertex() || destId < 0 || destId > graph.getNumVertex()){
+		return false;
+	}
+
+	//completar -> a ceninha do floyd dá erro.
+
+	vector<Vertex<unsigned> *> g = graph.getVertexSet();
+	vector<unsigned> path = graph.getfloydWarshallPath(302627489, 269543065);
+	return true;
+}
+
+string EasyPilot::getMap() const{
+	return map;
+}
+
+void EasyPilot::setMap(string m) {
+	map = m;
 }
 
 /***UTILITY FUNCTIONS***/

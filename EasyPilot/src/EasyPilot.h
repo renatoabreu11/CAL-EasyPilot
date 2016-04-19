@@ -4,7 +4,6 @@
 
 #include "Graph.h"
 #include "graphviewer.h"
-#include "menu.h"
 #include "iostream"
 #include "fstream"
 #include "string"
@@ -17,19 +16,34 @@ class EasyPilot {
 private:
 	Graph<unsigned> graph;
 	GraphViewer * gv;
-
+	string map;
+	int sourceID;
+	int destinyID;
+	vector<int> pointsOfInterest; // definido pelo utilizador
+	vector<int> inaccessibleZones; //o melhor será fazer um ficheiro com esta informação
 public:
 	EasyPilot();
 	virtual ~EasyPilot();
-	bool readOSM(string filename);
+	bool readOSM();
 	void graphInfoToGV();
 	bool highlightNode(int id);
 	bool highlightEdge(int id);
+	bool highlightPath(int srcId, int destId);
 	void eraseMap();
 	void updateMap();
+	string getMap() const;
+	void setMap(string m);
+	int getsourceID() const;
+	void setsourceID(string m);
+	int getdestinyID() const;
+	void setdestinyID(string m);
+	bool addPointOfInterest(int id);
+	void getPointsOfInterest() const;
 };
 
 /*Utility functions and classes to adapt nodes position in GV*/
+
+//continua a fazer a documentação aleixo. Tás a trabalhar bem, gg
 
 /**
  * LimitCoords will store the highest and lowest longitude and latitude of the nodes
