@@ -97,9 +97,8 @@ bool EasyPilot::readOSM(string filename) {
 				isTwoWay = true;
 			for (unsigned int i = 0; i < links.size(); i++) {
 				if (links[i]->roadId == roadId) {
-					int weight = = calculateEdgeWeigth(links[i]->node1Id, links[i]->node2Id);
-					graph.addEdge(links[i]->node1Id, links[i]->node2Id, weight,
-							isTwoWay, roadId, roadName);
+					int weight = graph.calculateEdgeWeight(links[i]->node1Id, links[i]->node2Id);
+					graph.addEdge(links[i]->node1Id, links[i]->node2Id, weight, isTwoWay, roadId, roadName);
 				}
 			}
 

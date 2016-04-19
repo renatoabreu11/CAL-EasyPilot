@@ -442,8 +442,8 @@ int Graph<T>::getVertexIndex(T id) const{
 template<class T>
 int Graph<T>::calculateEdgeWeight(T id1, T id2) const
 {
-	Vertex<T> v1 = getVertex(id1);
-	Vertex<T> v2 = getVertex(id2);
+	Vertex<T> *v1 = getVertex(id1);
+	Vertex<T> *v2 = getVertex(id2);
 
 	double lon1, lon2, lat1, lat2;
 
