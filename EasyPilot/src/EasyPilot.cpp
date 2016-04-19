@@ -147,7 +147,7 @@ void EasyPilot::graphInfoToGV() {
 	gv->rearrange();
 }
 
-void EasyPilot::reloadMap()
+void EasyPilot::updateMap()
 {
 	gv->rearrange();
 }

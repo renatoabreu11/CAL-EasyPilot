@@ -18,7 +18,7 @@ void loadMap(string location, EasyPilot &gps)
 	cin >> passThough;
 	cout << endl;
 
-	gps.reloadMap();
+	gps.updateMap();
 
 	cout << "Press enter to close the map\n";
 	cin.ignore();
