@@ -1,20 +1,7 @@
-﻿250018286;Avenida do Emigrante;False
-250018287;;False
-250018288;;False
-250018650;;False
-250018289;Avenida do Emigrante;False
-144710500;Rua Caminho Moradal;False
-250034939;Rua dos Precursores;True
-250035778;;True
-211636064;Travessa da Regueirinha;False
-211636055;;False
-211963836;Rua Caminho do Norte;False
-211963862;Rua Luis de Camões;False
-250151809;Rua António Vieira Pinto;False
-211963859;Rua da Saudade;False
-250200735;Beco das Saldidas;False
-250200430;Caminho da Feira;False
-250201428;Rua dos Condes;False
+﻿250034939;Rua dos Precursores;True
+250200735;Beco das Saldidas;True
+250200430;Caminho da Feira;True
+250201428;Rua dos Condes;True
 250201437;;False
 250201439;;False
 250202782;Avenida 29 de Outubro;False
@@ -24,39 +11,23 @@
 250205656;Beco da Regueirinha 1;False
 250206717;Caminho da Ferreirinha;False
 250206947;Viela do Facão;False
+250208255;Rua 9 de Abril;False
 250208286;Rua Doutor Barbosa Magalhães;False
 250220058;Beco da Farmácia;False
 250220154;;False
 250201430;Rua dos Condes;False
 250225707;Rua União Benificente Murtoense;False
-152179133;Rua da Regueirinha;False
-251085057;Avenida do Emigrante;False
-251085060;Rua Carlos Sousa Ferreira;False
+250226328;Caminho do Quintal;False
+250226825;Beco da Saldida;False
+152179141;Rua Padre Alberto Tavares Sousa;False
 251085067;;False
 251085071;Viela da Caixa;False
 250206236;Viela da Caixa;False
 251085069;;False
 211636116;Viela da Regueirinha;False
 211636141;;False
-211636060;Beco da Regueirinha 2;False
-211636092;Rua Caminho dos Garridos;False
-211636462;;False
-211636464;;False
-245002145;Rua do Mercado;False
-245003217;Rua António Vieira Pinto;False
-141040916;;False
-245002345;Travessa Paços do Concelho;False
-245003215;Avenida do Emigrante;False
-245002463;Largo Doutor José Tavares;False
-245002070;Rua do Mercado;False
-245003288;;False
-141040910;;False
-245003355;;False
-138697049;;False
-245004789;;False
-245102560;;False
+211636097;Travessa Padre Anselmo;False
 245104172;;False
-245005465;Avenida do Emigrante;False
 245104094;;False
 152179135;;False
 152179139;Rua dos Condes;False
@@ -68,14 +39,9 @@
 245104362;Beco do Zé Manuel;False
 245104446;Rua Manuel José Lopes Pereira;False
 245104610;;False
-245104997;;False
-245105154;Rua Urbanização da Acabada;False
 245104949;;False
 245104622;Rua Doutor Carlos Barbosa;False
 251085061;Rua Doutor Carlos Barbosa;False
 251085062;Rua Doutor Carlos Barbosa;False
 250039958;Avenida 29 de Outubro;False
 138702778;Rua Dona Maria das Dores Tavares de Sousa;False
-250027595;Rua Rui do Vouga;False
-211636465;;False
-211636062;;False
