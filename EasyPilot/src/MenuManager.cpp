@@ -22,7 +22,7 @@ MenuManager::~MenuManager() {
 
 void MenuManager::navigationOptions(EasyPilot *gps) {
 	bool running = true;
-	int input = -1, selection, srcNodeID, destNodeID;
+	int input = -1, selection, srcNodeID, destNodeID, pointOfInterestID;
 	while (running) {
 		input = -1;
 		vector<string> options;
@@ -39,7 +39,7 @@ void MenuManager::navigationOptions(EasyPilot *gps) {
 				try {
 					cout << "\nType the node ID from where to start:\n>>";
 					cin >> srcNodeID;
-					input = gps->highlightNode(srcNodeID);
+					input = gps->setsourceID(srcNodeID);
 				} catch (InvalidInput& e) {
 					cout << "\nInvalid Input. Try again";
 					cin.clear();
@@ -52,7 +52,7 @@ void MenuManager::navigationOptions(EasyPilot *gps) {
 				try {
 					cout << "\nType the node ID from where to end:\n>>";
 					cin >> destNodeID;
-					input = gps->highlightNode(destNodeID);
+					input = gps->setdestinyID(destNodeID);
 				} catch (InvalidInput& e) {
 					cout << "\nInvalid Input. Try again";
 					cin.clear();
@@ -61,17 +61,16 @@ void MenuManager::navigationOptions(EasyPilot *gps) {
 			}
 			break;
 		case 3:
-			/*
-			 * O itinerário poderá ser simples, ou ainda incluir vários pontos de interesse (POIs),
-			 * como bombas de combustível para reabastecimento,
-			 * monumentos, ou outros cuja posição sejam indicadas pelo utilizador
-			 *
-			 */
-			while (input == -1) {
+			while (input == -1 || input == 0) {
 				try {
-					cout << "\nType the node ID of your POI:\n>>";
-					cin >> destNodeID;
-					input = gps->highlightNode(destNodeID, "green");
+					cout
+							<< "\nType the node ID that you want to pass through:\n>>";
+					cin >> pointOfInterestID;
+					input = gps->addPointOfInterest(pointOfInterestID);
+					if (input == 0) {
+						cout << "\nNode with ID " << pointOfInterestID
+								<< " already is selected as point of interest. Try again.\n";
+					}
 				} catch (InvalidInput& e) {
 					cout << "\nInvalid Input. Try again";
 					cin.clear();
@@ -80,6 +79,22 @@ void MenuManager::navigationOptions(EasyPilot *gps) {
 			}
 			break;
 		case 4:
+			while (input == -1 || input == 0) {
+				try {
+					cout
+							<< "\nType the node ID that you want to remove from POI's:\n>>";
+					cin >> pointOfInterestID;
+					input = gps->removePointOfInterest(pointOfInterestID);
+					if (input == 0) {
+						cout << "\nNode with ID " << pointOfInterestID
+								<< " is not selected as point of interest. Try again.\n";
+					}
+				} catch (InvalidInput& e) {
+					cout << "\nInvalid Input. Try again";
+					cin.clear();
+					cin.ignore(1000, '\n');
+				}
+			}
 			break;
 		case 5:
 			running = false;
@@ -111,13 +126,12 @@ void MenuManager::navigation(EasyPilot *gps) {
 		selection = menuOptions(navigation);
 		switch (selection) {
 		case 1:
-			//functionthatshowdesiredoaleixoestácaidinhopelacatarinapathaccordinglytotheselectedoptionsozécarloséumfalso(gps);
+			gps->highlightPath();
 			break;
 		case 2:
 			navigationOptions(gps);
 			break;
 		case 3:
-			//zé carlos, senhor da falsidade, esta função não está funcionando
 			gps->eraseMap();
 			running = false;
 			break;
@@ -136,10 +150,13 @@ void MenuManager::mapSelection(EasyPilot *gps) {
 	maps.push_back("Back");
 	selection = menuOptions(maps);
 
-	if (selection != 5) {
+	if (selection < 5 && selection >= 1) {
 		gps->setMap(maps[selection]);
+		cout << "\n" << gps->getMap() << " map is the choosen one.\n";
+	} else{
+		cout << "\nInvalid Input \n";
+		cout << "\n" << gps->getMap() << " map remains the choosen one.\n";
 	}
-	cout << "\n" << gps->getMap() << " map is the choosen one.\n";
 }
 
 void MenuManager::mainMenu(EasyPilot *gps) {
@@ -161,7 +178,7 @@ void MenuManager::mainMenu(EasyPilot *gps) {
 			mapSelection(gps);
 			break;
 		case 3:
-			cout << "Bye!\n";
+			cout << "\nBye!\n";
 			exit(0);
 		}
 	}
