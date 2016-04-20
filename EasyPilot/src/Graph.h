@@ -30,6 +30,7 @@ const int INT_INFINITY = INT_MAX;
 template <class T>
 class Vertex {
 	T info;
+	string name; // NULL, unless vertex represents a point of interest
 	vector<Edge<T>  > adj;
 	bool visited;
 	bool processing;
@@ -47,6 +48,9 @@ public:
 
 	T getInfo() const;
 	void setInfo(T info);
+
+	string getName() const;
+	void setName(string name);
 
 	int getDist() const;
 	int getIndegree() const;
@@ -88,6 +92,7 @@ bool Vertex<T>::removeEdgeTo(Vertex<T> *d) {
 template <class T>
 Vertex<T>::Vertex(T in, double longitude, double latitude): info(in), visited(false), processing(false), indegree(0), dist(0) , longitude(longitude),latitude(latitude){
 	path = NULL;
+	name = "";
 }
 
 
@@ -112,6 +117,18 @@ int Vertex<T>::getDist() const {
 template <class T>
 void Vertex<T>::setInfo(T info) {
 	this->info = info;
+}
+
+template <class T>
+void Vertex<T>::setName(string name)
+{
+	this->name = name;
+}
+
+template <class T>
+string Vertex<T>::getName() const
+{
+	return this->name;
 }
 
 template <class T>

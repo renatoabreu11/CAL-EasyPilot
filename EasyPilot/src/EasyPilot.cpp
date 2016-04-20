@@ -23,8 +23,9 @@ bool EasyPilot::readOSM() {
 	string edgesFile = map + "Edges.txt";
 	string connectionsFile = map + "Connections.txt";
 	string nodesFile = map + "Nodes.txt";
+	string poisFile = map + "POI.txt";	// points of interest
 
-	ifstream nodes, edges, connections;
+	ifstream nodes, edges, connections, pois;
 	string line, aux;
 	size_t firstSemicolon, lastSemicolon;
 	unsigned nodeId;
@@ -114,6 +115,41 @@ bool EasyPilot::readOSM() {
 
 	edges.close();
 
+	/********
+	 * POIs *
+	 ********/
+
+	string poiName;
+
+	/*TODO: UNCOMMENT WHEN THERE IS A FILE FOR EVERY MAP*/
+	//pois.exceptions(ifstream::badbit | ifstream::failbit);
+
+	/*File format: "<nodeID - int>;<poi name - string>"*/
+
+	pois.open(poisFile.c_str(), ifstream::in); // optional file
+
+	if(pois.good())
+	{
+		while (!pois.eof()) {
+			getline(pois, line);
+			firstSemicolon = line.find(';');
+			aux = line.substr(0, firstSemicolon);
+			nodeId = atol(aux.c_str());
+			aux = line.substr(firstSemicolon + 1, line.size());
+			poiName = aux.c_str();
+
+			if (poiName != "")
+			{
+				graph.getVertex(nodeId)->setName(poiName);	// gives the vertex a name
+			}
+
+		}
+	}
+
+	pois.close();
+
+	/***END OF READING TXT FILES***/
+
 	return true;
 }
 
@@ -132,6 +168,13 @@ void EasyPilot::graphInfoToGV() {
 		int y = resizeLat(vertex[i]->getLatitude(), l, GV_WINDOW_HEIGHT);
 
 		gv->addNode(i, x, y);
+
+		if(vertex[i]->getName() != "")	// if it has a name
+		{
+			ostringstream label;
+			label << i << " - " << vertex[i]->getName();
+			gv->setVertexLabel(i, label.str());
+		}
 	}
 
 	int srcNode, dstNode, counter = 0;
