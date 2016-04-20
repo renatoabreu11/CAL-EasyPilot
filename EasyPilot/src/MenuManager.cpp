@@ -67,6 +67,17 @@ void MenuManager::navigationOptions(EasyPilot *gps) {
 			 * monumentos, ou outros cuja posição sejam indicadas pelo utilizador
 			 *
 			 */
+			while (input == -1) {
+				try {
+					cout << "\nType the node ID of your POI:\n>>";
+					cin >> destNodeID;
+					input = gps->highlightNode(destNodeID, "green");
+				} catch (InvalidInput& e) {
+					cout << "\nInvalid Input. Try again";
+					cin.clear();
+					cin.ignore(1000, '\n');
+				}
+			}
 			break;
 		case 4:
 			break;

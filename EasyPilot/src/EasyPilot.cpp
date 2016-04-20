@@ -163,6 +163,16 @@ bool EasyPilot::highlightNode(int id){
 	}
 }
 
+bool EasyPilot::highlightNode(int id, string color){
+	if(id < 0 || id > graph.getNumVertex()){
+		return false;
+	} else{
+		gv->setVertexColor(id, color);
+		updateMap();
+		return true;
+	}
+}
+
 bool EasyPilot::highlightEdge(int id){
 	if(id < 0 || id > graph.getNumEdge()){
 		return false;

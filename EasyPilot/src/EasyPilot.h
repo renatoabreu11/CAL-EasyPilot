@@ -27,6 +27,7 @@ public:
 	bool readOSM();
 	void graphInfoToGV();
 	bool highlightNode(int id);
+	bool highlightNode(int id, string color);
 	bool highlightEdge(int id);
 	bool highlightPath(int srcId, int destId);
 	void eraseMap();
