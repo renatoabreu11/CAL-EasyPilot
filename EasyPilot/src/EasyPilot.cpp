@@ -130,6 +130,11 @@ void EasyPilot::graphInfoToGV() {
 		int y = resizeLat(vertex[i]->getLatitude(), l, GV_WINDOW_HEIGHT);
 
 		gv->addNode(i, x, y);
+		if(i == sourceID){
+			gv->setVertexColor(sourceID, "yellow");
+		}else if(i == destinyID){
+			gv->setVertexColor(destinyID, "yellow");
+		}
 	}
 
 	int srcNode, dstNode, counter = 0;
@@ -151,34 +156,24 @@ void EasyPilot::graphInfoToGV() {
 	gv->rearrange();
 }
 
-bool EasyPilot::highlightNode(int id){
+int EasyPilot::highlightNode(int id, string color){
 	if(id < 0 || id > graph.getNumVertex()){
-		return false;
-	} else{
-		gv->setVertexColor(id, "yellow");
-		updateMap();
-		return true;
-	}
-}
-
-bool EasyPilot::highlightNode(int id, string color){
-	if(id < 0 || id > graph.getNumVertex()){
-		return false;
+		return -1;
 	} else{
 		gv->setVertexColor(id, color);
 		updateMap();
-		return true;
+		return 1;
 	}
 }
 
-bool EasyPilot::highlightEdge(int id){
+int EasyPilot::highlightEdge(int id){
 	if(id < 0 || id > graph.getNumEdge()){
-		return false;
+		return -1;
 	} else{
 		gv->setEdgeColor(id, "pink");
 		gv->setEdgeThickness(id, 10);
 		updateMap();
-		return true;
+		return 1;
 	}
 }
 
@@ -189,21 +184,23 @@ void EasyPilot::updateMap()
 
 void EasyPilot::eraseMap()
 {
+	this->destinyID = 0;
+	this->sourceID = 1;
+	this->inaccessibleZones.clear();
+	this->pointsOfInterest.clear();
 	gv->closeWindow();
 	graph.clearGraph();
 	gv = NULL;
 }
 
-bool EasyPilot::highlightPath(int srcId, int destId){
-	if(srcId < 0 || srcId > graph.getNumVertex() || destId < 0 || destId > graph.getNumVertex()){
-		return false;
-	}
-
-	//completar -> a ceninha do floyd dá erro.
-
+void EasyPilot::highlightPath(){
 	vector<Vertex<unsigned> *> g = graph.getVertexSet();
-	vector<unsigned> path = graph.getfloydWarshallPath(302627489, 269543065);
-	return true;
+	unsigned node1Id = g[sourceID]->getInfo();
+	unsigned node2Id = g[destinyID]->getInfo();
+	vector<unsigned> path = graph.getPath(node1Id, node2Id);
+	for(int i = 0; i < path.size(); i++){
+		cout << path[i] << endl;
+	}
 }
 
 string EasyPilot::getMap() const{
@@ -212,6 +209,59 @@ string EasyPilot::getMap() const{
 
 void EasyPilot::setMap(string m) {
 	map = m;
+}
+
+int EasyPilot::getsourceID() const {
+	return sourceID;
+}
+
+int EasyPilot::setsourceID(int id) {
+	gv->setVertexColor(sourceID, "blue");
+	if(highlightNode(id, "yellow") == -1)
+		return -1;
+	else sourceID = id;
+	return 1;
+}
+
+int EasyPilot::getdestinyID() const {
+	return destinyID;
+}
+
+int EasyPilot::setdestinyID(int id) {
+	gv->setVertexColor(destinyID, "blue");
+	if (highlightNode(id, "yellow") == -1)
+		return -1;
+	else
+		destinyID = id;
+	return 1;
+}
+
+int EasyPilot::addPointOfInterest(int id) {
+	if (find(pointsOfInterest.begin(), pointsOfInterest.end(), id)
+			!= pointsOfInterest.end()) {
+		return 0;
+	} else {
+		if (highlightNode(id, "green") == -1 || id == sourceID || id == destinyID)
+			return -1;
+		else {
+			pointsOfInterest.push_back(id);
+		}
+		return 1;
+	}
+}
+
+int EasyPilot::removePointOfInterest(int id) {
+	vector<int>::iterator it = find(pointsOfInterest.begin(), pointsOfInterest.end(), id);
+	if (it == pointsOfInterest.end()) {
+		return 0;
+	} else {
+		if (highlightNode(id, "blue") == -1 || id == sourceID || id == destinyID)
+			return -1;
+		else {
+			pointsOfInterest.erase(it);
+		}
+		return 1;
+	}
 }
 
 /***UTILITY FUNCTIONS***/
