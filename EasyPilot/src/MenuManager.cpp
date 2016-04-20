@@ -1,9 +1,3 @@
-/*
- * MenuManager.cpp
- *
- *  Created on: 19/04/2016
- *      Author: Asus X55A
- */
 
 #include "MenuManager.h"
 
@@ -121,6 +115,7 @@ void MenuManager::navigation(EasyPilot *gps) {
 		vector<string> navigation;
 		navigation.push_back("\nNavigation");
 		navigation.push_back("Path visualization");
+		navigation.push_back("Path reset");
 		navigation.push_back("Navigation criteria");
 		navigation.push_back("Back");
 		selection = menuOptions(navigation);
@@ -129,9 +124,12 @@ void MenuManager::navigation(EasyPilot *gps) {
 			gps->highlightPath();
 			break;
 		case 2:
-			navigationOptions(gps);
+			gps->resetPath();
 			break;
 		case 3:
+			navigationOptions(gps);
+			break;
+		case 4:
 			gps->eraseMap();
 			running = false;
 			break;

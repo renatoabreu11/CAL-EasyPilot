@@ -164,6 +164,7 @@ class Edge {
 	bool twoWays;
 	T id;
 	string name;
+	bool blocked;
 public:
 	Edge(Vertex<T> *d, double w, bool tw, T id, string name);
 	bool getTwoWays() const;
@@ -173,10 +174,12 @@ public:
 	friend class Graph<T>;
 	friend class Vertex<T>;
 	Vertex<T> * getDest() const;
+	bool getBlocked() const;
+	void setBlocked(bool b);
 };
 
 template <class T>
-Edge<T>::Edge(Vertex<T> *d, double w, bool tw, T id, string n): dest(d), weight(w), twoWays(tw), id(id), name(n){}
+Edge<T>::Edge(Vertex<T> *d, double w, bool tw, T id, string n): dest(d), weight(w), twoWays(tw), id(id), name(n), blocked(false){}
 
 template <class T>
 bool Edge<T>::getTwoWays() const{
@@ -204,6 +207,15 @@ Vertex<T> * Edge<T>::getDest() const{
 	return this->dest;
 }
 
+template <class T>
+bool Edge<T>::getBlocked() const{
+	return this->blocked;
+}
+
+template <class T>
+void Edge<T>::setBlocked(bool b){
+	this->blocked = b;
+}
 
 /* ================================================================================================
  * Class Graph
@@ -234,11 +246,12 @@ public:
 	int maxNewChildren(Vertex<T> *v, T &inf) const;
 	vector<Vertex<T> * > getVertexSet() const;
 	int getNumVertex() const;
-	int getVertexIndex(T id) const;
+	int getVertexIndex(const T &v) const;
 	int calculateEdgeWeight(T id1, T id2) const;
 
 	//exercicio 5
 	Vertex<T>* getVertex(const T &v) const;
+	Edge<T> * getEdge(const T &v) const;
 	void resetIndegrees();
 	vector<Vertex<T>*> getSources() const;
 	int getNumCycles();
@@ -257,6 +270,7 @@ public:
 
 	int getNumEdge() const;
 	void clearGraph();
+	int getEdgeIndex(const T &v) const;
 };
 
 
@@ -267,6 +281,32 @@ int Graph<T>::getNumVertex() const {
 template <class T>
 vector<Vertex<T> * > Graph<T>::getVertexSet() const {
 	return vertexSet;
+}
+
+template <class T>
+int Graph<T>::getEdgeIndex(const T &v) const {
+	int counter = 0;
+	for (int i = 0; i < vertexSet.size(); i++) {
+		vector < Edge<T> > adjEdges = vertexSet[i]->adj;
+		for (unsigned int j = 0; j < adjEdges.size(); j++) {
+			if(adjEdges[j].id == v)
+				return counter;
+		}
+		counter++;
+	}
+	return -1;
+}
+
+template <class T>
+Edge<T> * Graph<T>::getEdge(const T &v) const {
+	for (int i = 0; i < vertexSet.size(); i++) {
+		vector<Edge<T> > adjEdges = vertexSet[i]->adj;
+		for (unsigned int j = 0; j < adjEdges.size(); j++) {
+			if (adjEdges[j].id == v)
+				return &adjEdges[j];
+		}
+	}
+	return NULL;
 }
 
 template <class T>
@@ -449,9 +489,9 @@ int Graph<T>::maxNewChildren(Vertex<T> *v, T &inf) const {
 }
 
 template <class T>
-int Graph<T>::getVertexIndex(T id) const{
+int Graph<T>::getVertexIndex(const T &v) const{
 	for (int i = 0; i < this->vertexSet.size(); i++)
-		if(this->vertexSet[i]->info == id)
+		if(this->vertexSet[i]->info == v)
 			return i;
 
 	return -1;

@@ -1,9 +1,5 @@
 #include "EasyPilot.h"
 
-//tentem passar esta struct para o ficheiro .h, a mim dá-me erro
-//até amanhã, beijinhos e abraços <3
-
-
 EasyPilot::EasyPilot() {
 	map = "Test"; //default map
 	destinyID = 1;
@@ -19,9 +15,9 @@ bool EasyPilot::readOSM() {
 	string edgesFile = map + "Edges.txt";
 	string connectionsFile = map + "Connections.txt";
 	string nodesFile = map + "Nodes.txt";
-	string poisFile = map + "POI.txt";	// points of interest
+	string pointOfInterestFile = map + "POI.txt";
 
-	ifstream nodes, edges, connections, pois;
+	ifstream nodes, edges, connections, POIs;
 	string line, aux;
 	size_t firstSemicolon, lastSemicolon;
 	unsigned nodeId;
@@ -113,38 +109,36 @@ bool EasyPilot::readOSM() {
 
 	edges.close();
 
-	/********
-	 * POIs *
-	 ********/
+	string pointOfInterest, ident;
+	unsigned id;
 
-	string poiName;
-
-	/*TODO: UNCOMMENT WHEN THERE IS A FILE FOR EVERY MAP*/
-	//pois.exceptions(ifstream::badbit | ifstream::failbit);
+	POIs.exceptions(ifstream::badbit | ifstream::failbit);
 
 	/*File format: "<nodeID - int>;<poi name - string>"*/
 
-	pois.open(poisFile.c_str(), ifstream::in); // optional file
+	POIs.open(pointOfInterestFile.c_str(), ifstream::in);
 
-	if(pois.good())
-	{
-		while (!pois.eof()) {
-			getline(pois, line);
-			firstSemicolon = line.find(';');
-			aux = line.substr(0, firstSemicolon);
-			nodeId = atol(aux.c_str());
-			aux = line.substr(firstSemicolon + 1, line.size());
-			poiName = aux.c_str();
+	while (!POIs.eof()) {
+		getline(POIs, line);
+		firstSemicolon = line.find(';');
+		lastSemicolon = line.find(';', firstSemicolon + 1);
+		aux = line.substr(0, firstSemicolon);
+		ident = aux.c_str();
+		aux = line.substr(firstSemicolon + 1,
+				lastSemicolon - firstSemicolon - 1);
+		id = atol(aux.c_str());
+		aux = line.substr(lastSemicolon + 1, line.size());
+		pointOfInterest = aux.c_str();
 
-			if (poiName != "")
-			{
-				graph.getVertex(nodeId)->setName(poiName);	// gives the vertex a name
-			}
-
+		if (ident == "POI") {
+			graph.getVertex(id)->setName(pointOfInterest);
+		}else{
+			graph.getEdge(id)->setBlocked(true);
+			inaccessibleZones.push_back(graph.getEdgeIndex(id));
 		}
 	}
 
-	pois.close();
+	POIs.close();
 
 	/***END OF READING TXT FILES***/
 
@@ -167,9 +161,9 @@ void EasyPilot::graphInfoToGV() {
 
 		gv->addNode(i, x, y);
 		if(i == sourceID){
-			gv->setVertexColor(sourceID, "yellow");
+			gv->setVertexColor(sourceID, "red");
 		}else if(i == destinyID){
-			gv->setVertexColor(destinyID, "yellow");
+			gv->setVertexColor(destinyID, "red");
 		}
 
 		if(vertex[i]->getName() != "")	// if it has a name
@@ -193,14 +187,18 @@ void EasyPilot::graphInfoToGV() {
 
 			gv->setEdgeWeight(counter, adjEdges[j].getWeight());
 			gv->setEdgeLabel(counter, adjEdges[j].getName());
+			if (adjEdges[j].getBlocked()) {
+				gv->setEdgeColor(counter, "pink");
+				gv->setEdgeThickness(counter, 10);
+			}
 			counter++;
 		}
 	}
 	gv->rearrange();
 }
 
-int EasyPilot::highlightNode(int id, string color){
-	if(id < 0 || id > graph.getNumVertex()){
+int EasyPilot::highlightNode(int id, string color) {
+	if (id < 0 || id > graph.getNumVertex()) {
 		return -1;
 	} else{
 		gv->setVertexColor(id, color);
@@ -231,6 +229,7 @@ void EasyPilot::eraseMap()
 	this->sourceID = 1;
 	this->inaccessibleZones.clear();
 	this->pointsOfInterest.clear();
+	this->path.clear();
 	gv->closeWindow();
 	graph.clearGraph();
 	gv = NULL;
@@ -240,10 +239,27 @@ void EasyPilot::highlightPath(){
 	vector<Vertex<unsigned> *> g = graph.getVertexSet();
 	unsigned node1Id = g[sourceID]->getInfo();
 	unsigned node2Id = g[destinyID]->getInfo();
-	vector<unsigned> path = graph.getPath(node1Id, node2Id);
-	for(int i = 0; i < path.size(); i++){
-		cout << path[i] << endl;
+	graph.floydWarshallShortestPath();
+	vector<unsigned> graphPath = graph.getfloydWarshallPath(node1Id, node2Id);
+	int id;
+	for(unsigned int i = 0; i < graphPath.size(); i++){
+		id = graph.getVertexIndex(path[i]);
+		path.push_back(id);
+		if(id != sourceID && id != destinyID)
+			gv->setVertexColor(graph.getVertexIndex(path[i]), "yellow");
 	}
+}
+
+void EasyPilot::resetPath() {
+	vector<int>::iterator it = path.begin();
+	for (; it != path.end(); it++) {
+		if (*it != sourceID && *it != destinyID)
+			gv->setVertexColor(*it, "blue");
+
+		path.erase(it);
+		it--;
+	}
+	path.clear();
 }
 
 string EasyPilot::getMap() const{
@@ -260,7 +276,7 @@ int EasyPilot::getsourceID() const {
 
 int EasyPilot::setsourceID(int id) {
 	gv->setVertexColor(sourceID, "blue");
-	if(highlightNode(id, "yellow") == -1)
+	if(highlightNode(id, "red") == -1)
 		return -1;
 	else sourceID = id;
 	return 1;
@@ -272,7 +288,7 @@ int EasyPilot::getdestinyID() const {
 
 int EasyPilot::setdestinyID(int id) {
 	gv->setVertexColor(destinyID, "blue");
-	if (highlightNode(id, "yellow") == -1)
+	if (highlightNode(id, "red") == -1)
 		return -1;
 	else
 		destinyID = id;

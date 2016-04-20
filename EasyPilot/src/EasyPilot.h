@@ -21,8 +21,9 @@ private:
 	string map;
 	int sourceID;
 	int destinyID;
-	vector<int> pointsOfInterest; // definido pelo utilizador
-	vector<int> inaccessibleZones; //o melhor será fazer um ficheiro com esta informação
+	vector<int> path;
+	vector<int> pointsOfInterest;
+	vector<int> inaccessibleZones;
 public:
 	EasyPilot();
 	virtual ~EasyPilot();
@@ -41,6 +42,7 @@ public:
 	int setdestinyID(int id);
 	int addPointOfInterest(int id);
 	int removePointOfInterest(int id);
+	void resetPath();
 };
 
 /*Utility functions and classes to adapt nodes position in GV*/
