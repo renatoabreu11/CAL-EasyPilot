@@ -2,17 +2,13 @@
 
 //tentem passar esta struct para o ficheiro .h, a mim dá-me erro
 //até amanhã, beijinhos e abraços <3
-struct Link {
-	unsigned node1Id, node2Id, roadId;
-	Link(unsigned r, unsigned n1, unsigned n2) :
-			roadId(r), node1Id(n1), node2Id(n2) {
-	}
-};
+
 
 EasyPilot::EasyPilot() {
 	map = "Test"; //default map
 	destinyID = 1;
 	sourceID = 0;
+	gv = NULL;
 }
 
 EasyPilot::~EasyPilot() {
@@ -54,7 +50,8 @@ bool EasyPilot::readOSM() {
 	line.clear();
 	aux.clear();
 	unsigned node1Id, node2Id, roadId;
-	vector<Link *> links;
+	vector<Link> links;
+	Link l = Link();
 
 	connections.exceptions(ifstream::badbit | ifstream::failbit);
 
@@ -70,7 +67,8 @@ bool EasyPilot::readOSM() {
 			node1Id = atol(aux.c_str());
 			aux = line.substr(lastSemicolon + 1, line.size());
 			node2Id = atol(aux.c_str());
-			links.push_back(new Link(roadId, node1Id, node2Id));
+			l = Link(roadId, node1Id, node2Id);
+			links.push_back(l);
 		}
 	} catch (ifstream::failure &e) {
 		cout << "Error while opening " << connectionsFile << endl;
@@ -101,9 +99,9 @@ bool EasyPilot::readOSM() {
 			else
 				isTwoWay = true;
 			for (unsigned int i = 0; i < links.size(); i++) {
-				if (links[i]->roadId == roadId) {
-					int weight = graph.calculateEdgeWeight(links[i]->node1Id, links[i]->node2Id);
-					graph.addEdge(links[i]->node1Id, links[i]->node2Id, weight, isTwoWay, roadId, roadName);
+				if (links[i].roadId == roadId) {
+					int weight = graph.calculateEdgeWeight(links[i].node1Id, links[i].node2Id);
+					graph.addEdge(links[i].node1Id, links[i].node2Id, weight, isTwoWay, roadId, roadName);
 				}
 			}
 
@@ -192,8 +190,8 @@ void EasyPilot::updateMap()
 void EasyPilot::eraseMap()
 {
 	gv->closeWindow();
-	gv->rearrange();
-	delete(gv);
+	graph.clearGraph();
+	gv = NULL;
 }
 
 bool EasyPilot::highlightPath(int srcId, int destId){

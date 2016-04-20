@@ -239,6 +239,7 @@ public:
 	void getfloydWarshallPathAux(int index1, int index2, vector<T> & res);
 
 	int getNumEdge() const;
+	void clearGraph();
 };
 
 
@@ -838,6 +839,11 @@ void Graph<T>::floydWarshallShortestPath() {
 				}
 			}
 
+}
+
+template<class T>
+void Graph<T>::clearGraph(){
+	vertexSet.clear();
 }
 
 

@@ -136,10 +136,13 @@ void MenuManager::mapSelection(EasyPilot *gps) {
 	maps.push_back("Back");
 	selection = menuOptions(maps);
 
-	if (selection != 5) {
+	if (selection < 5 && selection >= 1) {
 		gps->setMap(maps[selection]);
+		cout << "\n" << gps->getMap() << " map is the choosen one.\n";
+	} else{
+		cout << "\nInvalid Input \n";
+		cout << "\n" << gps->getMap() << " map remains the choosen one.\n";
 	}
-	cout << "\n" << gps->getMap() << " map is the choosen one.\n";
 }
 
 void MenuManager::mainMenu(EasyPilot *gps) {
