@@ -121,7 +121,7 @@ void MenuManager::navigation(EasyPilot *gps) {
 		selection = menuOptions(navigation);
 		switch (selection) {
 		case 1:
-			gps->highlightPath();
+			gps->HighLightShortestPath();
 			break;
 		case 2:
 			gps->resetPath();

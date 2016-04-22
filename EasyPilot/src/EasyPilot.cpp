@@ -134,7 +134,7 @@ bool EasyPilot::readOSM() {
 
 		if (ident == "POI") {
 			graph.getVertex(id)->setName(pointOfInterest);
-		}else{
+		} else {
 			graph.getEdge(id)->setBlocked(true);
 			inaccessibleZones.push_back(graph.getEdgeIndex(id));
 		}
@@ -236,12 +236,10 @@ void EasyPilot::eraseMap() {
 	gv = NULL;
 }
 
-void EasyPilot::highlightPath() {
-	vector<Vertex<unsigned> *> g = graph.getVertexSet();
-	unsigned node1Id = g[sourceID]->getInfo();
-	unsigned node2Id = g[destinyID]->getInfo();
+void EasyPilot::highlightPath(unsigned nodeStartID, unsigned nodeDestinationID) {
 	graph.floydWarshallShortestPath();
-	vector<unsigned> graphPath = graph.getfloydWarshallPath(node1Id, node2Id);
+	vector<unsigned> graphPath = graph.getfloydWarshallPath(nodeStartID,
+			nodeDestinationID);
 
 	unsigned nodeID, edgeID;
 	for (unsigned int i = 0; i < graphPath.size(); i++) {
@@ -249,12 +247,42 @@ void EasyPilot::highlightPath() {
 		highlightNode(nodeID, "yellow");
 
 		if (i + 1 < graphPath.size()) {
-			vector<Edge<unsigned> > adj = graph.getVertex(graphPath[i])->getAdj();
+			vector<Edge<unsigned> > adj =
+					graph.getVertex(graphPath[i])->getAdj();
 			for (int j = 0; j < adj.size(); j++) {
-				if (adj[j].getDest()->getInfo() == graph.getVertex(graphPath[i + 1])->getInfo()) {
+				if (adj[j].getDest()->getInfo()
+						== graph.getVertex(graphPath[i + 1])->getInfo()) {
 					highlightEdge(graph.getEdgeIndex(adj[j].getId()));
 					break;
 				}
+			}
+		}
+	}
+}
+
+void EasyPilot::HighLightShortestPath() {
+	vector<Vertex<unsigned> *> g = graph.getVertexSet();
+	unsigned node1ID;
+	unsigned node2ID;
+
+	if (pointsOfInterest.size() == 0) {
+		node1ID = g[sourceID]->getInfo();
+		node2ID = g[destinyID]->getInfo();
+		highlightPath(node1ID, node2ID);
+	} else {
+		for (int i = 0; i < pointsOfInterest.size() + 1; i++) {
+			if (i == 0) {
+				node1ID = g[sourceID]->getInfo();
+				node2ID = graph.getVertexSet()[pointsOfInterest[0]]->getInfo();
+				highlightPath(node1ID, node2ID);
+			} else if (i == pointsOfInterest.size()) {
+				node1ID = graph.getVertexSet()[pointsOfInterest[i - 1]]->getInfo();
+				node2ID = g[destinyID]->getInfo();
+				highlightPath(node1ID, node2ID);
+			} else {
+				node1ID = graph.getVertexSet()[pointsOfInterest[i - 1]]->getInfo();
+				node2ID = graph.getVertexSet()[pointsOfInterest[i]]->getInfo();
+				highlightPath(node1ID, node2ID);
 			}
 		}
 	}

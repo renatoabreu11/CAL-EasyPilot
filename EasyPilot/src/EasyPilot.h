@@ -33,7 +33,7 @@ public:
 	void graphInfoToGV();
 	int highlightNode(int id, string color);
 	int highlightEdge(int id);
-	void highlightPath();
+	void highlightPath(unsigned nodeStartID, unsigned nodeDestinationID);
 	void eraseMap();
 	void updateMap();
 	string getMap() const;
@@ -45,6 +45,7 @@ public:
 	int addPointOfInterest(int id);
 	int removePointOfInterest(int id);
 	void resetPath();
+	void HighLightShortestPath();
 };
 
 /*Utility functions and classes to adapt nodes position in GV*/
