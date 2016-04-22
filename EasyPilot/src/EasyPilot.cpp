@@ -1,9 +1,9 @@
 #include "EasyPilot.h"
 
 EasyPilot::EasyPilot() {
-	map = "Test"; //default map
-	destinyID = 1;
-	sourceID = 0;
+	map = "Esposende"; //default map
+	destinyID = 174;
+	sourceID = 165;
 	gv = NULL;
 }
 
@@ -97,8 +97,10 @@ bool EasyPilot::readOSM() {
 				isTwoWay = true;
 			for (unsigned int i = 0; i < links.size(); i++) {
 				if (links[i].roadId == roadId) {
-					int weight = graph.calculateEdgeWeight(links[i].node1Id, links[i].node2Id);
-					graph.addEdge(links[i].node1Id, links[i].node2Id, weight, isTwoWay, roadId, roadName);
+					int weight = graph.calculateEdgeWeight(links[i].node1Id,
+							links[i].node2Id);
+					graph.addEdge(links[i].node1Id, links[i].node2Id, weight,
+							isTwoWay, roadId, roadName);
 				}
 			}
 
@@ -112,33 +114,33 @@ bool EasyPilot::readOSM() {
 	string pointOfInterest, ident;
 	unsigned id;
 
-	POIs.exceptions(ifstream::badbit | ifstream::failbit);
-
-	/*File format: "<nodeID - int>;<poi name - string>"*/
-
-	POIs.open(pointOfInterestFile.c_str(), ifstream::in);
-
-	while (!POIs.eof()) {
-		getline(POIs, line);
-		firstSemicolon = line.find(';');
-		lastSemicolon = line.find(';', firstSemicolon + 1);
-		aux = line.substr(0, firstSemicolon);
-		ident = aux.c_str();
-		aux = line.substr(firstSemicolon + 1,
-				lastSemicolon - firstSemicolon - 1);
-		id = atol(aux.c_str());
-		aux = line.substr(lastSemicolon + 1, line.size());
-		pointOfInterest = aux.c_str();
-
-		if (ident == "POI") {
-			graph.getVertex(id)->setName(pointOfInterest);
-		}else{
-			graph.getEdge(id)->setBlocked(true);
-			inaccessibleZones.push_back(graph.getEdgeIndex(id));
-		}
-	}
-
-	POIs.close();
+//	POIs.exceptions(ifstream::badbit | ifstream::failbit);
+//
+//	/*File format: "<nodeID - int>;<poi name - string>"*/
+//
+//	POIs.open(pointOfInterestFile.c_str(), ifstream::in);
+//
+//	while (!POIs.eof()) {
+//		getline(POIs, line);
+//		firstSemicolon = line.find(';');
+//		lastSemicolon = line.find(';', firstSemicolon + 1);
+//		aux = line.substr(0, firstSemicolon);
+//		ident = aux.c_str();
+//		aux = line.substr(firstSemicolon + 1,
+//				lastSemicolon - firstSemicolon - 1);
+//		id = atol(aux.c_str());
+//		aux = line.substr(lastSemicolon + 1, line.size());
+//		pointOfInterest = aux.c_str();
+//
+//		if (ident == "POI") {
+//			graph.getVertex(id)->setName(pointOfInterest);
+//		}else{
+//			graph.getEdge(id)->setBlocked(true);
+//			inaccessibleZones.push_back(graph.getEdgeIndex(id));
+//		}
+//	}
+//
+//	POIs.close();
 
 	/***END OF READING TXT FILES***/
 
@@ -160,14 +162,14 @@ void EasyPilot::graphInfoToGV() {
 		int y = resizeLat(vertex[i]->getLatitude(), l, GV_WINDOW_HEIGHT);
 
 		gv->addNode(i, x, y);
-		if(i == sourceID){
+		if (i == sourceID) {
 			gv->setVertexColor(sourceID, "red");
-		}else if(i == destinyID){
+		} else if (i == destinyID) {
 			gv->setVertexColor(destinyID, "red");
 		}
 
-		if(vertex[i]->getName() != "")	// if it has a name
-		{
+		if (vertex[i]->getName() != "")	// if it has a name
+				{
 			ostringstream label;
 			label << i << " - " << vertex[i]->getName();
 			gv->setVertexLabel(i, label.str());
@@ -186,6 +188,7 @@ void EasyPilot::graphInfoToGV() {
 				gv->addEdge(counter, srcNode, dstNode, EdgeType::DIRECTED);
 
 			gv->setEdgeWeight(counter, adjEdges[j].getWeight());
+
 			gv->setEdgeLabel(counter, adjEdges[j].getName());
 			if (adjEdges[j].getBlocked()) {
 				gv->setEdgeColor(counter, "pink");
@@ -200,31 +203,29 @@ void EasyPilot::graphInfoToGV() {
 int EasyPilot::highlightNode(int id, string color) {
 	if (id < 0 || id > graph.getNumVertex()) {
 		return -1;
-	} else{
+	} else {
 		gv->setVertexColor(id, color);
 		updateMap();
 		return 1;
 	}
 }
 
-int EasyPilot::highlightEdge(int id){
-	if(id < 0 || id > graph.getNumEdge()){
+int EasyPilot::highlightEdge(int id) {
+	if (id < 0 || id > graph.getNumEdge()) {
 		return -1;
-	} else{
+	} else {
 		gv->setEdgeColor(id, "pink");
-		gv->setEdgeThickness(id, 10);
+		gv->setEdgeThickness(id, 30);
 		updateMap();
 		return 1;
 	}
 }
 
-void EasyPilot::updateMap()
-{
+void EasyPilot::updateMap() {
 	gv->rearrange();
 }
 
-void EasyPilot::eraseMap()
-{
+void EasyPilot::eraseMap() {
 	this->destinyID = 0;
 	this->sourceID = 1;
 	this->inaccessibleZones.clear();
@@ -235,18 +236,29 @@ void EasyPilot::eraseMap()
 	gv = NULL;
 }
 
-void EasyPilot::highlightPath(){
+void EasyPilot::highlightPath() {
 	vector<Vertex<unsigned> *> g = graph.getVertexSet();
 	unsigned node1Id = g[sourceID]->getInfo();
 	unsigned node2Id = g[destinyID]->getInfo();
 	graph.floydWarshallShortestPath();
 	vector<unsigned> graphPath = graph.getfloydWarshallPath(node1Id, node2Id);
-	int id;
-	for(unsigned int i = 0; i < graphPath.size(); i++){
-		id = graph.getVertexIndex(path[i]);
-		path.push_back(id);
-		if(id != sourceID && id != destinyID)
-			gv->setVertexColor(graph.getVertexIndex(path[i]), "yellow");
+
+	unsigned nodeID, edgeID;
+	for (unsigned int i = 0; i < graphPath.size(); i++) {
+		nodeID = graph.getVertexIndex(graphPath[i]);
+		highlightNode(nodeID, "yellow");
+
+		if (i + 1 < graphPath.size()) {
+			vector<Edge<unsigned> > adj =
+					graph.getVertex(graphPath[i])->getAdj();
+			for (int j = 0; j < adj.size(); j++) {
+				if (adj[j].getDest()->getInfo()
+						== graph.getVertex(graphPath[i + 1])->getInfo()) {
+					highlightEdge(graph.getEdgeIndex(adj[j].getId()));
+					break;
+				}
+			}
+		}
 	}
 }
 
@@ -262,7 +274,7 @@ void EasyPilot::resetPath() {
 	path.clear();
 }
 
-string EasyPilot::getMap() const{
+string EasyPilot::getMap() const {
 	return map;
 }
 
@@ -276,9 +288,10 @@ int EasyPilot::getsourceID() const {
 
 int EasyPilot::setsourceID(int id) {
 	gv->setVertexColor(sourceID, "blue");
-	if(highlightNode(id, "red") == -1)
+	if (highlightNode(id, "red") == -1)
 		return -1;
-	else sourceID = id;
+	else
+		sourceID = id;
 	return 1;
 }
 
@@ -300,7 +313,8 @@ int EasyPilot::addPointOfInterest(int id) {
 			!= pointsOfInterest.end()) {
 		return 0;
 	} else {
-		if (highlightNode(id, "green") == -1 || id == sourceID || id == destinyID)
+		if (highlightNode(id, "green") == -1 || id == sourceID
+				|| id == destinyID)
 			return -1;
 		else {
 			pointsOfInterest.push_back(id);
@@ -310,11 +324,13 @@ int EasyPilot::addPointOfInterest(int id) {
 }
 
 int EasyPilot::removePointOfInterest(int id) {
-	vector<int>::iterator it = find(pointsOfInterest.begin(), pointsOfInterest.end(), id);
+	vector<int>::iterator it = find(pointsOfInterest.begin(),
+			pointsOfInterest.end(), id);
 	if (it == pointsOfInterest.end()) {
 		return 0;
 	} else {
-		if (highlightNode(id, "blue") == -1 || id == sourceID || id == destinyID)
+		if (highlightNode(id, "blue") == -1 || id == sourceID
+				|| id == destinyID)
 			return -1;
 		else {
 			pointsOfInterest.erase(it);
@@ -328,7 +344,7 @@ int EasyPilot::removePointOfInterest(int id) {
 LimitCoords getLimitCoords(Graph<unsigned> g) {
 	LimitCoords l;
 
-	//Initializes minimum value with highest possible
+//Initializes minimum value with highest possible
 	double minLat = FLT_MAX;
 	double minLong = FLT_MAX;
 
@@ -359,7 +375,8 @@ LimitCoords getLimitCoords(Graph<unsigned> g) {
 }
 
 int resizeLat(double lat, LimitCoords l, float windowH) {
-	return (windowH - (round(windowH / (l.maxLat - l.minLat) * (lat - l.minLat))));
+	return (windowH
+			- (round(windowH / (l.maxLat - l.minLat) * (lat - l.minLat))));
 }
 
 int resizeLong(double lon, LimitCoords l, float windowW) {
