@@ -291,8 +291,9 @@ int Graph<T>::getEdgeIndex(const T &v) const {
 		for (unsigned int j = 0; j < adjEdges.size(); j++) {
 			if(adjEdges[j].id == v)
 				return counter;
+
+			counter++;
 		}
-		counter++;
 	}
 	return -1;
 }

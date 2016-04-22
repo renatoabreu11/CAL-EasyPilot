@@ -11,7 +11,7 @@
 #include <float.h>
 #include <algorithm>
 
-#define EDGE_THICKNESS 20
+#define EDGE_THICKNESS 10
 
 #define GV_WINDOW_WIDTH 1600 	// graph viewer x resolution
 #define GV_WINDOW_HEIGHT 700	// gv y resolution

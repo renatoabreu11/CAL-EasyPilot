@@ -2,7 +2,7 @@
 
 EasyPilot::EasyPilot() {
 	map = "Esposende"; //default map
-	destinyID = 174;
+	destinyID = 338;
 	sourceID = 165;
 	gv = NULL;
 }
@@ -114,33 +114,33 @@ bool EasyPilot::readOSM() {
 	string pointOfInterest, ident;
 	unsigned id;
 
-//	POIs.exceptions(ifstream::badbit | ifstream::failbit);
-//
-//	/*File format: "<nodeID - int>;<poi name - string>"*/
-//
-//	POIs.open(pointOfInterestFile.c_str(), ifstream::in);
-//
-//	while (!POIs.eof()) {
-//		getline(POIs, line);
-//		firstSemicolon = line.find(';');
-//		lastSemicolon = line.find(';', firstSemicolon + 1);
-//		aux = line.substr(0, firstSemicolon);
-//		ident = aux.c_str();
-//		aux = line.substr(firstSemicolon + 1,
-//				lastSemicolon - firstSemicolon - 1);
-//		id = atol(aux.c_str());
-//		aux = line.substr(lastSemicolon + 1, line.size());
-//		pointOfInterest = aux.c_str();
-//
-//		if (ident == "POI") {
-//			graph.getVertex(id)->setName(pointOfInterest);
-//		}else{
-//			graph.getEdge(id)->setBlocked(true);
-//			inaccessibleZones.push_back(graph.getEdgeIndex(id));
-//		}
-//	}
-//
-//	POIs.close();
+	POIs.exceptions(ifstream::badbit | ifstream::failbit);
+
+	/*File format: "<nodeID - int>;<poi name - string>"*/
+
+	POIs.open(pointOfInterestFile.c_str(), ifstream::in);
+
+	while (!POIs.eof()) {
+		getline(POIs, line);
+		firstSemicolon = line.find(';');
+		lastSemicolon = line.find(';', firstSemicolon + 1);
+		aux = line.substr(0, firstSemicolon);
+		ident = aux.c_str();
+		aux = line.substr(firstSemicolon + 1,
+				lastSemicolon - firstSemicolon - 1);
+		id = atol(aux.c_str());
+		aux = line.substr(lastSemicolon + 1, line.size());
+		pointOfInterest = aux.c_str();
+
+		if (ident == "POI") {
+			graph.getVertex(id)->setName(pointOfInterest);
+		}else{
+			graph.getEdge(id)->setBlocked(true);
+			inaccessibleZones.push_back(graph.getEdgeIndex(id));
+		}
+	}
+
+	POIs.close();
 
 	/***END OF READING TXT FILES***/
 
@@ -215,7 +215,7 @@ int EasyPilot::highlightEdge(int id) {
 		return -1;
 	} else {
 		gv->setEdgeColor(id, "pink");
-		gv->setEdgeThickness(id, 30);
+		gv->setEdgeThickness(id, EDGE_THICKNESS);
 		updateMap();
 		return 1;
 	}
@@ -249,11 +249,9 @@ void EasyPilot::highlightPath() {
 		highlightNode(nodeID, "yellow");
 
 		if (i + 1 < graphPath.size()) {
-			vector<Edge<unsigned> > adj =
-					graph.getVertex(graphPath[i])->getAdj();
+			vector<Edge<unsigned> > adj = graph.getVertex(graphPath[i])->getAdj();
 			for (int j = 0; j < adj.size(); j++) {
-				if (adj[j].getDest()->getInfo()
-						== graph.getVertex(graphPath[i + 1])->getInfo()) {
+				if (adj[j].getDest()->getInfo() == graph.getVertex(graphPath[i + 1])->getInfo()) {
 					highlightEdge(graph.getEdgeIndex(adj[j].getId()));
 					break;
 				}
