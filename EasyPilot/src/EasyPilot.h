@@ -34,6 +34,7 @@ public:
 	int highlightNode(int id, string color);
 	int highlightEdge(int id);
 	void highlightPath(unsigned nodeStartID, unsigned nodeDestinationID);
+	void HighLightShortestPath();
 	void eraseMap();
 	void updateMap();
 	string getMap() const;
@@ -44,8 +45,9 @@ public:
 	int setdestinyID(int id);
 	int addPointOfInterest(int id);
 	int removePointOfInterest(int id);
+	int addInaccessibleZone(int id);
+	int removeInaccessibleZone(int id);
 	void resetPath();
-	void HighLightShortestPath();
 };
 
 /*Utility functions and classes to adapt nodes position in GV*/

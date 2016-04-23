@@ -16,7 +16,7 @@ MenuManager::~MenuManager() {
 
 void MenuManager::navigationOptions(EasyPilot *gps) {
 	bool running = true;
-	int input = -1, selection, srcNodeID, destNodeID, pointOfInterestID;
+	int input = -1, selection, srcNodeID, destNodeID, pointOfInterestID, inaccessibleID;
 	while (running) {
 		input = -1;
 		vector<string> options;
@@ -25,6 +25,8 @@ void MenuManager::navigationOptions(EasyPilot *gps) {
 		options.push_back("Destination");
 		options.push_back("Add points of interest");
 		options.push_back("Remove points of interest");
+		options.push_back("Add inaccessible point");
+		options.push_back("Remove inaccessible point");
 		options.push_back("Back");
 		selection = menuOptions(options);
 		switch (selection) {
@@ -91,6 +93,37 @@ void MenuManager::navigationOptions(EasyPilot *gps) {
 			}
 			break;
 		case 5:
+			while (input == -1 || input == 0) {
+				try {
+					cout << "\nType the node ID that is uneccessible: \n";
+					cin >> inaccessibleID;
+					input = gps->addInaccessibleZone(inaccessibleID);
+					if(input == -1 || input == 0)
+						cout << "\nNode with ID " << inaccessibleID << " is not selected as inaccessible point. Try again.\n";
+				} catch(InvalidInput &e) {
+					cout << "\nInvalid Input. Try again";
+					cin.clear();
+					cin.ignore(1000, '\n');
+				}
+			}
+			break;
+		case 6:
+			while (input == -1 || input == 0) {
+				try {
+					cout << "\nType the node ID that is no longer inaccessible:\n>>";
+					cin >> inaccessibleID;
+					input = gps->removeInaccessibleZone(inaccessibleID);
+					if (input == 0) {
+						cout << "\nNode with ID " << inaccessibleID << " is not selected as inaccessible point. Try again.\n";
+					}
+				} catch (InvalidInput& e) {
+					cout << "\nInvalid Input. Try again";
+					cin.clear();
+					cin.ignore(1000, '\n');
+				}
+			}
+			break;
+		case 7:
 			running = false;
 			break;
 			/**

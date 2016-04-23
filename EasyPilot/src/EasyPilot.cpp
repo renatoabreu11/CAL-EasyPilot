@@ -2,8 +2,8 @@
 
 EasyPilot::EasyPilot() {
 	map = "Esposende"; //default map
-	destinyID = 338;
-	sourceID = 165;
+	destinyID = 587;
+	sourceID = 211;
 	gv = NULL;
 }
 
@@ -114,9 +114,9 @@ bool EasyPilot::readOSM() {
 	string pointOfInterest, ident;
 	unsigned id;
 
-	POIs.exceptions(ifstream::badbit | ifstream::failbit);
+	/*POIs.exceptions(ifstream::badbit | ifstream::failbit);
 
-	/*File format: "<nodeID - int>;<poi name - string>"*/
+	/*File format: "<nodeID - int>;<poi name - string>"
 
 	POIs.open(pointOfInterestFile.c_str(), ifstream::in);
 
@@ -140,7 +140,7 @@ bool EasyPilot::readOSM() {
 		}
 	}
 
-	POIs.close();
+	POIs.close();*/
 
 	/***END OF READING TXT FILES***/
 
@@ -238,8 +238,7 @@ void EasyPilot::eraseMap() {
 
 void EasyPilot::highlightPath(unsigned nodeStartID, unsigned nodeDestinationID) {
 	graph.floydWarshallShortestPath();
-	vector<unsigned> graphPath = graph.getfloydWarshallPath(nodeStartID,
-			nodeDestinationID);
+	vector<unsigned> graphPath = graph.getfloydWarshallPath(nodeStartID, nodeDestinationID);
 
 	unsigned nodeID, edgeID;
 	for (unsigned int i = 0; i < graphPath.size(); i++) {
@@ -247,11 +246,9 @@ void EasyPilot::highlightPath(unsigned nodeStartID, unsigned nodeDestinationID) 
 		highlightNode(nodeID, "yellow");
 
 		if (i + 1 < graphPath.size()) {
-			vector<Edge<unsigned> > adj =
-					graph.getVertex(graphPath[i])->getAdj();
+			vector<Edge<unsigned> > adj = graph.getVertex(graphPath[i])->getAdj();
 			for (int j = 0; j < adj.size(); j++) {
-				if (adj[j].getDest()->getInfo()
-						== graph.getVertex(graphPath[i + 1])->getInfo()) {
+				if (adj[j].getDest()->getInfo() == graph.getVertex(graphPath[i + 1])->getInfo()) {
 					highlightEdge(graph.getEdgeIndex(adj[j].getId()));
 					break;
 				}
@@ -261,6 +258,18 @@ void EasyPilot::highlightPath(unsigned nodeStartID, unsigned nodeDestinationID) 
 }
 
 void EasyPilot::HighLightShortestPath() {
+
+	/*
+	 * Elimina os pontos inacessiveis do grafo e do gv.
+	 * No entanto, o caminho calculado é muito estranho...
+	 * */
+//	inaccessibleZones.push_back(208);
+//	for(int i = 0; i < inaccessibleZones.size(); i++){
+//		graph.removeVertex(graph.getVertexSet()[inaccessibleZones[i]]->getInfo());
+//		gv->removeNode(inaccessibleZones[i]);
+//		updateMap();
+//	}
+
 	vector<Vertex<unsigned> *> g = graph.getVertexSet();
 	unsigned node1ID;
 	unsigned node2ID;
@@ -335,8 +344,7 @@ int EasyPilot::setdestinyID(int id) {
 }
 
 int EasyPilot::addPointOfInterest(int id) {
-	if (find(pointsOfInterest.begin(), pointsOfInterest.end(), id)
-			!= pointsOfInterest.end()) {
+	if (find(pointsOfInterest.begin(), pointsOfInterest.end(), id) != pointsOfInterest.end()) {
 		return 0;
 	} else {
 		if (highlightNode(id, "green") == -1 || id == sourceID
@@ -350,8 +358,7 @@ int EasyPilot::addPointOfInterest(int id) {
 }
 
 int EasyPilot::removePointOfInterest(int id) {
-	vector<int>::iterator it = find(pointsOfInterest.begin(),
-			pointsOfInterest.end(), id);
+	vector<int>::iterator it = find(pointsOfInterest.begin(), pointsOfInterest.end(), id);
 	if (it == pointsOfInterest.end()) {
 		return 0;
 	} else {
@@ -363,6 +370,29 @@ int EasyPilot::removePointOfInterest(int id) {
 		}
 		return 1;
 	}
+}
+
+int EasyPilot::addInaccessibleZone(int id)
+{
+	if(find(inaccessibleZones.begin(), inaccessibleZones.end(), id) != inaccessibleZones.end())
+		return 0;
+	else if(id == sourceID || id == destinyID)
+		return -1;
+	else
+		inaccessibleZones.push_back(id);
+
+	return 1;
+}
+
+int EasyPilot::removeInaccessibleZone(int id)
+{
+	vector<int>::iterator it = find(inaccessibleZones.begin(), inaccessibleZones.end(), id);
+	if(it == inaccessibleZones.end())
+		return 0;
+	else
+		inaccessibleZones.erase(it);
+
+	return 1;
 }
 
 /***UTILITY FUNCTIONS***/
