@@ -12,6 +12,7 @@
 #include <algorithm>
 
 #define EDGE_THICKNESS 10
+#define DEFAULT_EDGE_THICKNESS 1
 
 #define GV_WINDOW_WIDTH 1600 	// graph viewer x resolution
 #define GV_WINDOW_HEIGHT 700	// gv y resolution
@@ -23,7 +24,8 @@ private:
 	string map;
 	int sourceID;
 	int destinyID;
-	vector<int> path;
+	vector<int> nodePath;
+	vector<int> edgePath;
 	vector<int> pointsOfInterest;
 	vector<int> inaccessibleZones;
 public:
@@ -32,7 +34,7 @@ public:
 	bool readOSM();
 	void graphInfoToGV();
 	int highlightNode(int id, string color);
-	int highlightEdge(int id);
+	int highlightEdge(int id, string color, int thickness);
 	void highlightPath(unsigned nodeStartID, unsigned nodeDestinationID);
 	void HighLightShortestPath();
 	void eraseMap();

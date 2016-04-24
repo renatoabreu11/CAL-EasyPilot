@@ -251,7 +251,6 @@ public:
 
 	//exercicio 5
 	Vertex<T>* getVertex(const T &v) const;
-	Edge<T> * getEdge(const T &v) const;
 	void resetIndegrees();
 	vector<Vertex<T>*> getSources() const;
 	int getNumCycles();
@@ -296,18 +295,6 @@ int Graph<T>::getEdgeIndex(const T &v) const {
 		}
 	}
 	return -1;
-}
-
-template <class T>
-Edge<T> * Graph<T>::getEdge(const T &v) const {
-	for (int i = 0; i < vertexSet.size(); i++) {
-		vector<Edge<T> > adjEdges = vertexSet[i]->adj;
-		for (unsigned int j = 0; j < adjEdges.size(); j++) {
-			if (adjEdges[j].id == v)
-				return &adjEdges[j];
-		}
-	}
-	return NULL;
 }
 
 template <class T>

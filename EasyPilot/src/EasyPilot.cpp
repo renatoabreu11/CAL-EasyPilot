@@ -78,6 +78,7 @@ bool EasyPilot::readOSM() {
 	bool isTwoWay;
 
 	edges.exceptions(ifstream::badbit | ifstream::failbit);
+	int counter = 0;
 
 	try {
 		edges.open(edgesFile.c_str(), ifstream::in);
@@ -100,7 +101,8 @@ bool EasyPilot::readOSM() {
 					int weight = graph.calculateEdgeWeight(links[i].node1Id,
 							links[i].node2Id);
 					graph.addEdge(links[i].node1Id, links[i].node2Id, weight,
-							isTwoWay, roadId, roadName);
+							isTwoWay, counter, roadName);
+					counter++;
 				}
 			}
 
@@ -176,25 +178,24 @@ void EasyPilot::graphInfoToGV() {
 		}
 	}
 
-	int srcNode, dstNode, counter = 0;
+	int srcNode, dstNode;
 	for (int i = 0; i < graph.getNumVertex(); i++) {
 		vector<Edge<unsigned> > adjEdges = vertex[i]->getAdj();
 		for (unsigned int j = 0; j < adjEdges.size(); j++) {
 			srcNode = graph.getVertexIndex(vertex[i]->getInfo());
 			dstNode = graph.getVertexIndex(adjEdges[j].getDest()->getInfo());
 			if (adjEdges[j].getTwoWays())
-				gv->addEdge(counter, srcNode, dstNode, EdgeType::UNDIRECTED);
+				gv->addEdge(adjEdges[j].getId(), srcNode, dstNode, EdgeType::UNDIRECTED);
 			else
-				gv->addEdge(counter, srcNode, dstNode, EdgeType::DIRECTED);
+				gv->addEdge(adjEdges[j].getId(), srcNode, dstNode, EdgeType::DIRECTED);
 
-			gv->setEdgeWeight(counter, adjEdges[j].getWeight());
+			gv->setEdgeWeight(adjEdges[j].getId(), adjEdges[j].getWeight());
 
-			gv->setEdgeLabel(counter, adjEdges[j].getName());
+			gv->setEdgeLabel(adjEdges[j].getId(), adjEdges[j].getName());
 			if (adjEdges[j].getBlocked()) {
-				gv->setEdgeColor(counter, "pink");
-				gv->setEdgeThickness(counter, 10);
+				gv->setEdgeColor(adjEdges[j].getId(), "pink");
+				gv->setEdgeThickness(adjEdges[j].getId(), 10);
 			}
-			counter++;
 		}
 	}
 	gv->rearrange();
@@ -210,12 +211,12 @@ int EasyPilot::highlightNode(int id, string color) {
 	}
 }
 
-int EasyPilot::highlightEdge(int id) {
+int EasyPilot::highlightEdge(int id, string color, int thickness) {
 	if (id < 0 || id > graph.getNumEdge()) {
 		return -1;
 	} else {
-		gv->setEdgeColor(id, "pink");
-		gv->setEdgeThickness(id, EDGE_THICKNESS);
+		gv->setEdgeColor(id, color);
+		gv->setEdgeThickness(id, thickness);
 		updateMap();
 		return 1;
 	}
@@ -230,7 +231,8 @@ void EasyPilot::eraseMap() {
 	this->sourceID = 1;
 	this->inaccessibleZones.clear();
 	this->pointsOfInterest.clear();
-	this->path.clear();
+	this->nodePath.clear();
+	this->edgePath.clear();
 	gv->closeWindow();
 	graph.clearGraph();
 	gv = NULL;
@@ -240,16 +242,18 @@ void EasyPilot::highlightPath(unsigned nodeStartID, unsigned nodeDestinationID) 
 	graph.floydWarshallShortestPath();
 	vector<unsigned> graphPath = graph.getfloydWarshallPath(nodeStartID, nodeDestinationID);
 
-	unsigned nodeID, edgeID;
+	unsigned nodeID;
 	for (unsigned int i = 0; i < graphPath.size(); i++) {
 		nodeID = graph.getVertexIndex(graphPath[i]);
 		highlightNode(nodeID, "yellow");
+		nodePath.push_back(nodeID);
 
 		if (i + 1 < graphPath.size()) {
 			vector<Edge<unsigned> > adj = graph.getVertex(graphPath[i])->getAdj();
-			for (int j = 0; j < adj.size(); j++) {
+			for (unsigned int j = 0; j < adj.size(); j++) {
 				if (adj[j].getDest()->getInfo() == graph.getVertex(graphPath[i + 1])->getInfo()) {
-					highlightEdge(graph.getEdgeIndex(adj[j].getId()));
+					highlightEdge(adj[j].getId(), "pink", EDGE_THICKNESS);
+					edgePath.push_back(adj[j].getId());
 					break;
 				}
 			}
@@ -298,15 +302,24 @@ void EasyPilot::HighLightShortestPath() {
 }
 
 void EasyPilot::resetPath() {
-	vector<int>::iterator it = path.begin();
-	for (; it != path.end(); it++) {
+	vector<int>::iterator it = nodePath.begin();
+	for (; it != nodePath.end(); it++) {
 		if (*it != sourceID && *it != destinyID)
 			gv->setVertexColor(*it, "blue");
 
-		path.erase(it);
+		nodePath.erase(it);
 		it--;
 	}
-	path.clear();
+	nodePath.clear();
+
+	vector<int>::iterator itr = edgePath.begin();
+	for (; itr != edgePath.end(); itr++) {
+		highlightEdge(*itr, "black", DEFAULT_EDGE_THICKNESS);
+
+		edgePath.erase(itr);
+		itr--;
+	}
+	edgePath.clear();
 }
 
 string EasyPilot::getMap() const {
