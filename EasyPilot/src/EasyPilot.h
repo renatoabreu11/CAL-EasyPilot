@@ -25,6 +25,7 @@ private:
 	string map;
 	int sourceID;
 	int destinyID;
+	int POIsNavigationMethod;
 	vector<int> nodePath;
 	vector<int> edgePath;
 	vector<int> pointsOfInterest;
@@ -36,6 +37,8 @@ public:
 	void graphInfoToGV();
 	int highlightNode(int id, string color);
 	int highlightEdge(int id, string color, int thickness);
+	double getWaitOfPath(unsigned nodeStartID, unsigned nodeDestinationID);
+	void sortPOIsByWeight(const vector<Vertex<unsigned> *> &g);
 	void highlightPath(unsigned nodeStartID, unsigned nodeDestinationID);
 	void HighLightShortestPath();
 	void eraseMap();
@@ -48,10 +51,19 @@ public:
 	int setdestinyID(int id);
 	int addPointOfInterest(int id);
 	int removePointOfInterest(int id);
+	int setPOIsNavigation(int method);
 	int addInaccessibleZone(int firstID, int lastID);
 	void removeInaccessibleZone(int id);
 	vector<string> getInaccessibleZones() const;
 	void resetPath();
+};
+
+struct Link {
+	Link() {}
+	unsigned node1Id, node2Id, roadId;
+	Link(unsigned r, unsigned n1, unsigned n2) :
+			roadId(r), node1Id(n1), node2Id(n2) {
+	}
 };
 
 /**

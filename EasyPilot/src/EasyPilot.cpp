@@ -5,6 +5,7 @@ EasyPilot::EasyPilot() {
 	destinyID = 96;
 	sourceID = 163;
 	gv = NULL;
+	POIsNavigationMethod = 2;
 }
 
 EasyPilot::~EasyPilot() {
@@ -253,11 +254,32 @@ void EasyPilot::eraseMap() {
 	gv = NULL;
 }
 
-void EasyPilot::highlightPath(unsigned nodeStartID, unsigned nodeDestinationID) {
-	graph.floydWarshallShortestPath();
+double EasyPilot::getWaitOfPath(unsigned nodeStartID, unsigned nodeDestinationID) {
 	vector<unsigned> graphPath = graph.getfloydWarshallPath(nodeStartID, nodeDestinationID);
-
 	unsigned nodeID;
+	double totalWeight = 0;
+
+	for (unsigned int i = 0; i < graphPath.size(); i++) {
+		nodeID = graph.getVertexIndex(graphPath[i]);
+
+		if (i + 1 < graphPath.size()) {
+			vector<Edge<unsigned> > adj = graph.getVertex(graphPath[i])->getAdj();
+			for (unsigned int j = 0; j < adj.size(); j++) {
+				if (adj[j].getDest()->getInfo() == graph.getVertex(graphPath[i + 1])->getInfo()) {
+					totalWeight += adj[j].getWeight();
+					break;
+				}
+			}
+		}
+	}
+
+	return totalWeight;
+}
+
+void EasyPilot::highlightPath(unsigned nodeStartID, unsigned nodeDestinationID) {
+	vector<unsigned> graphPath = graph.getfloydWarshallPath(nodeStartID, nodeDestinationID);
+	unsigned nodeID;
+
 	for (unsigned int i = 0; i < graphPath.size(); i++) {
 		nodeID = graph.getVertexIndex(graphPath[i]);
 		highlightNode(nodeID, "yellow");
@@ -276,10 +298,54 @@ void EasyPilot::highlightPath(unsigned nodeStartID, unsigned nodeDestinationID) 
 	}
 }
 
+bool alreadyProcessed(int nodeToSearch, vector<int> POIsAlreadySeen) {
+	for(unsigned int i = 0; i < POIsAlreadySeen.size(); i++) {
+		if(POIsAlreadySeen[i] == nodeToSearch)
+			return true;
+	}
+
+	return false;
+}
+
+void EasyPilot::sortPOIsByWeight(const vector<Vertex<unsigned> *> &g) {
+	unsigned node1ID, node2ID;
+	vector<int> POIsByWeightOrder;
+
+	while(POIsByWeightOrder.size() != pointsOfInterest.size()) {
+		if(POIsByWeightOrder.empty())
+			node1ID = g[sourceID]->getInfo();
+		else
+			node1ID = POIsByWeightOrder[POIsByWeightOrder.size() - 1];
+
+		unsigned secondNodeToUse;
+		double weight, weightCloser = INT_INFINITY;
+
+		for(unsigned int i = 0; i < pointsOfInterest.size(); i++) {
+			node2ID = graph.getVertexSet()[pointsOfInterest[i]]->getInfo();
+
+			weight = getWaitOfPath(node1ID, node2ID);
+
+			if(weight < weightCloser && !alreadyProcessed(node2ID, POIsByWeightOrder)) {
+				weightCloser = weight;
+				secondNodeToUse = node2ID;
+			}
+		}
+
+		POIsByWeightOrder.push_back(secondNodeToUse);
+	}
+
+	pointsOfInterest = POIsByWeightOrder;
+
+	for(int i = 0; i < pointsOfInterest.size(); i++)
+		cout << graph.getVertexIndex(pointsOfInterest[i]) << endl;
+}
+
 void EasyPilot::HighLightShortestPath() {
 	vector<Vertex<unsigned> *> g = graph.getVertexSet();
 	unsigned node1ID;
 	unsigned node2ID;
+
+	graph.floydWarshallShortestPath();
 
 	if (pointsOfInterest.size() == 0) {
 		node1ID = g[sourceID]->getInfo();
@@ -289,22 +355,24 @@ void EasyPilot::HighLightShortestPath() {
 			highlightPath(node1ID, node2ID);
 		}else cout << "\nImpossible to go from point " << sourceID << " to point " << destinyID << endl;
 	} else {
-		for (unsigned int i = 0; i < pointsOfInterest.size() + 1; i++) {
+		sortPOIsByWeight(g);
+
+		for (int i = 0; i < pointsOfInterest.size() + 1; i++) {
 			if (i == 0) {
 				node1ID = g[sourceID]->getInfo();
-				node2ID = graph.getVertexSet()[pointsOfInterest[0]]->getInfo();
+				node2ID = pointsOfInterest[0];
 				highlightPath(node1ID, node2ID);
-				cout << "Going to interest point '" << graph.getVertexIndex(node2ID) << "'\nPress ENTER to move to the next one...";
+				cout << "Going to interest point '" << graph.getVertexIndex(pointsOfInterest[0]) << "'\nPress ENTER to move to the next one...";
 			} else if (i == pointsOfInterest.size()) {
-				node1ID = graph.getVertexSet()[pointsOfInterest[i - 1]]->getInfo();
+				node1ID = pointsOfInterest[i-1];
 				node2ID = g[destinyID]->getInfo();
 				highlightPath(node1ID, node2ID);
 				cout << "Going to destination point '" << graph.getVertexIndex(node2ID) << "'\nPress ENTER to finish your trip...";
 			} else {
-				node1ID = graph.getVertexSet()[pointsOfInterest[i - 1]]->getInfo();
-				node2ID = graph.getVertexSet()[pointsOfInterest[i]]->getInfo();
+				node1ID = pointsOfInterest[i-1];
+				node2ID = pointsOfInterest[i];
 				highlightPath(node1ID, node2ID);
-				cout << "Going to point interest point '" << graph.getVertexIndex(node2ID) << "'\nPress ENTER to move to the next one...";
+				cout << "Going to point interest point '" << graph.getVertexIndex(pointsOfInterest[i]) << "'\nPress ENTER to move to the next one...";
 			}
 			cin.ignore();
 		}
@@ -312,13 +380,26 @@ void EasyPilot::HighLightShortestPath() {
 }
 
 void EasyPilot::resetPath() {
+	bool changeColorPOIs = true;
 	vector<int>::iterator it = nodePath.begin();
+
 	for (; it != nodePath.end(); it++) {
-		if (*it != sourceID && *it != destinyID)
-			gv->setVertexColor(*it, "blue");
+		if (*it != sourceID && *it != destinyID) {
+			for(unsigned int i = 0; i < pointsOfInterest.size(); i++)
+				if(*it == pointsOfInterest[i]) {
+					changeColorPOIs = false;
+					break;
+				}
+
+			if(changeColorPOIs)
+				gv->setVertexColor(*it, "blue");
+			else
+				gv->setVertexColor(*it, "green");
+		}
 
 		nodePath.erase(it);
 		it--;
+		changeColorPOIs = true;
 	}
 	nodePath.clear();
 
@@ -330,21 +411,6 @@ void EasyPilot::resetPath() {
 		itr--;
 	}
 	edgePath.clear();
-
-	vector<Vertex<unsigned> *> vertex = graph.getVertexSet();
-	for (int i = 0; i < graph.getNumVertex(); i++) {
-		vector<Edge<unsigned> > adjEdges = vertex[i]->getAdj();
-		for (unsigned int j = 0; j < adjEdges.size(); j++) {
-			if (adjEdges[j].getBlocked()) {
-				gv->setEdgeColor(adjEdges[j].getId(), "red");
-				gv->setEdgeThickness(adjEdges[j].getId(), 10);
-			}
-		}
-	}
-
-	for(unsigned int i = 0; i < this->pointsOfInterest.size(); i++){
-		gv->setEdgeColor(pointsOfInterest[i], "green");
-	}
 }
 
 string EasyPilot::getMap() const {
@@ -382,7 +448,8 @@ int EasyPilot::setdestinyID(int id) {
 }
 
 int EasyPilot::addPointOfInterest(int id) {
-	if (find(pointsOfInterest.begin(), pointsOfInterest.end(), id) != pointsOfInterest.end()) {
+	if (find(pointsOfInterest.begin(), pointsOfInterest.end(), id)
+			!= pointsOfInterest.end()) {
 		return 0;
 	} else {
 		if (highlightNode(id, "green") == -1 || id == sourceID
@@ -396,7 +463,8 @@ int EasyPilot::addPointOfInterest(int id) {
 }
 
 int EasyPilot::removePointOfInterest(int id) {
-	vector<int>::iterator it = find(pointsOfInterest.begin(), pointsOfInterest.end(), id);
+	vector<int>::iterator it = find(pointsOfInterest.begin(),
+			pointsOfInterest.end(), id);
 	if (it == pointsOfInterest.end()) {
 		return 0;
 	} else {
@@ -408,6 +476,14 @@ int EasyPilot::removePointOfInterest(int id) {
 		}
 		return 1;
 	}
+}
+
+int EasyPilot::setPOIsNavigation(int method) {
+	if (method < 1 || method > 2)
+		return -1;
+
+	POIsNavigationMethod = method;
+	return 1;
 }
 
 int EasyPilot::addInaccessibleZone(int firstID, int lastID)
@@ -472,8 +548,6 @@ void EasyPilot::removeInaccessibleZone(int id) {
 			return;
 		}
 	}
-
-
 }
 
 vector<string> EasyPilot::getInaccessibleZones() const{

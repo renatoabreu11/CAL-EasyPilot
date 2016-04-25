@@ -16,7 +16,7 @@ MenuManager::~MenuManager() {
 
 void MenuManager::navigationOptions(EasyPilot *gps) {
 	bool running = true;
-	int input = -1, selection, srcNodeID, destNodeID, pointOfInterestID, firstInaccessibleID, lastInaccessibleID;
+	int input = -1, selection, srcNodeID, destNodeID, pointOfInterestID, POIsNavigationMethod, firstInaccessibleID, lastInaccessibleID;
 	while (running) {
 		input = -1;
 		vector<string> options;
@@ -25,6 +25,7 @@ void MenuManager::navigationOptions(EasyPilot *gps) {
 		options.push_back("Destination");
 		options.push_back("Add points of interest");
 		options.push_back("Remove points of interest");
+		options.push_back("Select points of interest navigation method");
 		options.push_back("Add inaccessible point");
 		options.push_back("Remove inaccessible point");
 		options.push_back("Back");
@@ -93,6 +94,19 @@ void MenuManager::navigationOptions(EasyPilot *gps) {
 			}
 			break;
 		case 5:
+			while(input == -1) {
+				try {
+					cout << "Type 1 for user input order, or 2 for shortest way possible:\n";
+					cin >> POIsNavigationMethod;
+					input = gps->setPOIsNavigation(POIsNavigationMethod);
+				} catch (InvalidInput& e) {
+					cout << "\nInvalid Input. Try again";
+					cin.clear();
+					cin.ignore(1000, '\n');
+				}
+			}
+			break;
+		case 6:
 			while (input == -1 || input == 0) {
 				try {
 					cout << "\nSelect the connection that is now inaccessible. To do that you must choose two nodes adjacent to each other.\n";
@@ -110,7 +124,7 @@ void MenuManager::navigationOptions(EasyPilot *gps) {
 				}
 			}
 			break;
-		case 6:
+		case 7:
 			while (input == -1) {
 				try {
 					cout << "\nType the connection that is no longer inaccessible:";
@@ -126,7 +140,7 @@ void MenuManager::navigationOptions(EasyPilot *gps) {
 				}
 			}
 			break;
-		case 7:
+		case 8:
 			running = false;
 			break;
 			/**
