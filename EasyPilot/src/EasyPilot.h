@@ -10,6 +10,7 @@
 #include "string"
 #include <float.h>
 #include <algorithm>
+#include "Utilities.h"
 
 #define EDGE_THICKNESS 10
 #define DEFAULT_EDGE_THICKNESS 1
@@ -27,7 +28,7 @@ private:
 	vector<int> nodePath;
 	vector<int> edgePath;
 	vector<int> pointsOfInterest;
-	vector<int> inaccessibleZones;
+	vector<InaccessibleZone> inaccessibleZones;
 public:
 	EasyPilot();
 	virtual ~EasyPilot();
@@ -47,14 +48,11 @@ public:
 	int setdestinyID(int id);
 	int addPointOfInterest(int id);
 	int removePointOfInterest(int id);
-	int addInaccessibleZone(int id);
-	int removeInaccessibleZone(int id);
+	int addInaccessibleZone(int firstID, int lastID);
+	void removeInaccessibleZone(int id);
+	vector<string> getInaccessibleZones() const;
 	void resetPath();
 };
-
-/*Utility functions and classes to adapt nodes position in GV*/
-
-//continua a fazer a documentação aleixo. Tás a trabalhar bem, gg
 
 struct Link {
 	Link() {}
