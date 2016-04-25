@@ -2,8 +2,8 @@
 
 EasyPilot::EasyPilot() {
 	map = "Esposende"; //default map
-	destinyID = 587;
-	sourceID = 211;
+	destinyID = 96;
+	sourceID = 163;
 	gv = NULL;
 }
 
@@ -73,7 +73,7 @@ bool EasyPilot::readOSM() {
 	connections.close();
 
 	string pointOfInterest, ident;
-	unsigned id;
+	unsigned firstID, lastID;
 
 	POIs.exceptions(ifstream::badbit | ifstream::failbit);
 
@@ -85,16 +85,21 @@ bool EasyPilot::readOSM() {
 		lastSemicolon = line.find(';', firstSemicolon + 1);
 		aux = line.substr(0, firstSemicolon);
 		ident = aux.c_str();
-		aux = line.substr(firstSemicolon + 1,
-				lastSemicolon - firstSemicolon - 1);
-		id = atol(aux.c_str());
-		aux = line.substr(lastSemicolon + 1, line.size());
-		pointOfInterest = aux.c_str();
-
 		if (ident == "POI") {
-			graph.getVertex(id)->setName(pointOfInterest);
+			aux = line.substr(firstSemicolon + 1,
+					lastSemicolon - firstSemicolon - 1);
+			firstID = atol(aux.c_str());
+			aux = line.substr(lastSemicolon + 1, line.size());
+			pointOfInterest = aux.c_str();
+			graph.getVertex(firstID)->setName(pointOfInterest);
 		} else {
-			inaccessibleZones.push_back(id);
+			aux = line.substr(firstSemicolon + 1,
+					lastSemicolon - firstSemicolon - 1);
+			firstID = atol(aux.c_str());
+			aux = line.substr(lastSemicolon + 1, line.size());
+			lastID = atol(aux.c_str());
+			InaccessibleZone iz = InaccessibleZone(firstID, lastID);
+			inaccessibleZones.push_back(iz);
 		}
 	}
 
@@ -129,12 +134,18 @@ bool EasyPilot::readOSM() {
 				if (links[i].roadId == roadId) {
 					int weight = graph.calculateEdgeWeight(links[i].node1Id,
 							links[i].node2Id);
-					if(find(inaccessibleZones.begin(), inaccessibleZones.end(), counter) != inaccessibleZones.end())
+					InaccessibleZone iz = InaccessibleZone(graph.getVertexIndex(links[i].node1Id), graph.getVertexIndex(links[i].node2Id));
+					if(find(inaccessibleZones.begin(), inaccessibleZones.end(), iz) != inaccessibleZones.end())
 						blocked = true;
 					else blocked = false;
 					graph.addEdge(links[i].node1Id, links[i].node2Id, weight,
 							isTwoWay, blocked, counter, roadName);
 					counter++;
+					if (isTwoWay == true) {
+						graph.addEdge(links[i].node2Id, links[i].node1Id,
+								weight, isTwoWay, blocked, counter, roadName);
+						counter++;
+					}
 				}
 			}
 
@@ -166,9 +177,9 @@ void EasyPilot::graphInfoToGV() {
 
 		gv->addNode(i, x, y);
 		if (i == sourceID) {
-			gv->setVertexColor(sourceID, "orange");
+			gv->setVertexColor(sourceID, "yellow");
 		} else if (i == destinyID) {
-			gv->setVertexColor(destinyID, "orange");
+			gv->setVertexColor(destinyID, "yellow");
 		}
 
 		if (vertex[i]->getName() != "")	// if it has a name
@@ -240,8 +251,8 @@ void EasyPilot::eraseMap() {
 }
 
 void EasyPilot::highlightPath(unsigned nodeStartID, unsigned nodeDestinationID) {
-	graph.dijkstraShortestPath(nodeStartID);
-	vector<unsigned> graphPath = graph.getPath(nodeStartID, nodeDestinationID);
+	graph.floydWarshallShortestPath();
+	vector<unsigned> graphPath = graph.getfloydWarshallPath(nodeStartID, nodeDestinationID);
 
 	unsigned nodeID;
 	for (unsigned int i = 0; i < graphPath.size(); i++) {
@@ -337,7 +348,7 @@ int EasyPilot::getsourceID() const {
 
 int EasyPilot::setsourceID(int id) {
 	gv->setVertexColor(sourceID, "blue");
-	if (highlightNode(id, "orange") == -1)
+	if (highlightNode(id, "yellow") == -1)
 		return -1;
 	else
 		sourceID = id;
@@ -350,7 +361,7 @@ int EasyPilot::getdestinyID() const {
 
 int EasyPilot::setdestinyID(int id) {
 	gv->setVertexColor(destinyID, "blue");
-	if (highlightNode(id, "orange") == -1)
+	if (highlightNode(id, "yellow") == -1)
 		return -1;
 	else
 		destinyID = id;
@@ -386,27 +397,66 @@ int EasyPilot::removePointOfInterest(int id) {
 	}
 }
 
-int EasyPilot::addInaccessibleZone(int id)
+int EasyPilot::addInaccessibleZone(int firstID, int lastID)
 {
-	if(find(inaccessibleZones.begin(), inaccessibleZones.end(), id) != inaccessibleZones.end())
-		return 0;
-	else if(id == sourceID || id == destinyID)
+	InaccessibleZone iz = InaccessibleZone(firstID, lastID);
+	if(firstID == sourceID || lastID == destinyID)
 		return -1;
-	else
-		inaccessibleZones.push_back(id);
+	else if(find(inaccessibleZones.begin(), inaccessibleZones.end(), iz) != inaccessibleZones.end()){
+		return -1;
+	}
+	else{
+		Vertex<unsigned>* v1 = graph.getVertexSet()[firstID];
+		Vertex<unsigned>* v2 = graph.getVertexSet()[lastID];
+		vector<Edge<unsigned> > adjV1 = v1->getAdj();
+		for(unsigned int i = 0; i < adjV1.size(); i++){
+			if(adjV1[i].getDest()->getInfo() == v2->getInfo()){
+				this->highlightEdge(adjV1[i].getId(), "red", 10);
+				inaccessibleZones.push_back(iz);
+				return 1;
+			}
+		}
 
-	return 1;
+		vector<Edge<unsigned> > adjV2 = v2->getAdj();
+		for (unsigned int i = 0; i < adjV2.size(); i++) {
+			if (adjV2[i].getDest()->getInfo() == v1->getInfo()) {
+				this->highlightEdge(adjV2[i].getId(), "red", 10);
+				inaccessibleZones.push_back(iz);
+				return 1;
+			}
+		}
+	}
+
+	return -1;
 }
 
-int EasyPilot::removeInaccessibleZone(int id)
-{
-	vector<int>::iterator it = find(inaccessibleZones.begin(), inaccessibleZones.end(), id);
-	if(it == inaccessibleZones.end())
-		return 0;
-	else
-		inaccessibleZones.erase(it);
+void EasyPilot::removeInaccessibleZone(int id) {
+	InaccessibleZone iz = inaccessibleZones[id - 1];
+	Vertex<unsigned>* v1 = graph.getVertexSet()[iz.getFirstID()];
+	Vertex<unsigned>* v2 = graph.getVertexSet()[iz.getLastID()];
+	vector<Edge<unsigned> > adjV1 = v1->getAdj();
+	for (unsigned int i = 0; i < adjV1.size(); i++) {
+		if (adjV1[i].getDest()->getInfo() == v2->getInfo()) {
+			this->highlightEdge(adjV1[i].getId(), "black", DEFAULT_EDGE_THICKNESS);
+			return;
+		}
+	}
 
-	return 1;
+	vector<Edge<unsigned> > adjV2 = v2->getAdj();
+	for (unsigned int i = 0; i < adjV2.size(); i++) {
+		if (adjV2[i].getDest()->getInfo() == v1->getInfo()) {
+			this->highlightEdge(adjV2[i].getId(), "black", DEFAULT_EDGE_THICKNESS);
+		}
+	}
+}
+
+vector<string> EasyPilot::getInaccessibleZones() const{
+	vector<string> ret;
+	ret.push_back("");
+	for(unsigned int i = 0; i < inaccessibleZones.size(); i++){
+		ret.push_back(inaccessibleZones[i].toString());
+	}
+	return ret;
 }
 
 /***UTILITY FUNCTIONS***/

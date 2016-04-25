@@ -16,7 +16,7 @@ MenuManager::~MenuManager() {
 
 void MenuManager::navigationOptions(EasyPilot *gps) {
 	bool running = true;
-	int input = -1, selection, srcNodeID, destNodeID, pointOfInterestID, inaccessibleID;
+	int input = -1, selection, srcNodeID, destNodeID, pointOfInterestID, firstInaccessibleID, lastInaccessibleID;
 	while (running) {
 		input = -1;
 		vector<string> options;
@@ -95,11 +95,14 @@ void MenuManager::navigationOptions(EasyPilot *gps) {
 		case 5:
 			while (input == -1 || input == 0) {
 				try {
-					cout << "\nType the node ID that is uneccessible: \n";
-					cin >> inaccessibleID;
-					input = gps->addInaccessibleZone(inaccessibleID);
+					cout << "\nSelect the connection that is now inaccessible. To do that you must choose two nodes adjacent to each other.\n";
+					cout << "\nType the first node ID\n>>";
+					cin >> firstInaccessibleID;
+					cout << "Type the last node ID\n>>";
+					cin >> lastInaccessibleID;
+					input = gps->addInaccessibleZone(firstInaccessibleID, lastInaccessibleID);
 					if(input == -1 || input == 0)
-						cout << "\nNode with ID " << inaccessibleID << " is not selected as inaccessible point. Try again.\n";
+						cout << "\nNode with ID " << lastInaccessibleID << " is not selected as inaccessible point. Try again.\n";
 				} catch(InvalidInput &e) {
 					cout << "\nInvalid Input. Try again";
 					cin.clear();
@@ -108,14 +111,11 @@ void MenuManager::navigationOptions(EasyPilot *gps) {
 			}
 			break;
 		case 6:
-			while (input == -1 || input == 0) {
+			while (input == -1) {
 				try {
-					cout << "\nType the node ID that is no longer inaccessible:\n>>";
-					cin >> inaccessibleID;
-					input = gps->removeInaccessibleZone(inaccessibleID);
-					if (input == 0) {
-						cout << "\nNode with ID " << inaccessibleID << " is not selected as inaccessible point. Try again.\n";
-					}
+					cout << "\nType the connection that is no longer inaccessible:";
+					input = menuOptions(gps->getInaccessibleZones());
+					gps->removeInaccessibleZone(input);
 				} catch (InvalidInput& e) {
 					cout << "\nInvalid Input. Try again";
 					cin.clear();
