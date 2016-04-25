@@ -102,7 +102,7 @@ void MenuManager::navigationOptions(EasyPilot *gps) {
 					cin >> lastInaccessibleID;
 					input = gps->addInaccessibleZone(firstInaccessibleID, lastInaccessibleID);
 					if(input == -1 || input == 0)
-						cout << "\nNode with ID " << lastInaccessibleID << " is not selected as inaccessible point. Try again.\n";
+						cout << "\nInvalid nodes. Select another inaccessible point.\n";
 				} catch(InvalidInput &e) {
 					cout << "\nInvalid Input. Try again";
 					cin.clear();
@@ -114,8 +114,11 @@ void MenuManager::navigationOptions(EasyPilot *gps) {
 			while (input == -1) {
 				try {
 					cout << "\nType the connection that is no longer inaccessible:";
-					input = menuOptions(gps->getInaccessibleZones());
-					gps->removeInaccessibleZone(input);
+					vector<string> op = gps->getInaccessibleZones();
+					op.push_back("Back");
+					input = menuOptions(op);
+					if(input != op.size() - 1)
+						gps->removeInaccessibleZone(input);
 				} catch (InvalidInput& e) {
 					cout << "\nInvalid Input. Try again";
 					cin.clear();

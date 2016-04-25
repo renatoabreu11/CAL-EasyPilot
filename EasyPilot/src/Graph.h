@@ -175,7 +175,6 @@ public:
 	friend class Vertex<T>;
 	Vertex<T> * getDest() const;
 	bool getBlocked() const;
-	void setBlocked(bool b);
 };
 
 template <class T>
@@ -212,11 +211,6 @@ bool Edge<T>::getBlocked() const{
 	return this->blocked;
 }
 
-template <class T>
-void Edge<T>::setBlocked(bool b){
-	this->blocked = b;
-}
-
 /* ================================================================================================
  * Class Graph
  * ================================================================================================
@@ -251,6 +245,7 @@ public:
 
 	//exercicio 5
 	Vertex<T>* getVertex(const T &v) const;
+	Edge<T>* getEdge(const T &v) const;
 	void resetIndegrees();
 	vector<Vertex<T>*> getSources() const;
 	int getNumCycles();
@@ -269,6 +264,7 @@ public:
 
 	int getNumEdge() const;
 	void clearGraph();
+	void setEdgeBlocked(const T &v, bool b);
 };
 
 
@@ -279,6 +275,16 @@ int Graph<T>::getNumVertex() const {
 template <class T>
 vector<Vertex<T> * > Graph<T>::getVertexSet() const {
 	return vertexSet;
+}
+
+template<class T>
+void Graph<T>::setEdgeBlocked(const T &v, bool b) {
+	for (unsigned int i = 0; i < vertexSet.size(); i++) {
+		for (unsigned int j = 0; j < vertexSet[i]->adj.size(); j++) {
+			if (vertexSet[i]->adj[j].id == v)
+				vertexSet[i]->adj[j].blocked = b;
+		}
+	}
 }
 
 template <class T>
@@ -395,7 +401,7 @@ void Graph<T>::dfs(Vertex<T> *v,vector<T> &res) const {
 	typename vector<Edge<T> >::iterator it= (v->adj).begin();
 	typename vector<Edge<T> >::iterator ite= (v->adj).end();
 	for (; it !=ite; it++)
-	    if ( it->dest->visited == false ){
+	    if ( it->dest->visited == false && it->blocked == false){
 	    	//cout << "ok ";
 	    	dfs(it->dest, res);
 	    }
@@ -415,7 +421,7 @@ vector<T> Graph<T>::bfs(Vertex<T> *v) const {
 		typename vector<Edge<T> >::iterator ite=v1->adj.end();
 		for (; it!=ite; it++) {
 			Vertex<T> *d = it->dest;
-			if (d->visited==false) {
+			if (d->visited==false && it->blocked == false) {
 				d->visited=true;
 				q.push(d);
 			}
