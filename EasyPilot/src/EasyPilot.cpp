@@ -72,10 +72,39 @@ bool EasyPilot::readOSM() {
 	}
 	connections.close();
 
+	string pointOfInterest, ident;
+	unsigned id;
+
+	POIs.exceptions(ifstream::badbit | ifstream::failbit);
+
+	POIs.open(pointOfInterestFile.c_str(), ifstream::in);
+
+	while (!POIs.eof()) {
+		getline(POIs, line);
+		firstSemicolon = line.find(';');
+		lastSemicolon = line.find(';', firstSemicolon + 1);
+		aux = line.substr(0, firstSemicolon);
+		ident = aux.c_str();
+		aux = line.substr(firstSemicolon + 1,
+				lastSemicolon - firstSemicolon - 1);
+		id = atol(aux.c_str());
+		aux = line.substr(lastSemicolon + 1, line.size());
+		pointOfInterest = aux.c_str();
+
+		if (ident == "POI") {
+			graph.getVertex(id)->setName(pointOfInterest);
+		} else {
+			inaccessibleZones.push_back(id);
+		}
+	}
+
+	POIs.close();
+
 	line.clear();
 	aux.clear();
 	string roadName;
 	bool isTwoWay;
+	bool blocked;
 
 	edges.exceptions(ifstream::badbit | ifstream::failbit);
 	int counter = 0;
@@ -100,8 +129,11 @@ bool EasyPilot::readOSM() {
 				if (links[i].roadId == roadId) {
 					int weight = graph.calculateEdgeWeight(links[i].node1Id,
 							links[i].node2Id);
+					if(find(inaccessibleZones.begin(), inaccessibleZones.end(), counter) != inaccessibleZones.end())
+						blocked = true;
+					else blocked = false;
 					graph.addEdge(links[i].node1Id, links[i].node2Id, weight,
-							isTwoWay, counter, roadName);
+							isTwoWay, blocked, counter, roadName);
 					counter++;
 				}
 			}
@@ -112,37 +144,6 @@ bool EasyPilot::readOSM() {
 	}
 
 	edges.close();
-
-	string pointOfInterest, ident;
-	unsigned id;
-
-	/*POIs.exceptions(ifstream::badbit | ifstream::failbit);
-
-	/*File format: "<nodeID - int>;<poi name - string>"
-
-	POIs.open(pointOfInterestFile.c_str(), ifstream::in);
-
-	while (!POIs.eof()) {
-		getline(POIs, line);
-		firstSemicolon = line.find(';');
-		lastSemicolon = line.find(';', firstSemicolon + 1);
-		aux = line.substr(0, firstSemicolon);
-		ident = aux.c_str();
-		aux = line.substr(firstSemicolon + 1,
-				lastSemicolon - firstSemicolon - 1);
-		id = atol(aux.c_str());
-		aux = line.substr(lastSemicolon + 1, line.size());
-		pointOfInterest = aux.c_str();
-
-		if (ident == "POI") {
-			graph.getVertex(id)->setName(pointOfInterest);
-		} else {
-			graph.getEdge(id)->setBlocked(true);
-			inaccessibleZones.push_back(graph.getEdgeIndex(id));
-		}
-	}
-
-	POIs.close();*/
 
 	/***END OF READING TXT FILES***/
 
@@ -165,9 +166,9 @@ void EasyPilot::graphInfoToGV() {
 
 		gv->addNode(i, x, y);
 		if (i == sourceID) {
-			gv->setVertexColor(sourceID, "red");
+			gv->setVertexColor(sourceID, "orange");
 		} else if (i == destinyID) {
-			gv->setVertexColor(destinyID, "red");
+			gv->setVertexColor(destinyID, "orange");
 		}
 
 		if (vertex[i]->getName() != "")	// if it has a name
@@ -193,7 +194,7 @@ void EasyPilot::graphInfoToGV() {
 
 			gv->setEdgeLabel(adjEdges[j].getId(), adjEdges[j].getName());
 			if (adjEdges[j].getBlocked()) {
-				gv->setEdgeColor(adjEdges[j].getId(), "pink");
+				gv->setEdgeColor(adjEdges[j].getId(), "red");
 				gv->setEdgeThickness(adjEdges[j].getId(), 10);
 			}
 		}
@@ -239,8 +240,8 @@ void EasyPilot::eraseMap() {
 }
 
 void EasyPilot::highlightPath(unsigned nodeStartID, unsigned nodeDestinationID) {
-	graph.floydWarshallShortestPath();
-	vector<unsigned> graphPath = graph.getfloydWarshallPath(nodeStartID, nodeDestinationID);
+	graph.dijkstraShortestPath(nodeStartID);
+	vector<unsigned> graphPath = graph.getPath(nodeStartID, nodeDestinationID);
 
 	unsigned nodeID;
 	for (unsigned int i = 0; i < graphPath.size(); i++) {
@@ -336,7 +337,7 @@ int EasyPilot::getsourceID() const {
 
 int EasyPilot::setsourceID(int id) {
 	gv->setVertexColor(sourceID, "blue");
-	if (highlightNode(id, "red") == -1)
+	if (highlightNode(id, "orange") == -1)
 		return -1;
 	else
 		sourceID = id;
@@ -349,7 +350,7 @@ int EasyPilot::getdestinyID() const {
 
 int EasyPilot::setdestinyID(int id) {
 	gv->setVertexColor(destinyID, "blue");
-	if (highlightNode(id, "red") == -1)
+	if (highlightNode(id, "orange") == -1)
 		return -1;
 	else
 		destinyID = id;
