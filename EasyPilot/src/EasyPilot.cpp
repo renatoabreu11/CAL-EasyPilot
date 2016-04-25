@@ -281,9 +281,12 @@ void EasyPilot::HighLightShortestPath() {
 	if (pointsOfInterest.size() == 0) {
 		node1ID = g[sourceID]->getInfo();
 		node2ID = g[destinyID]->getInfo();
-		highlightPath(node1ID, node2ID);
+		vector<unsigned> ret = graph.bfs(graph.getVertex(node1ID));
+		if(find(ret.begin(), ret.end(), node2ID) != ret.end()){
+			highlightPath(node1ID, node2ID);
+		}else cout << "\nImpossible to go from point " << sourceID << " to point " << destinyID << endl;
 	} else {
-		for (int i = 0; i < pointsOfInterest.size() + 1; i++) {
+		for (unsigned int i = 0; i < pointsOfInterest.size() + 1; i++) {
 			if (i == 0) {
 				node1ID = g[sourceID]->getInfo();
 				node2ID = graph.getVertexSet()[pointsOfInterest[0]]->getInfo();
@@ -324,6 +327,21 @@ void EasyPilot::resetPath() {
 		itr--;
 	}
 	edgePath.clear();
+
+	vector<Vertex<unsigned> *> vertex = graph.getVertexSet();
+	for (int i = 0; i < graph.getNumVertex(); i++) {
+		vector<Edge<unsigned> > adjEdges = vertex[i]->getAdj();
+		for (unsigned int j = 0; j < adjEdges.size(); j++) {
+			if (adjEdges[j].getBlocked()) {
+				gv->setEdgeColor(adjEdges[j].getId(), "red");
+				gv->setEdgeThickness(adjEdges[j].getId(), 10);
+			}
+		}
+	}
+
+	for(unsigned int i = 0; i < this->pointsOfInterest.size(); i++){
+		gv->setEdgeColor(pointsOfInterest[i], "green");
+	}
 }
 
 string EasyPilot::getMap() const {
@@ -404,6 +422,7 @@ int EasyPilot::addInaccessibleZone(int firstID, int lastID)
 		for(unsigned int i = 0; i < adjV1.size(); i++){
 			if(adjV1[i].getDest()->getInfo() == v2->getInfo()){
 				this->highlightEdge(adjV1[i].getId(), "red", 10);
+				graph.setEdgeBlocked(adjV1[i].getId(), true);
 				inaccessibleZones.push_back(iz);
 				return 1;
 			}
@@ -413,6 +432,7 @@ int EasyPilot::addInaccessibleZone(int firstID, int lastID)
 		for (unsigned int i = 0; i < adjV2.size(); i++) {
 			if (adjV2[i].getDest()->getInfo() == v1->getInfo()) {
 				this->highlightEdge(adjV2[i].getId(), "red", 10);
+				graph.setEdgeBlocked(adjV2[i].getId(), true);
 				inaccessibleZones.push_back(iz);
 				return 1;
 			}
@@ -424,12 +444,17 @@ int EasyPilot::addInaccessibleZone(int firstID, int lastID)
 
 void EasyPilot::removeInaccessibleZone(int id) {
 	InaccessibleZone iz = inaccessibleZones[id - 1];
+	vector<InaccessibleZone>::iterator it;
+	it = find(inaccessibleZones.begin(),inaccessibleZones.end(), iz);
 	Vertex<unsigned>* v1 = graph.getVertexSet()[iz.getFirstID()];
 	Vertex<unsigned>* v2 = graph.getVertexSet()[iz.getLastID()];
 	vector<Edge<unsigned> > adjV1 = v1->getAdj();
 	for (unsigned int i = 0; i < adjV1.size(); i++) {
 		if (adjV1[i].getDest()->getInfo() == v2->getInfo()) {
-			this->highlightEdge(adjV1[i].getId(), "black", DEFAULT_EDGE_THICKNESS);
+			this->highlightEdge(adjV1[i].getId(), "black",
+					DEFAULT_EDGE_THICKNESS);
+			graph.setEdgeBlocked(adjV1[i].getId(), false);
+			inaccessibleZones.erase(it);
 			return;
 		}
 	}
@@ -437,9 +462,15 @@ void EasyPilot::removeInaccessibleZone(int id) {
 	vector<Edge<unsigned> > adjV2 = v2->getAdj();
 	for (unsigned int i = 0; i < adjV2.size(); i++) {
 		if (adjV2[i].getDest()->getInfo() == v1->getInfo()) {
-			this->highlightEdge(adjV2[i].getId(), "black", DEFAULT_EDGE_THICKNESS);
+			this->highlightEdge(adjV2[i].getId(), "black",
+					DEFAULT_EDGE_THICKNESS);
+			graph.setEdgeBlocked(adjV2[i].getId(), false);
+			inaccessibleZones.erase(it);
+			return;
 		}
 	}
+
+
 }
 
 vector<string> EasyPilot::getInaccessibleZones() const{
