@@ -25,4 +25,14 @@ public:
 	string toString() const;
 };
 
+class Link{
+public:
+	unsigned roadId, node1Id, node2Id;
+	Link() : roadId(0), node1Id(0), node2Id(0) {}
+	Link(unsigned r, unsigned n1, unsigned n2) :
+			roadId(r), node1Id(n1), node2Id(n2) {
+	}
+};
+
+
 #endif /* SRC_UTILITIES_H_ */

@@ -58,14 +58,6 @@ public:
 	void resetPath();
 };
 
-struct Link {
-	Link() {}
-	unsigned node1Id, node2Id, roadId;
-	Link(unsigned r, unsigned n1, unsigned n2) :
-			roadId(r), node1Id(n1), node2Id(n2) {
-	}
-};
-
 /**
  * LimitCoords will store the highest and lowest longitude and latitude of the nodes
  */
