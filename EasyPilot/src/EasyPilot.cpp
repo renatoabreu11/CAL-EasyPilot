@@ -274,18 +274,6 @@ void EasyPilot::highlightPath(unsigned nodeStartID, unsigned nodeDestinationID) 
 }
 
 void EasyPilot::HighLightShortestPath() {
-
-	/*
-	 * Elimina os pontos inacessiveis do grafo e do gv.
-	 * No entanto, o caminho calculado é muito estranho...
-	 * */
-//	inaccessibleZones.push_back(208);
-//	for(int i = 0; i < inaccessibleZones.size(); i++){
-//		graph.removeVertex(graph.getVertexSet()[inaccessibleZones[i]]->getInfo());
-//		gv->removeNode(inaccessibleZones[i]);
-//		updateMap();
-//	}
-
 	vector<Vertex<unsigned> *> g = graph.getVertexSet();
 	unsigned node1ID;
 	unsigned node2ID;
@@ -300,15 +288,19 @@ void EasyPilot::HighLightShortestPath() {
 				node1ID = g[sourceID]->getInfo();
 				node2ID = graph.getVertexSet()[pointsOfInterest[0]]->getInfo();
 				highlightPath(node1ID, node2ID);
+				cout << "Going to interest point '" << graph.getVertexIndex(node2ID) << "'\nPress ENTER to move to the next one...";
 			} else if (i == pointsOfInterest.size()) {
 				node1ID = graph.getVertexSet()[pointsOfInterest[i - 1]]->getInfo();
 				node2ID = g[destinyID]->getInfo();
 				highlightPath(node1ID, node2ID);
+				cout << "Going to destination point '" << graph.getVertexIndex(node2ID) << "'\nPress ENTER to finish your trip...";
 			} else {
 				node1ID = graph.getVertexSet()[pointsOfInterest[i - 1]]->getInfo();
 				node2ID = graph.getVertexSet()[pointsOfInterest[i]]->getInfo();
 				highlightPath(node1ID, node2ID);
+				cout << "Going to point interest point '" << graph.getVertexIndex(node2ID) << "'\nPress ENTER to move to the next one...";
 			}
+			cin.ignore();
 		}
 	}
 }
