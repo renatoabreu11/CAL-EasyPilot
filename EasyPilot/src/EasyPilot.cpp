@@ -79,27 +79,30 @@ bool EasyPilot::readOSM() {
 
 	POIs.open(pointOfInterestFile.c_str(), ifstream::in);
 
-	while (!POIs.eof()) {
-		getline(POIs, line);
-		firstSemicolon = line.find(';');
-		lastSemicolon = line.find(';', firstSemicolon + 1);
-		aux = line.substr(0, firstSemicolon);
-		ident = aux.c_str();
-		if (ident == "POI") {
-			aux = line.substr(firstSemicolon + 1,
-					lastSemicolon - firstSemicolon - 1);
-			firstID = atol(aux.c_str());
-			aux = line.substr(lastSemicolon + 1, line.size());
-			pointOfInterest = aux.c_str();
-			graph.getVertex(firstID)->setName(pointOfInterest);
-		} else {
-			aux = line.substr(firstSemicolon + 1,
-					lastSemicolon - firstSemicolon - 1);
-			firstID = atol(aux.c_str());
-			aux = line.substr(lastSemicolon + 1, line.size());
-			lastID = atol(aux.c_str());
-			InaccessibleZone iz = InaccessibleZone(firstID, lastID);
-			inaccessibleZones.push_back(iz);
+	if(POIs.peek() != ifstream::traits_type::eof())	// if it's not an empty file
+	{
+		while (!POIs.eof()) {
+			getline(POIs, line);
+			firstSemicolon = line.find(';');
+			lastSemicolon = line.find(';', firstSemicolon + 1);
+			aux = line.substr(0, firstSemicolon);
+			ident = aux.c_str();
+			if (ident == "POI") {
+				aux = line.substr(firstSemicolon + 1,
+						lastSemicolon - firstSemicolon - 1);
+				firstID = atol(aux.c_str());
+				aux = line.substr(lastSemicolon + 1, line.size());
+				pointOfInterest = aux.c_str();
+				graph.getVertex(firstID)->setName(pointOfInterest);
+			} else {
+				aux = line.substr(firstSemicolon + 1,
+						lastSemicolon - firstSemicolon - 1);
+				firstID = atol(aux.c_str());
+				aux = line.substr(lastSemicolon + 1, line.size());
+				lastID = atol(aux.c_str());
+				InaccessibleZone iz = InaccessibleZone(firstID, lastID);
+				inaccessibleZones.push_back(iz);
+			}
 		}
 	}
 
