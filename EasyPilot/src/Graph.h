@@ -407,8 +407,12 @@ void Graph<T>::dfs(Vertex<T> *v,vector<T> &res) const {
 	    }
 }
 
-template <class T>
+template<class T>
 vector<T> Graph<T>::bfs(Vertex<T> *v) const {
+	typename vector<Vertex<T>*>::const_iterator it = vertexSet.begin();
+	typename vector<Vertex<T>*>::const_iterator ite = vertexSet.end();
+	for (; it != ite; it++)
+		(*it)->visited = false;
 	vector<T> res;
 	queue<Vertex<T> *> q;
 	q.push(v);
@@ -713,7 +717,7 @@ void Graph<T>::unweightedShortestPath(const T &s) {
 		v = q.front(); q.pop();
 		for(unsigned int i = 0; i < v->adj.size(); i++) {
 			Vertex<T>* w = v->adj[i].dest;
-			if( w->dist == INT_INFINITY ) {
+			if( w->dist == INT_INFINITY && !v->adj[i].blocked) {
 				w->dist = v->dist + 1;
 				w->path = v;
 				q.push(w);
@@ -740,7 +744,7 @@ void Graph<T>::bellmanFordShortestPath(const T &s) {
 		v = q.front(); q.pop();
 		for(unsigned int i = 0; i < v->adj.size(); i++) {
 			Vertex<T>* w = v->adj[i].dest;
-			if(v->dist + v->adj[i].weight < w->dist) {
+			if(v->dist + v->adj[i].weight < w->dist && !v->adj[i].blocked) {
 				w->dist = v->dist + v->adj[i].weight;
 				w->path = v;
 				q.push(w);
@@ -806,8 +810,11 @@ int Graph<T>::edgeCost(int vOrigIndex, int vDestIndex)
 
 	for(unsigned int i = 0; i < vertexSet[vOrigIndex]->adj.size(); i++)
 	{
-		if(vertexSet[vOrigIndex]->adj[i].dest == vertexSet[vDestIndex])
-			return vertexSet[vOrigIndex]->adj[i].weight;
+		if(vertexSet[vOrigIndex]->adj[i].dest == vertexSet[vDestIndex]){
+			if(vertexSet[vOrigIndex]->adj[i].blocked)
+				continue;
+			else return vertexSet[vOrigIndex]->adj[i].weight;
+		}
 	}
 
 	return INT_INFINITY;
