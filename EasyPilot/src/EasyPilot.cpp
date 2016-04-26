@@ -119,9 +119,9 @@ bool EasyPilot::readOSM() {
 				Tolls.push_back(t);
 			}
 
-			else
-			{
-				cout << "Wrongly defined line in " << pointOfInterestFile.c_str() << ".\n";
+			else {
+				cout << "Wrongly defined line in "
+						<< pointOfInterestFile.c_str() << ".\n";
 			}
 		}
 	}
@@ -189,7 +189,6 @@ void EasyPilot::graphInfoToGV() {
 	gv->createWindow(GV_WINDOW_WIDTH, GV_WINDOW_HEIGHT);
 	gv->defineVertexColor("blue");
 	gv->defineEdgeColor("black");
-
 	LimitCoords l = getLimitCoords(graph);	// gets max and min coords
 
 	vector<Vertex<unsigned> *> vertex = graph.getVertexSet();
@@ -281,7 +280,7 @@ void EasyPilot::eraseMap() {
 	gv = NULL;
 }
 
-double EasyPilot::getWaitOfPath(unsigned nodeStartID, unsigned nodeDestinationID) {
+double EasyPilot::getWeightOfPath(unsigned nodeStartID, unsigned nodeDestinationID) {
 	vector<unsigned> graphPath = graph.getfloydWarshallPath(nodeStartID, nodeDestinationID);
 	unsigned nodeID;
 	double totalWeight = 0;
@@ -350,7 +349,7 @@ void EasyPilot::sortPOIsByWeight(const vector<Vertex<unsigned> *> &g) {
 		for(unsigned int i = 0; i < pointsOfInterest.size(); i++) {
 			node2ID = graph.getVertexSet()[pointsOfInterest[i]]->getInfo();
 
-			weight = getWaitOfPath(node1ID, node2ID);
+			weight = getWeightOfPath(node1ID, node2ID);
 
 			if(weight < weightCloser && !alreadyProcessed(node2ID, POIsByWeightOrder)) {
 				weightCloser = weight;
@@ -384,12 +383,14 @@ void EasyPilot::HighLightShortestPath() {
 		highlightPath(node1ID, node2ID);
 	} else {
 		vector<int>::iterator it = pointsOfInterest.begin();
-		for(; it != pointsOfInterest.begin(); it++){
+		for(; it != pointsOfInterest.end(); it++){
 			ret = graph.bfs(graph.getVertex(node1ID));
 			auxNode = g[*it]->getInfo();
-			if (find(ret.begin(), ret.end(), auxNode) == ret.end()){
-				cout << "Point of interest with node " << *it << " removed because it is inaccessible";
-				this->removePointOfInterest(*it);
+			if (find(ret.begin(), ret.end(), auxNode) == ret.end()) {
+				cout << "Point of interest with node " << *it
+						<< " removed because it is inaccessible";
+				pointsOfInterest.erase(it);
+				it--;
 			}
 		}
 		if (pointsOfInterest.size() == 0) {
@@ -474,11 +475,35 @@ int EasyPilot::getsourceID() const {
 }
 
 int EasyPilot::setsourceID(int id) {
-	gv->setVertexColor(sourceID, "blue");
-	if (highlightNode(id, "yellow") == -1)
+	if (id < 0 || id > graph.getNumVertex()) {
+		cout << "Node id out of range. Try again\n";
 		return -1;
-	else
-		sourceID = id;
+	}
+
+	gv->setVertexColor(sourceID, "blue");
+	highlightNode(id, "yellow");
+	sourceID = id;
+
+	cout << sourceID << endl;
+	vector<Vertex<unsigned> *> v = graph.getVertexSet();
+	unsigned src = v[sourceID]->getInfo();
+	vector<unsigned> ret;
+	unsigned auxNode;
+	vector<int>::iterator it = pointsOfInterest.begin();
+	for (; it != pointsOfInterest.end(); it++) {
+		ret = graph.bfs(graph.getVertex(src));
+		cout << *it << endl;
+		auxNode = v[*it]->getInfo();
+		cout << auxNode << endl;
+		if (find(ret.begin(), ret.end(), auxNode) == ret.end()) {
+			cout << "Point of interest with node " << *it
+					<< " removed because it is inaccessible";
+			gv->setVertexColor(*it, "blue");
+			pointsOfInterest.erase(it);
+			it--;
+		}
+	}
+
 	return 1;
 }
 

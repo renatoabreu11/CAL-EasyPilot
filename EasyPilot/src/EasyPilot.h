@@ -38,7 +38,7 @@ public:
 	void graphInfoToGV();
 	int highlightNode(int id, string color);
 	int highlightEdge(int id, string color, int thickness);
-	double getWaitOfPath(unsigned nodeStartID, unsigned nodeDestinationID);
+	double getWeightOfPath(unsigned nodeStartID, unsigned nodeDestinationID);
 	void sortPOIsByWeight(const vector<Vertex<unsigned> *> &g);
 	void highlightPath(unsigned nodeStartID, unsigned nodeDestinationID);
 	void HighLightShortestPath();
