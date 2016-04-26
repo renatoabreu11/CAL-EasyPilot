@@ -343,21 +343,21 @@ vector<int> EasyPilot::sortPOIsByWeight(const vector<Vertex<unsigned> *> &g) {
 		else
 			node1ID = POIsByWeightOrder[POIsByWeightOrder.size() - 1];
 
-		unsigned secondNodeToUse;
+		int secondNodeToUse;
 		double weight, weightCloser = INT_INFINITY;
 
 		for(unsigned int i = 0; i < pointsOfInterest.size(); i++) {
 			node2ID = graph.getVertexSet()[pointsOfInterest[i]]->getInfo();
-
 			weight = getWeightOfPath(node1ID, node2ID);
 
 			if(weight < weightCloser && !alreadyProcessed(node2ID, POIsByWeightOrder)) {
 				weightCloser = weight;
-				secondNodeToUse = node2ID;
+				secondNodeToUse = graph.getVertexIndex(node2ID);
 			}
 		}
 
 		POIsByWeightOrder.push_back(secondNodeToUse);
+		cout << secondNodeToUse << endl;
 	}
 
 	return POIsByWeightOrder;
@@ -407,9 +407,9 @@ void EasyPilot::HighLightShortestPath() {
 		for (unsigned int i = 0; i < POIs.size() + 1; i++) {
 			if (i == 0) {
 				node1ID = g[sourceID]->getInfo();
-				node2ID = g[POIs[0]]->getInfo();
+				node2ID = graph.getVertexSet()[POIs[0]]->getInfo();
 				highlightPath(node1ID, node2ID);
-				cout << "Going to interest point '" << graph.getVertexIndex(graph.getVertexSet()[POIs[0]]->getInfo()) << "'\nPress ENTER to move to the next one...";
+				cout << "Going to interest point '" << POIs[0] << "'\nPress ENTER to move to the next one...";
 			} else if (i == POIs.size()) {
 				node1ID = g[POIs[i-1]]->getInfo();
 				node2ID = g[destinyID]->getInfo();
@@ -419,7 +419,7 @@ void EasyPilot::HighLightShortestPath() {
 				node1ID = g[POIs[i-1]]->getInfo();
 				node2ID = g[POIs[i]]->getInfo();
 				highlightPath(node1ID, node2ID);
-				cout << "Going to point interest point '" << graph.getVertexIndex(graph.getVertexSet()[POIs[i]]->getInfo()) << "'\nPress ENTER to move to the next one...";
+				cout << "Going to point interest point '" << POIs[i] << "'\nPress ENTER to move to the next one...";
 			}
 			cin.ignore();
 		}
