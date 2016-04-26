@@ -30,6 +30,7 @@ private:
 	vector<int> edgePath;
 	vector<int> pointsOfInterest;
 	vector<InaccessibleZone> inaccessibleZones;
+	vector<Toll> Tolls;
 public:
 	EasyPilot();
 	virtual ~EasyPilot();

@@ -31,3 +31,18 @@ string InaccessibleZone::toString() const {
 	label << "Connection with initial node at " << this->firstID << " and end node at " << lastID;
 	return label.str();
 }
+
+
+Toll::Toll(int vertexID, float cost)
+{
+	this->vertexID = vertexID;
+	this->cost = cost;
+}
+
+float Toll::getCost() const {
+	return cost;
+}
+
+int Toll::getVertexId() const {
+	return vertexID;
+}

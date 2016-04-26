@@ -34,5 +34,16 @@ public:
 	}
 };
 
+class Toll{
+private:
+	int vertexID;
+	float cost;
+public:
+	Toll(int vertexID, float cost);
+	float getCost() const;
+	int getVertexId() const;
+};
+
+
 
 #endif /* SRC_UTILITIES_H_ */

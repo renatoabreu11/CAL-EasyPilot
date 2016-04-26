@@ -75,6 +75,8 @@ bool EasyPilot::readOSM() {
 
 	string pointOfInterest, ident;
 	unsigned firstID, lastID;
+	float cost;
+	int vertexID;
 
 	POIs.exceptions(ifstream::badbit | ifstream::failbit);
 
@@ -95,7 +97,8 @@ bool EasyPilot::readOSM() {
 				aux = line.substr(lastSemicolon + 1, line.size());
 				pointOfInterest = aux.c_str();
 				graph.getVertex(firstID)->setName(pointOfInterest);
-			} else {
+			}
+			else if (ident == "IZ") {
 				aux = line.substr(firstSemicolon + 1,
 						lastSemicolon - firstSemicolon - 1);
 				firstID = atol(aux.c_str());
@@ -103,6 +106,23 @@ bool EasyPilot::readOSM() {
 				lastID = atol(aux.c_str());
 				InaccessibleZone iz = InaccessibleZone(firstID, lastID);
 				inaccessibleZones.push_back(iz);
+			}
+
+			else if (ident == "T") {
+
+				aux = line.substr(firstSemicolon + 1,
+						lastSemicolon - firstSemicolon - 1);
+				vertexID = atoi(aux.c_str());
+				aux = line.substr(lastSemicolon + 1, line.size());
+				cost = atof(aux.c_str());
+				cout << vertexID << " " << cost << endl;
+				Toll t = Toll(vertexID, cost);
+				Tolls.push_back(t);
+			}
+
+			else
+			{
+				cout << "Wrongly defined line in " << pointOfInterestFile.c_str() << ".\n";
 			}
 		}
 	}
@@ -161,6 +181,13 @@ bool EasyPilot::readOSM() {
 	edges.close();
 
 	/***END OF READING TXT FILES***/
+
+	/***APPLY WEIGHTS OF TOLLS***/
+
+	for (unsigned i = 0; i < Tolls.size(); i++)
+	{
+		graph.applyTollCost(Tolls[i]);
+	}
 
 	return true;
 }

@@ -12,6 +12,8 @@
 #include <stddef.h>
 #include "iostream"
 
+#include "utilities.h"
+
 using namespace std;
 
 template <class T> class Edge;
@@ -241,7 +243,9 @@ public:
 	vector<Vertex<T> * > getVertexSet() const;
 	int getNumVertex() const;
 	int getVertexIndex(const T &v) const;
+
 	int calculateEdgeWeight(T id1, T id2) const;
+	void applyTollCost(Toll t) const;
 
 	//exercicio 5
 	Vertex<T>* getVertex(const T &v) const;
@@ -498,6 +502,23 @@ int Graph<T>::calculateEdgeWeight(T id1, T id2) const
 
 	return floor(dist);
 }
+
+/**
+ * @brief Takes a toll and applies a change of weight to all its adjacent edges,
+ * according to its cost. It adds 100*cost to the weight of the edge.
+ * @param Toll t Toll to be applied.
+ */
+template<class T>
+void Graph<T>::applyTollCost(Toll t) const
+{
+	Vertex<T>* v = vertexSet[t.getVertexId()];
+
+	for (int i = 0; i < v->adj.size(); i++)
+	{
+		v->adj[i].weight = v->adj[i].weight + floor(t.getCost() * 100);
+	}
+}
+
 
 template <class T>
 Vertex<T>* Graph<T>::getVertex(const T &v) const {
