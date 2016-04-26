@@ -2,10 +2,11 @@
 
 EasyPilot::EasyPilot() {
 	map = "Esposende"; //default map
-	destinyID = 96;
-	sourceID = 163;
+	destinyID = 389;
+	sourceID = 329;
 	gv = NULL;
 	POIsNavigationMethod = 2;
+	allowHighways = false;
 }
 
 EasyPilot::~EasyPilot() {
@@ -368,6 +369,42 @@ void EasyPilot::HighLightShortestPath() {
 	unsigned node1ID;
 	unsigned node2ID, auxNode;
 
+	for(int i = 0; i < inaccessibleZones.size(); i++)
+		cout << "IZ" << i << ": " << inaccessibleZones[i].getFirstID() << ", " << inaccessibleZones[i].getLastID() << endl;
+
+	if(!allowHighways) {
+		for(unsigned int i = 0; i < Tolls.size(); i++) {
+			int node1ID = Tolls[i].getVertexId();
+			vector<Edge<unsigned> > adj = graph.getVertexSet()[node1ID]->getAdj();
+
+			for(unsigned int j = 0; j < adj.size(); j++) {
+				int node2ID = graph.getVertexIndex(adj[j].getDest()->getInfo());
+				addInaccessibleZone(node1ID, node2ID);
+				addInaccessibleZone(node2ID, node1ID);
+			}
+		}
+	} else {
+		for(unsigned int i = 0; i < inaccessibleZones.size(); i++) {
+			int node1ID = inaccessibleZones[i].getFirstID();
+			int node2ID = inaccessibleZones[i].getLastID();
+
+			for(unsigned int j = 0; j < Tolls.size(); j++) {
+				int nodeHighway1 = Tolls[j].getVertexId();
+				vector<Edge<unsigned> > adj = graph.getVertexSet()[nodeHighway1]->getAdj();
+
+				for(unsigned int k = 0; k < adj.size(); k++) {
+					int nodeHighway2 = graph.getVertexIndex(adj[k].getDest()->getInfo());
+					if((node1ID == nodeHighway1 && node2ID == nodeHighway2) || (node2ID == nodeHighway1 && node1ID == nodeHighway2))
+						removeInaccessibleZone(i);
+				}
+			}
+		}
+	}
+
+	cout << endl;
+	for(int i = 0; i < inaccessibleZones.size(); i++)
+		cout << "IZ" << i << ": " << inaccessibleZones[i].getFirstID() << ", " << inaccessibleZones[i].getLastID() << endl;
+
 	graph.floydWarshallShortestPath();
 
 	node1ID = g[sourceID]->getInfo();
@@ -462,9 +499,7 @@ void EasyPilot::resetPath() {
 	/**RECOLOR TOLLS**/
 
 	for(unsigned i = 0; i < Tolls.size(); i++)
-	{
 		gv->setVertexColor(Tolls[i].getVertexId(), "orange");
-	}
 }
 
 string EasyPilot::getMap() const {
@@ -661,6 +696,20 @@ void EasyPilot::setTollWeight(bool apply)
 		else
 			this->graph.removeTollWeight(Tolls[i], this->gv);
 	}
+}
+
+int EasyPilot::setAllowHighways(int allow)
+{
+	if(allow < 1 || allow > 2)
+		return -1;
+
+	if(allow == 1)
+		allowHighways = true;
+	else
+		allowHighways = false;
+
+	return 1;
+
 }
 
 /***UTILITY FUNCTIONS***/

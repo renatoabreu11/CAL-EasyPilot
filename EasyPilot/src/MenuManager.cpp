@@ -16,7 +16,7 @@ MenuManager::~MenuManager() {
 
 void MenuManager::navigationOptions(EasyPilot *gps) {
 	bool running = true;
-	int input = -1, selection, srcNodeID, destNodeID, pointOfInterestID, POIsNavigationMethod, firstInaccessibleID, lastInaccessibleID;
+	int input = -1, selection, srcNodeID, destNodeID, pointOfInterestID, POIsNavigationMethod, firstInaccessibleID, lastInaccessibleID, allowHW;
 	while (running) {
 		input = -1;
 		vector<string> options;
@@ -28,7 +28,8 @@ void MenuManager::navigationOptions(EasyPilot *gps) {
 		options.push_back("Select points of interest navigation method");
 		options.push_back("Add inaccessible point");
 		options.push_back("Remove inaccessible point");
-		options.push_back("Type of route.");
+		options.push_back("Type of route");
+		options.push_back("Allow Highways");
 		options.push_back("Back");
 		selection = menuOptions(options);
 		switch (selection) {
@@ -159,17 +160,26 @@ void MenuManager::navigationOptions(EasyPilot *gps) {
 						cout << "\nType either 'f' or 'c'.\n";
 
 					gps->updateMap();
-				}
-
-				catch (InvalidInput& e) {
+				} catch (InvalidInput& e) {
 					cout << "\nInvalid Input. Try again";
 					cin.clear();
 					cin.ignore(1000, '\n');
 				}
 			}
 			break;
-
 		case 9:
+			while(input == -1) {
+				try {
+					cout << "\nType 1 to allow highways, type 2 to block them:\n>>";
+					cin >> allowHW;
+					input = gps->setAllowHighways(allowHW);
+				} catch (InvalidInput& e) {
+					cout << "\nInvalid Input. Try again";
+					cin.clear();
+					cin.ignore(1000, '\n');
+				}
+			}
+		case 10:
 			running = false;
 			break;
 		}
