@@ -245,7 +245,8 @@ public:
 	int getVertexIndex(const T &v) const;
 
 	int calculateEdgeWeight(T id1, T id2) const;
-	void applyTollCost(Toll t) const;
+	void applyTollWeight(Toll &t);
+	void removeTollWeight(Toll &t);
 
 	//exercicio 5
 	Vertex<T>* getVertex(const T &v) const;
@@ -483,6 +484,13 @@ int Graph<T>::getVertexIndex(const T &v) const{
 	return -1;
 }
 
+/**
+ * Calculates an edge weight according to the distance that separates its nodes. The applied
+ * formula is the distance between the two points times 1000, so it has a significant amount of weight.
+ *
+ * @param T id1	Content of node 1.
+ * @param T id2	Content of node 2.
+ */
 template<class T>
 int Graph<T>::calculateEdgeWeight(T id1, T id2) const
 {
@@ -509,13 +517,35 @@ int Graph<T>::calculateEdgeWeight(T id1, T id2) const
  * @param Toll t Toll to be applied.
  */
 template<class T>
-void Graph<T>::applyTollCost(Toll t) const
+void Graph<T>::applyTollWeight(Toll &t)
 {
 	Vertex<T>* v = vertexSet[t.getVertexId()];
 
 	for (int i = 0; i < v->adj.size(); i++)
 	{
-		v->adj[i].weight = v->adj[i].weight + floor(t.getCost() * 100);
+		if(!t.applied)	// if the toll weight hasn't been applied
+		{
+			//cout << "Old w: " << v->adj[i].weight << endl;
+			v->adj[i].weight = v->adj[i].weight + t.getWeightAdd();
+			t.applied = true;
+			//cout << "New w: " << v->adj[i].weight << endl;
+		}
+
+	}
+}
+
+template<class T>
+void Graph<T>::removeTollWeight(Toll &t)
+{
+	Vertex<T>* v = vertexSet[t.getVertexId()];
+
+	for (int i = 0; i < v->adj.size(); i++)
+	{
+		if(t.applied)	// if the toll weight has already been applied
+		{
+			v->adj[i].weight = v->adj[i].weight - t.getWeightAdd();
+			t.applied = false;
+		}
 	}
 }
 

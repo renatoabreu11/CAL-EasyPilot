@@ -37,6 +37,8 @@ Toll::Toll(int vertexID, float cost)
 {
 	this->vertexID = vertexID;
 	this->cost = cost;
+	this->weightAdd = round(100*cost);
+	this->applied = false;
 }
 
 float Toll::getCost() const {
@@ -46,3 +48,8 @@ float Toll::getCost() const {
 int Toll::getVertexId() const {
 	return vertexID;
 }
+
+int Toll::getWeightAdd() const {
+	return weightAdd;
+}
+

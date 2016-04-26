@@ -9,6 +9,7 @@
 #define SRC_UTILITIES_H_
 #include "string"
 #include "sstream"
+#include <cmath>
 using namespace std;
 
 //stores the initial node ID and the last node ID. The edge between those points is inaccessible
@@ -38,10 +39,14 @@ class Toll{
 private:
 	int vertexID;
 	float cost;
+	int weightAdd;
 public:
 	Toll(int vertexID, float cost);
 	float getCost() const;
 	int getVertexId() const;
+	int getWeightAdd() const;
+
+	bool applied;
 };
 
 

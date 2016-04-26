@@ -28,6 +28,7 @@ void MenuManager::navigationOptions(EasyPilot *gps) {
 		options.push_back("Select points of interest navigation method");
 		options.push_back("Add inaccessible point");
 		options.push_back("Remove inaccessible point");
+		options.push_back("Type of route.");
 		options.push_back("Back");
 		selection = menuOptions(options);
 		switch (selection) {
@@ -138,6 +139,37 @@ void MenuManager::navigationOptions(EasyPilot *gps) {
 			}
 			break;
 		case 8:
+			while (input == -1) {
+				try {
+					string option;
+					cout << "\nDo you want the [f]astest or the [c]heapest route?" << endl;
+					getline(cin, option);
+					if(option == "f" || option == "F")
+					{
+						gps->setTollWeight(false);	// doesn't apply toll weights, since price doesn't matter
+						input = 0;
+					}
+					if(option == "c" || option == "C")
+					{
+						gps->setTollWeight(true);
+						input = 0;
+					}
+
+					if (input == -1)
+						cout << "\nType either 'f' or 'c'.\n";
+
+					gps->updateMap();
+				}
+
+				catch (InvalidInput& e) {
+					cout << "\nInvalid Input. Try again";
+					cin.clear();
+					cin.ignore(1000, '\n');
+				}
+			}
+			break;
+
+		case 9:
 			running = false;
 			break;
 		}

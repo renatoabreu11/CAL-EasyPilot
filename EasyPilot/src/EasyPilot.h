@@ -58,6 +58,7 @@ public:
 	vector<string> getInaccessibleZones() const;
 	void resetPath();
 	vector<string> getPointsOfInterest() const;
+	void setTollWeight(bool apply);
 };
 
 /**

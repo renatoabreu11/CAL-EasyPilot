@@ -181,13 +181,6 @@ bool EasyPilot::readOSM() {
 
 	/***END OF READING TXT FILES***/
 
-	/***APPLY WEIGHTS OF TOLLS***/
-
-	for (unsigned i = 0; i < Tolls.size(); i++)
-	{
-		graph.applyTollCost(Tolls[i]);
-	}
-
 	return true;
 }
 
@@ -623,6 +616,21 @@ vector<string> EasyPilot::getInaccessibleZones() const{
 		ret.push_back(inaccessibleZones[i].toString());
 	}
 	return ret;
+}
+
+/**
+ * @brief If apply is TRUE, the toll weights will be applied to the map. Otherwise, they won't.
+ * @param bool apply Chooses if weight is applied.
+ */
+void EasyPilot::setTollWeight(bool apply)
+{
+	for (unsigned i = 0; i < this->Tolls.size(); i++)
+	{
+		if (apply)
+			this->graph.applyTollWeight(Tolls[i]);
+		else
+			this->graph.removeTollWeight(Tolls[i]);
+	}
 }
 
 /***UTILITY FUNCTIONS***/
