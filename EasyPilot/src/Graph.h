@@ -11,6 +11,7 @@
 #include <cmath>
 #include <stddef.h>
 #include "iostream"
+#include "graphviewer.h"
 
 #include "utilities.h"
 
@@ -245,8 +246,8 @@ public:
 	int getVertexIndex(const T &v) const;
 
 	int calculateEdgeWeight(T id1, T id2) const;
-	void applyTollWeight(Toll &t);
-	void removeTollWeight(Toll &t);
+	void applyTollWeight(Toll &t, GraphViewer* gv);
+	void removeTollWeight(Toll &t,GraphViewer* gv);
 
 	//exercicio 5
 	Vertex<T>* getVertex(const T &v) const;
@@ -517,36 +518,41 @@ int Graph<T>::calculateEdgeWeight(T id1, T id2) const
  * @param Toll t Toll to be applied.
  */
 template<class T>
-void Graph<T>::applyTollWeight(Toll &t)
+void Graph<T>::applyTollWeight(Toll &t, GraphViewer* gv)
 {
 	Vertex<T>* v = vertexSet[t.getVertexId()];
 
-	for (int i = 0; i < v->adj.size(); i++)
+	if(!t.applied)	// if the toll weight has already been applied
 	{
-		if(!t.applied)	// if the toll weight hasn't been applied
+		for (int i = 0; i < v->adj.size(); i++)
 		{
-			//cout << "Old w: " << v->adj[i].weight << endl;
-			v->adj[i].weight = v->adj[i].weight + t.getWeightAdd();
-			t.applied = true;
-			//cout << "New w: " << v->adj[i].weight << endl;
-		}
 
+			v->adj[i].weight = v->adj[i].weight + t.getWeightAdd();
+			gv->setEdgeWeight(v->adj[i].id, v->adj[i].weight);
+
+		}
 	}
+
+	t.applied = true;
 }
 
 template<class T>
-void Graph<T>::removeTollWeight(Toll &t)
+void Graph<T>::removeTollWeight(Toll &t, GraphViewer* gv)
 {
 	Vertex<T>* v = vertexSet[t.getVertexId()];
 
-	for (int i = 0; i < v->adj.size(); i++)
+	if(t.applied)	// if the toll weight has already been applied
 	{
-		if(t.applied)	// if the toll weight has already been applied
+		for (int i = 0; i < v->adj.size(); i++)
 		{
+
 			v->adj[i].weight = v->adj[i].weight - t.getWeightAdd();
-			t.applied = false;
+			gv->setEdgeWeight(v->adj[i].id, v->adj[i].weight);
+
 		}
 	}
+
+	t.applied = false;
 }
 
 
