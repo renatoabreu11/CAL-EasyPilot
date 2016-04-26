@@ -39,7 +39,7 @@ public:
 	int highlightNode(int id, string color);
 	int highlightEdge(int id, string color, int thickness);
 	double getWeightOfPath(unsigned nodeStartID, unsigned nodeDestinationID);
-	void sortPOIsByWeight(const vector<Vertex<unsigned> *> &g);
+	vector<int> sortPOIsByWeight(const vector<Vertex<unsigned> *> &g);
 	void highlightPath(unsigned nodeStartID, unsigned nodeDestinationID);
 	void HighLightShortestPath();
 	void eraseMap();

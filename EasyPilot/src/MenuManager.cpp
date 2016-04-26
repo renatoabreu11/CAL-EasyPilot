@@ -94,7 +94,7 @@ void MenuManager::navigationOptions(EasyPilot *gps) {
 			while (input == -1) {
 				try {
 					cout
-							<< "Type 1 for user input order, or 2 for shortest way possible:\n";
+							<< "\nType 1 for user input order, or 2 for shortest way possible:\n>>";
 					cin >> POIsNavigationMethod;
 					input = gps->setPOIsNavigation(POIsNavigationMethod);
 				} catch (InvalidInput& e) {
