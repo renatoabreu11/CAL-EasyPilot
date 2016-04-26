@@ -115,7 +115,6 @@ bool EasyPilot::readOSM() {
 				vertexID = atoi(aux.c_str());
 				aux = line.substr(lastSemicolon + 1, line.size());
 				cost = atof(aux.c_str());
-				cout << vertexID << " " << cost << endl;
 				Toll t = Toll(vertexID, cost);
 				Tolls.push_back(t);
 			}
@@ -241,6 +240,14 @@ void EasyPilot::graphInfoToGV() {
 			}
 		}
 	}
+
+	/**COLOR TOLLS**/
+
+	for(unsigned i = 0; i < Tolls.size(); i++)
+	{
+		gv->setVertexColor(Tolls[i].getVertexId(), "orange");
+	}
+
 	gv->rearrange();
 }
 
@@ -452,6 +459,13 @@ void EasyPilot::resetPath() {
 		itr--;
 	}
 	edgePath.clear();
+
+	/**RECOLOR TOLLS**/
+
+	for(unsigned i = 0; i < Tolls.size(); i++)
+	{
+		gv->setVertexColor(Tolls[i].getVertexId(), "orange");
+	}
 }
 
 string EasyPilot::getMap() const {
