@@ -56,6 +56,7 @@ public:
 	void removeInaccessibleZone(int id);
 	vector<string> getInaccessibleZones() const;
 	void resetPath();
+	vector<string> getPointsOfInterest() const;
 };
 
 /**

@@ -23,8 +23,6 @@ int InaccessibleZone::getLastID() const{
 bool InaccessibleZone::operator==(const InaccessibleZone &rv) {
 	if(this->firstID == rv.firstID && this->lastID == rv.lastID)
 		return true;
-	else if(this->firstID == rv.lastID && this->lastID == rv.firstID)
-		return true;
 	else return false;
 }
 

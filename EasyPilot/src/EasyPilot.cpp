@@ -335,29 +335,43 @@ void EasyPilot::sortPOIsByWeight(const vector<Vertex<unsigned> *> &g) {
 	}
 
 	pointsOfInterest = POIsByWeightOrder;
-
-	for(int i = 0; i < pointsOfInterest.size(); i++)
-		cout << graph.getVertexIndex(pointsOfInterest[i]) << endl;
 }
 
 void EasyPilot::HighLightShortestPath() {
 	vector<Vertex<unsigned> *> g = graph.getVertexSet();
 	unsigned node1ID;
-	unsigned node2ID;
+	unsigned node2ID, auxNode;
 
 	graph.floydWarshallShortestPath();
 
+	node1ID = g[sourceID]->getInfo();
+	node2ID = g[destinyID]->getInfo();
+	vector<unsigned> ret = graph.bfs(graph.getVertex(node1ID));
+	if (find(ret.begin(), ret.end(), node2ID) == ret.end()){
+		cout << "\nImpossible to go from point " << sourceID << " to point "
+				<< destinyID << endl;
+		return;
+	}
+
 	if (pointsOfInterest.size() == 0) {
-		node1ID = g[sourceID]->getInfo();
-		node2ID = g[destinyID]->getInfo();
-		vector<unsigned> ret = graph.bfs(graph.getVertex(node1ID));
-		if(find(ret.begin(), ret.end(), node2ID) != ret.end()){
-			highlightPath(node1ID, node2ID);
-		}else cout << "\nImpossible to go from point " << sourceID << " to point " << destinyID << endl;
+		highlightPath(node1ID, node2ID);
 	} else {
+		vector<int>::iterator it = pointsOfInterest.begin();
+		for(; it != pointsOfInterest.begin(); it++){
+			ret = graph.bfs(graph.getVertex(node1ID));
+			auxNode = g[*it]->getInfo();
+			if (find(ret.begin(), ret.end(), auxNode) == ret.end()){
+				cout << "Point of interest with node " << *it << " removed because it is inaccessible";
+				this->removePointOfInterest(*it);
+			}
+		}
+		if (pointsOfInterest.size() == 0) {
+			highlightPath(node1ID, node2ID);
+		}
 		sortPOIsByWeight(g);
 
-		for (int i = 0; i < pointsOfInterest.size() + 1; i++) {
+
+		for (unsigned int i = 0; i < pointsOfInterest.size() + 1; i++) {
 			if (i == 0) {
 				node1ID = g[sourceID]->getInfo();
 				node2ID = pointsOfInterest[0];
@@ -439,23 +453,45 @@ int EasyPilot::getdestinyID() const {
 }
 
 int EasyPilot::setdestinyID(int id) {
-	gv->setVertexColor(destinyID, "blue");
-	if (highlightNode(id, "yellow") == -1)
+	if (id < 0 || id > graph.getNumVertex()) {
+		cout << "Node id out of range. Try again\n";
 		return -1;
-	else
+	}
+
+	vector<Vertex<unsigned> * > v = graph.getVertexSet();
+	unsigned dst = v[id]->getInfo();
+	vector<unsigned> ret = graph.bfs(v[sourceID]);
+	if (find(ret.begin(), ret.end(), dst) == ret.end()) {
+		cout << "The destiny node ID is unreachable. Try again\n";
+		return -1;
+	} else {
+		gv->setVertexColor(destinyID, "blue");
+		highlightNode(id, "yellow");
 		destinyID = id;
+	}
 	return 1;
 }
 
 int EasyPilot::addPointOfInterest(int id) {
 	if (find(pointsOfInterest.begin(), pointsOfInterest.end(), id)
 			!= pointsOfInterest.end()) {
-		return 0;
+		cout << "\nNode with ID " << id
+				<< " already is selected as point of interest. Try again.\n";
+		return -1;
 	} else {
-		if (highlightNode(id, "green") == -1 || id == sourceID
-				|| id == destinyID)
+		if (id < 0 || id > graph.getNumVertex() || id == sourceID
+				|| id == destinyID) {
+			cout << "Invalid node. Try again!\n";
 			return -1;
-		else {
+		} else {
+			vector<Vertex<unsigned> *> v = graph.getVertexSet();
+			unsigned dst = v[id]->getInfo();
+			vector<unsigned> ret = graph.bfs(v[sourceID]);
+			if (find(ret.begin(), ret.end(), dst) == ret.end()) {
+				cout << "The point of interest specified is unreachable. Try again\n";
+				return -1;
+			}
+			highlightNode(id, "green");
 			pointsOfInterest.push_back(id);
 		}
 		return 1;
@@ -463,19 +499,29 @@ int EasyPilot::addPointOfInterest(int id) {
 }
 
 int EasyPilot::removePointOfInterest(int id) {
-	vector<int>::iterator it = find(pointsOfInterest.begin(),
-			pointsOfInterest.end(), id);
-	if (it == pointsOfInterest.end()) {
-		return 0;
-	} else {
-		if (highlightNode(id, "blue") == -1 || id == sourceID
-				|| id == destinyID)
-			return -1;
-		else {
-			pointsOfInterest.erase(it);
-		}
+	if(id < 1 || id > pointsOfInterest.size()){
+		return -1;
+	}else{
+		vector<int>::iterator it;
+		it = find(pointsOfInterest.begin(), pointsOfInterest.end(), pointsOfInterest[id-1]);
+		highlightNode(pointsOfInterest[id-1], "blue");
+		pointsOfInterest.erase(it);
 		return 1;
 	}
+}
+
+vector<string> EasyPilot::getPointsOfInterest() const{
+	vector<string> ret;
+	ret.push_back("");
+	ostringstream label;
+
+	for(unsigned int i = 0; i < this->pointsOfInterest.size(); i++){
+		label << "Node with id " << pointsOfInterest[i];
+		ret.push_back(label.str());
+		label.clear();
+		label.str("");
+	}
+	return ret;
 }
 
 int EasyPilot::setPOIsNavigation(int method) {
@@ -506,16 +552,6 @@ int EasyPilot::addInaccessibleZone(int firstID, int lastID)
 				return 1;
 			}
 		}
-
-		vector<Edge<unsigned> > adjV2 = v2->getAdj();
-		for (unsigned int i = 0; i < adjV2.size(); i++) {
-			if (adjV2[i].getDest()->getInfo() == v1->getInfo()) {
-				this->highlightEdge(adjV2[i].getId(), "red", 10);
-				graph.setEdgeBlocked(adjV2[i].getId(), true);
-				inaccessibleZones.push_back(iz);
-				return 1;
-			}
-		}
 	}
 
 	return -1;
@@ -533,17 +569,6 @@ void EasyPilot::removeInaccessibleZone(int id) {
 			this->highlightEdge(adjV1[i].getId(), "black",
 					DEFAULT_EDGE_THICKNESS);
 			graph.setEdgeBlocked(adjV1[i].getId(), false);
-			inaccessibleZones.erase(it);
-			return;
-		}
-	}
-
-	vector<Edge<unsigned> > adjV2 = v2->getAdj();
-	for (unsigned int i = 0; i < adjV2.size(); i++) {
-		if (adjV2[i].getDest()->getInfo() == v1->getInfo()) {
-			this->highlightEdge(adjV2[i].getId(), "black",
-					DEFAULT_EDGE_THICKNESS);
-			graph.setEdgeBlocked(adjV2[i].getId(), false);
 			inaccessibleZones.erase(it);
 			return;
 		}
