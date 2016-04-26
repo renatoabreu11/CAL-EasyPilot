@@ -94,7 +94,7 @@ void MenuManager::navigationOptions(EasyPilot *gps) {
 			while (input == -1) {
 				try {
 					cout
-							<< "Type 1 for user input order, or 2 for shortest way possible:\n";
+							<< "\nType 1 for user input order, or 2 for shortest way possible:\n>>";
 					cin >> POIsNavigationMethod;
 					input = gps->setPOIsNavigation(POIsNavigationMethod);
 				} catch (InvalidInput& e) {
@@ -142,7 +142,7 @@ void MenuManager::navigationOptions(EasyPilot *gps) {
 			while (input == -1) {
 				try {
 					string option;
-					cout << "\nDo you want the [f]astest or the [c]heapest route?" << endl;
+					cout << "\nDo you want the [f]astest or the [c]heapest route?\n>>";
 					getline(cin, option);
 					if(option == "f" || option == "F")
 					{

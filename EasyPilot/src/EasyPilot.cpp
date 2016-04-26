@@ -333,7 +333,7 @@ bool alreadyProcessed(int nodeToSearch, vector<int> POIsAlreadySeen) {
 	return false;
 }
 
-void EasyPilot::sortPOIsByWeight(const vector<Vertex<unsigned> *> &g) {
+vector<int> EasyPilot::sortPOIsByWeight(const vector<Vertex<unsigned> *> &g) {
 	unsigned node1ID, node2ID;
 	vector<int> POIsByWeightOrder;
 
@@ -360,7 +360,7 @@ void EasyPilot::sortPOIsByWeight(const vector<Vertex<unsigned> *> &g) {
 		POIsByWeightOrder.push_back(secondNodeToUse);
 	}
 
-	pointsOfInterest = POIsByWeightOrder;
+	return POIsByWeightOrder;
 }
 
 void EasyPilot::HighLightShortestPath() {
@@ -395,26 +395,31 @@ void EasyPilot::HighLightShortestPath() {
 		}
 		if (pointsOfInterest.size() == 0) {
 			highlightPath(node1ID, node2ID);
+			return;
 		}
-		sortPOIsByWeight(g);
 
+		vector<int> POIs;
+		if(POIsNavigationMethod == 2)
+			POIs = sortPOIsByWeight(g);
+		else
+			POIs = pointsOfInterest;
 
-		for (unsigned int i = 0; i < pointsOfInterest.size() + 1; i++) {
+		for (unsigned int i = 0; i < POIs.size() + 1; i++) {
 			if (i == 0) {
 				node1ID = g[sourceID]->getInfo();
-				node2ID = pointsOfInterest[0];
+				node2ID = g[POIs[0]]->getInfo();
 				highlightPath(node1ID, node2ID);
-				cout << "Going to interest point '" << graph.getVertexIndex(pointsOfInterest[0]) << "'\nPress ENTER to move to the next one...";
-			} else if (i == pointsOfInterest.size()) {
-				node1ID = pointsOfInterest[i-1];
+				cout << "Going to interest point '" << graph.getVertexIndex(graph.getVertexSet()[POIs[0]]->getInfo()) << "'\nPress ENTER to move to the next one...";
+			} else if (i == POIs.size()) {
+				node1ID = g[POIs[i-1]]->getInfo();
 				node2ID = g[destinyID]->getInfo();
 				highlightPath(node1ID, node2ID);
 				cout << "Going to destination point '" << graph.getVertexIndex(node2ID) << "'\nPress ENTER to finish your trip...";
 			} else {
-				node1ID = pointsOfInterest[i-1];
-				node2ID = pointsOfInterest[i];
+				node1ID = g[POIs[i-1]]->getInfo();
+				node2ID = g[POIs[i]]->getInfo();
 				highlightPath(node1ID, node2ID);
-				cout << "Going to point interest point '" << graph.getVertexIndex(pointsOfInterest[i]) << "'\nPress ENTER to move to the next one...";
+				cout << "Going to point interest point '" << graph.getVertexIndex(graph.getVertexSet()[POIs[i]]->getInfo()) << "'\nPress ENTER to move to the next one...";
 			}
 			cin.ignore();
 		}
@@ -656,8 +661,6 @@ void EasyPilot::setTollWeight(bool apply)
 		else
 			this->graph.removeTollWeight(Tolls[i], this->gv);
 	}
-
-	this->updateMap();
 }
 
 /***UTILITY FUNCTIONS***/
