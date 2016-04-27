@@ -186,6 +186,9 @@ bool EasyPilot::readOSM() {
 
 void EasyPilot::graphInfoToGV() {
 	gv = new GraphViewer(GV_WINDOW_WIDTH, GV_WINDOW_HEIGHT, false);
+	ostringstream ss;
+	ss << map << ".png";
+	gv->setBackground(ss.str());
 	gv->createWindow(GV_WINDOW_WIDTH, GV_WINDOW_HEIGHT);
 	gv->defineVertexColor("blue");
 	gv->defineEdgeColor("black");

@@ -1,0 +1,11 @@
+POI;1650134397;Piscinas Municipais
+POI;1520883673;Taberna do Quim
+POI;2216195736;Escola Secundária
+POI;2216196395;Mini Preço
+POI;2523525801;Centro Comercial
+POI;2523528163;Tribunal
+IZ;52;53
+IZ;50;60
+IZ;15;16
+T;213,0.8
+T;114;1.2

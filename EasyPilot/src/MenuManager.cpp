@@ -243,11 +243,10 @@ void MenuManager::mapSelection(EasyPilot *gps) {
 	maps.push_back("Esposende");
 	maps.push_back("Murtosa");
 	maps.push_back("Alpendorada");
-	maps.push_back("Test");
 	maps.push_back("Back");
 	selection = menuOptions(maps);
 
-	if (selection < 5 && selection >= 1) {
+	if (selection < 4 && selection >= 1) {
 		gps->setMap(maps[selection]);
 		cout << "\n" << gps->getMap() << " map is the choosen one.\n";
 	} else{
