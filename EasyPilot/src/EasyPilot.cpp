@@ -6,7 +6,6 @@ EasyPilot::EasyPilot() {
 	sourceID = 329;
 	gv = NULL;
 	POIsNavigationMethod = 2;
-	allowHighways = false;
 }
 
 EasyPilot::~EasyPilot() {
@@ -238,7 +237,7 @@ void EasyPilot::graphInfoToGV() {
 
 	for(unsigned i = 0; i < Tolls.size(); i++)
 	{
-		gv->setVertexColor(Tolls[i].getVertexId(), "orange");
+		gv->setVertexColor(Tolls[i].getVertexId(), "cyan");
 	}
 
 	gv->rearrange();
@@ -369,42 +368,6 @@ void EasyPilot::HighLightShortestPath() {
 	unsigned node1ID;
 	unsigned node2ID, auxNode;
 
-	for(int i = 0; i < inaccessibleZones.size(); i++)
-		cout << "IZ" << i << ": " << inaccessibleZones[i].getFirstID() << ", " << inaccessibleZones[i].getLastID() << endl;
-
-	if(!allowHighways) {
-		for(unsigned int i = 0; i < Tolls.size(); i++) {
-			int node1ID = Tolls[i].getVertexId();
-			vector<Edge<unsigned> > adj = graph.getVertexSet()[node1ID]->getAdj();
-
-			for(unsigned int j = 0; j < adj.size(); j++) {
-				int node2ID = graph.getVertexIndex(adj[j].getDest()->getInfo());
-				addInaccessibleZone(node1ID, node2ID);
-				addInaccessibleZone(node2ID, node1ID);
-			}
-		}
-	} else {
-		for(unsigned int i = 0; i < inaccessibleZones.size(); i++) {
-			int node1ID = inaccessibleZones[i].getFirstID();
-			int node2ID = inaccessibleZones[i].getLastID();
-
-			for(unsigned int j = 0; j < Tolls.size(); j++) {
-				int nodeHighway1 = Tolls[j].getVertexId();
-				vector<Edge<unsigned> > adj = graph.getVertexSet()[nodeHighway1]->getAdj();
-
-				for(unsigned int k = 0; k < adj.size(); k++) {
-					int nodeHighway2 = graph.getVertexIndex(adj[k].getDest()->getInfo());
-					if((node1ID == nodeHighway1 && node2ID == nodeHighway2) || (node2ID == nodeHighway1 && node1ID == nodeHighway2))
-						removeInaccessibleZone(i);
-				}
-			}
-		}
-	}
-
-	cout << endl;
-	for(int i = 0; i < inaccessibleZones.size(); i++)
-		cout << "IZ" << i << ": " << inaccessibleZones[i].getFirstID() << ", " << inaccessibleZones[i].getLastID() << endl;
-
 	graph.floydWarshallShortestPath();
 
 	node1ID = g[sourceID]->getInfo();
@@ -499,7 +462,7 @@ void EasyPilot::resetPath() {
 	/**RECOLOR TOLLS**/
 
 	for(unsigned i = 0; i < Tolls.size(); i++)
-		gv->setVertexColor(Tolls[i].getVertexId(), "orange");
+		gv->setVertexColor(Tolls[i].getVertexId(), "cyan");
 }
 
 string EasyPilot::getMap() const {
@@ -698,18 +661,24 @@ void EasyPilot::setTollWeight(bool apply)
 	}
 }
 
-int EasyPilot::setAllowHighways(int allow)
+void EasyPilot::allowHighways(bool b)
 {
-	if(allow < 1 || allow > 2)
-		return -1;
+	for (unsigned int i = 0; i < Tolls.size(); i++) {
+			int node1ID = Tolls[i].getVertexId();
+			vector<Edge<unsigned> > adj = graph.getVertexSet()[node1ID]->getAdj();
 
-	if(allow == 1)
-		allowHighways = true;
-	else
-		allowHighways = false;
-
-	return 1;
-
+			for (unsigned int j = 0; j < adj.size(); j++) {
+				if (!b) {
+					graph.setEdgeBlocked(adj[j].getId(), true);
+					this->highlightEdge(adj[j].getId(), "orange",
+					EDGE_THICKNESS);
+				} else {
+					graph.setEdgeBlocked(adj[j].getId(), false);
+					this->highlightEdge(adj[j].getId(), "black",
+					DEFAULT_EDGE_THICKNESS);
+				}
+			}
+		}
 }
 
 /***UTILITY FUNCTIONS***/

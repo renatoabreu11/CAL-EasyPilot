@@ -26,7 +26,6 @@ private:
 	int sourceID;
 	int destinyID;
 	int POIsNavigationMethod;
-	bool allowHighways;
 	vector<int> nodePath;
 	vector<int> edgePath;
 	vector<int> pointsOfInterest;
@@ -60,7 +59,7 @@ public:
 	void resetPath();
 	vector<string> getPointsOfInterest() const;
 	void setTollWeight(bool apply);
-	int setAllowHighways(int allow);
+	void allowHighways(bool b);
 };
 
 /**

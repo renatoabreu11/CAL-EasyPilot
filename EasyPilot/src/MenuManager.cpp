@@ -108,7 +108,7 @@ void MenuManager::navigationOptions(EasyPilot *gps) {
 		case 6:
 			while (input == -1) {
 				try {
-					cout << "\nSelect the connection that is now inaccessible. To do that you must choose two nodes adjacent to each other.\n";
+					cout << "\nSelect the connection that is now inaccessible. To do that you must choose two adjacent nodes (connected with an edge).\n";
 					cout << "\nType the first node ID\n>>";
 					cin >> firstInaccessibleID;
 					cout << "Type the last node ID\n>>";
@@ -147,7 +147,7 @@ void MenuManager::navigationOptions(EasyPilot *gps) {
 					getline(cin, option);
 					if(option == "f" || option == "F")
 					{
-						gps->setTollWeight(false);	// doesn't apply toll weights, since price doesn't matter
+						gps->setTollWeight(false);
 						input = 0;
 					}
 					if(option == "c" || option == "C")
@@ -172,7 +172,11 @@ void MenuManager::navigationOptions(EasyPilot *gps) {
 				try {
 					cout << "\nType 1 to allow highways, type 2 to block them:\n>>";
 					cin >> allowHW;
-					input = gps->setAllowHighways(allowHW);
+					input = allowHW;
+					if(allowHW == 1)
+						gps->allowHighways(true);
+					else if(allowHW == 2)
+						gps->allowHighways(false);
 				} catch (InvalidInput& e) {
 					cout << "\nInvalid Input. Try again";
 					cin.clear();
@@ -201,6 +205,7 @@ void MenuManager::navigation(EasyPilot *gps) {
 		navigation.push_back("Path visualization");
 		navigation.push_back("Path reset");
 		navigation.push_back("Navigation criteria");
+		navigation.push_back("Navigation legend");
 		navigation.push_back("Back");
 		selection = menuOptions(navigation);
 		switch (selection) {
@@ -214,6 +219,16 @@ void MenuManager::navigation(EasyPilot *gps) {
 			navigationOptions(gps);
 			break;
 		case 4:
+			cout << "\nYellow node -> source or destination point.\n" <<
+			"Green node -> point of interest.\n" <<
+			"Cyan node -> toll.\n" <<
+			"Red edge -> inaccessible zone.\n" <<
+			"Pink edge and yellow nodes -> selected path.\n" <<
+			"Orange edge -> blocked highway.\n" <<
+			"\nPress ENTER to go back...";
+			cin.ignore();
+			break;
+		case 5:
 			gps->eraseMap();
 			running = false;
 			break;
