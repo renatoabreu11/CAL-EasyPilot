@@ -1,0 +1,47 @@
+﻿250034939;Rua dos Precursores;True
+250200735;Beco das Saldidas;True
+250200430;Caminho da Feira;True
+250201428;Rua dos Condes;True
+250201437;;False
+250201439;;False
+250202782;Avenida 29 de Outubro;False
+250202783;Rua dos Precursores;False
+250207699;Caminho de São Lourenço;False
+250205654;;False
+250205656;Beco da Regueirinha 1;False
+250206717;Caminho da Ferreirinha;False
+250206947;Viela do Facão;False
+250208255;Rua 9 de Abril;False
+250208286;Rua Doutor Barbosa Magalhães;False
+250220058;Beco da Farmácia;False
+250220154;;False
+250201430;Rua dos Condes;False
+250225707;Rua União Benificente Murtoense;False
+250226328;Caminho do Quintal;False
+250226825;Beco da Saldida;False
+152179141;Rua Padre Alberto Tavares Sousa;False
+251085067;;False
+251085071;Viela da Caixa;False
+250206236;Viela da Caixa;False
+251085069;;False
+211636116;Viela da Regueirinha;False
+211636141;;False
+211636097;Travessa Padre Anselmo;False
+245104172;;False
+245104094;;False
+152179135;;False
+152179139;Rua dos Condes;False
+245103931;Rua José Maria Barbosa;False
+245104944;;False
+245104448;;False
+245104355;Travessa dos Condes;False
+245103876;Rua António José Freitas Guimarães;False
+245104362;Beco do Zé Manuel;False
+245104446;Rua Manuel José Lopes Pereira;False
+245104610;;False
+245104949;;False
+245104622;Rua Doutor Carlos Barbosa;False
+251085061;Rua Doutor Carlos Barbosa;False
+251085062;Rua Doutor Carlos Barbosa;False
+250039958;Avenida 29 de Outubro;False
+138702778;Rua Dona Maria das Dores Tavares de Sousa;False

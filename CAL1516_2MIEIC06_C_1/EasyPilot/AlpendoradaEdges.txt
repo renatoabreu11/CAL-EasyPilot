@@ -1,0 +1,29 @@
+﻿122048362;;False
+122048363;;False
+122049448;;False
+122049449;;False
+122049454;;False
+122049456;;False
+122049452;Rua Vilaboinha;False
+122091249;;False
+122091251;;False
+122091252;;False
+122091253;;False
+122049455;;False
+122091250;Rua João Paulo II;False
+122091254;Rua António Pinto Peixoto Vasconcelos;False
+122091247;;False
+122091256;Alameda da Europa;False
+122048361;Avenida Francisco Sá Carneiro;True
+122351772;;False
+122351776;;False
+122412330;;False
+25411597;;True
+137571521;;True
+137571525;;True
+137571526;;True
+137571527;;True
+137734574;;True
+137734589;;True
+137734606;Rua Padre Velino;True
+137734603;;True
