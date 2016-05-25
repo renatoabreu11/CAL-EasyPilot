@@ -1,5 +1,0 @@
-To build project:
-At Project -> Properties -> C/C++ build -> Settings -> MinGW C++ Linker -> Miscellaneous: 
-. Linker flags -> Write: "-static"
-. Other objects -> Add MinGW path + \libwsock32.a 
-Example: C:\MinGW\lib\libwsock32.a 

@@ -12,32 +12,32 @@ InaccessibleZone::InaccessibleZone(int node1, int node2) {
 	this->lastID = node2;
 }
 
-int InaccessibleZone::getFirstID() const{
+int InaccessibleZone::getFirstID() const {
 	return this->firstID;
 }
 
-int InaccessibleZone::getLastID() const{
+int InaccessibleZone::getLastID() const {
 	return this->lastID;
 }
 
 bool InaccessibleZone::operator==(const InaccessibleZone &rv) {
-	if(this->firstID == rv.firstID && this->lastID == rv.lastID)
+	if (this->firstID == rv.firstID && this->lastID == rv.lastID)
 		return true;
-	else return false;
+	else
+		return false;
 }
 
 string InaccessibleZone::toString() const {
 	ostringstream label;
-	label << "Connection with initial node at " << this->firstID << " and end node at " << lastID;
+	label << "Connection with initial node at " << this->firstID
+			<< " and end node at " << lastID;
 	return label.str();
 }
 
-
-Toll::Toll(int vertexID, float cost)
-{
+Toll::Toll(int vertexID, float cost) {
 	this->vertexID = vertexID;
 	this->cost = cost;
-	this->weightAdd = round(100*cost);
+	this->weightAdd = round(100 * cost);
 	this->applied = false;
 }
 
@@ -52,4 +52,3 @@ int Toll::getVertexId() const {
 int Toll::getWeightAdd() const {
 	return weightAdd;
 }
-

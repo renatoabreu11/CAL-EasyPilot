@@ -60,6 +60,8 @@ public:
 	vector<string> getPointsOfInterest() const;
 	void setTollWeight(bool apply);
 	void allowHighways(bool b);
+
+	//map<string, int> getRoadNames() const;
 };
 
 /**

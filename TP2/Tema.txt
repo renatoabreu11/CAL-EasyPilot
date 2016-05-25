@@ -1,4 +1,0 @@
-Tema 1 - EasyPilot: sistema de navegação
-
-Para a segunda parte deste trabalho, considere que as ruas têm nomes, por exemplo “Rua de Dr Roberto Frias”, e que pertencem a um dado distrito, por exemplo, “Porto”. Ao indicar o nome da rua, como um destino possível, o utilizador deverá indicar o distrito e o nome da rua. Implemente esta funcionalidade, considerando tanto pesquisa exata, assim como pesquisa aproximada, das strings identificativas dos nomes de rua e distrito. Para pesquisa exata, caso o distrito ou o nome de rua não existam, deverá retornar mensagem de destino inexistente. Para a pesquisa aproximada, deverá retornar os distritos e nomes de ruas mais próximos.
-Estas novas funcionalidades deverão ser integradas no trabalho já realizado para a primeira parte. Avalie a complexidade (teórica e empiricamente) dos algoritmos implementados em função dos dados de input usados.

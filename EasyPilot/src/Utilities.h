@@ -49,6 +49,4 @@ public:
 	bool applied;
 };
 
-
-
 #endif /* SRC_UTILITIES_H_ */

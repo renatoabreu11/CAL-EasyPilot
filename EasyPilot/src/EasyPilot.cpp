@@ -684,6 +684,10 @@ void EasyPilot::allowHighways(bool b)
 		}
 }
 
+/*map<string, int> EasyPilot::getRoadNames() const {
+	return graph.getEdgesNames();
+}*/
+
 /***UTILITY FUNCTIONS***/
 
 LimitCoords getLimitCoords(Graph<unsigned> g) {

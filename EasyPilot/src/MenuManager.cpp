@@ -30,6 +30,7 @@ void MenuManager::navigationOptions(EasyPilot *gps) {
 		options.push_back("Remove inaccessible point");
 		options.push_back("Type of route");
 		options.push_back("Allow Highways");
+		options.push_back("Write destination");
 		options.push_back("Back");
 		selection = menuOptions(options);
 		switch (selection) {
@@ -183,7 +184,25 @@ void MenuManager::navigationOptions(EasyPilot *gps) {
 					cin.ignore(1000, '\n');
 				}
 			}
+			break;
 		case 10:
+		{
+			string typedRoadName;
+			map<string, int> roadInfo;
+
+			cout << "\nType the desired road name:\n>>";
+			cin >> typedRoadName;
+
+			//roadInfo = gps->getRoadNames();
+			/*for(int i = 0; i < roadNames.size(); i++) {
+				cout << roadNames[i] << endl;
+			}*/
+
+			//gps->setsourceID(srcNodeID);
+
+
+		} break;
+		case 11:
 			running = false;
 			break;
 		}
@@ -255,6 +274,63 @@ void MenuManager::mapSelection(EasyPilot *gps) {
 	}
 }
 
+bool kmd(vector<string> toCompare, string toSearch) {
+	int numRepetido = 0;
+	int i, j;
+	int pi[toSearch.length()];
+	pi[0] = 0;
+
+	//Pre processamento
+	for (i = 1, j = 0; i < toSearch.length(); i++) {
+		if (toSearch[j] == toSearch[i]) {
+			pi[i] = j + 1;
+			j++;
+		} else {
+			while (toSearch[j] != toSearch[i]) {
+				if (j == 0) {
+					pi[i] = 0;
+					break;
+				}
+				j = pi[j - 1];
+			}
+			if (toSearch[j] == toSearch[i])
+				pi[i] = j + 1;
+		}
+	}
+
+	for(int k = 0; k < toCompare.size(); k++) {
+		j = 0;
+		for (i = 0; i < toCompare[k].length(); i++) {
+			if (j == toSearch.length() - 1)
+				return true;
+			if (toCompare[k][i] == toSearch[j])
+				j++;
+			else if (j != 0)
+				j = pi[j - 1];
+		}
+	}
+
+	return false;
+}
+
+void MenuManager::districtSelection(EasyPilot *gps) {
+	string typedDistrict;
+	vector<string> districts;
+
+	districts.push_back("Esposende");
+	districts.push_back("Murtosa");
+	districts.push_back("Alpendorada");
+
+	cout << "\nType the desired district:\n>> ";
+	cin >> typedDistrict;
+
+	if(kmd(districts, typedDistrict)) {
+		gps->setMap(typedDistrict);
+		cout << "\n" << gps->getMap() << " map is the choosen one.\n";
+	} else
+		cout << "There's no district named '" << typedDistrict << "' in the database...\n";
+}
+
 void MenuManager::mainMenu(EasyPilot *gps) {
 	bool running = true;
 	int selection;
@@ -264,6 +340,7 @@ void MenuManager::mainMenu(EasyPilot *gps) {
 		mainMenu.push_back("Main Menu");
 		mainMenu.push_back("Navigation");
 		mainMenu.push_back("Map Selection");
+		mainMenu.push_back("Write Desired District");
 		mainMenu.push_back("Quit");
 		selection = menuOptions(mainMenu);
 		switch(selection){
@@ -274,6 +351,9 @@ void MenuManager::mainMenu(EasyPilot *gps) {
 			mapSelection(gps);
 			break;
 		case 3:
+			districtSelection(gps);
+			break;
+		case 4:
 			cout << "\nBye!\n";
 			exit(0);
 		}

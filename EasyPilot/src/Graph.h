@@ -10,6 +10,7 @@
 #include <limits.h>
 #include <cmath>
 #include <stddef.h>
+#include <map>
 #include "iostream"
 
 #include "utilities.h"
@@ -271,6 +272,9 @@ public:
 	int getNumEdge() const;
 	void clearGraph();
 	void setEdgeBlocked(const T &v, bool b);
+
+	bool searchForDuplicate(map<string, int> roadInfo, string roadName) const;
+	map<string, int> getEdgesNames() const;
 };
 
 
@@ -587,6 +591,34 @@ int Graph<T>::getNumEdge() const
 		counter += vertexSet[i]->adj.size();
 
 	return counter;
+}
+
+template <class T>
+bool Graph<T>::searchForDuplicate(map<string, int> roadInfo, string roadName) const {
+	map<string, int>::iterator it;
+
+	roadInfo.find(roadName);
+	if(it != roadInfo.end())
+		return true;
+
+	return false;
+}
+
+template <class T>
+map<string, int> Graph<T>::getEdgesNames() const {
+	map<string, int> roadInfo;
+
+	for(int i = 0; i < vertexSet.size(); i++) {
+		vector<Edge<T> > adj = vertexSet[i]->getAdj();
+
+		for(int j = 0; j < adj.size(); j++) {
+			if(!searchForDuplicate(roadInfo, adj[j].getName())) {
+				roadInfo[adj[j].getName()] = adj[j].getDest().getInfo();
+			}
+		}
+	}
+
+	return roadInfo;
 }
 
 

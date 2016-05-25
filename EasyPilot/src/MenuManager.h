@@ -17,6 +17,7 @@ public:
 	void navigation(EasyPilot *gps);
 	void mapSelection(EasyPilot *gps);
 	void mainMenu(EasyPilot *gps);
+	void districtSelection(EasyPilot *gps);
 	int menuOptions(vector<string> options);
 };
 
