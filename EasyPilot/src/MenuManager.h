@@ -5,11 +5,14 @@
 #include <string>
 #include <windows.h>
 #include <iostream>
+#include "Utilities.h"
 #include "EasyPilot.h"
 
 namespace std {
 
 class MenuManager {
+private:
+	int mapSelectionOption;
 public:
 	MenuManager();
 	virtual ~MenuManager();
@@ -17,7 +20,9 @@ public:
 	void navigation(EasyPilot *gps);
 	void mapSelection(EasyPilot *gps);
 	void mainMenu(EasyPilot *gps);
-	void districtSelection(EasyPilot *gps);
+	void ApproximateDistrictSelection(EasyPilot *gps);
+	void ExactDistrictSelection(EasyPilot *gps);
+	void inputOptions(EasyPilot *gps);
 	int menuOptions(vector<string> options);
 };
 

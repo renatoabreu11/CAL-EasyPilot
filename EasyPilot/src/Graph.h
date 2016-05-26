@@ -16,7 +16,7 @@
 #include "utilities.h"
 #include "graphviewer.h"
 
-using namespace std;
+//using namespace std;
 
 template <class T> class Edge;
 template <class T> class Graph;
@@ -613,7 +613,7 @@ map<string, int> Graph<T>::getEdgesNames() const {
 
 		for(int j = 0; j < adj.size(); j++) {
 			if(!searchForDuplicate(roadInfo, adj[j].getName())) {
-				roadInfo[adj[j].getName()] = adj[j].getDest().getInfo();
+				//roadInfo[adj[j].getName()] = adj[j].getDest().getInfo();
 			}
 		}
 	}
