@@ -5,7 +5,6 @@
 #include <string>
 #include <windows.h>
 #include <iostream>
-#include <map>
 #include "Utilities.h"
 #include "EasyPilot.h"
 

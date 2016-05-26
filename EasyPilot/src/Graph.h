@@ -597,11 +597,11 @@ template <class T>
 bool Graph<T>::searchForDuplicate(map<string, int> roadInfo, string roadName) const {
 	map<string, int>::iterator it;
 
-	roadInfo.find(roadName);
-	if(it != roadInfo.end())
-		return true;
+	it = roadInfo.find(roadName);
+	if(it == roadInfo.end())
+		return false;
 
-	return false;
+	return true;
 }
 
 template <class T>
@@ -610,10 +610,9 @@ map<string, int> Graph<T>::getEdgesNames() const {
 
 	for(int i = 0; i < vertexSet.size(); i++) {
 		vector<Edge<T> > adj = vertexSet[i]->getAdj();
-
 		for(int j = 0; j < adj.size(); j++) {
 			if(!searchForDuplicate(roadInfo, adj[j].getName())) {
-				//roadInfo[adj[j].getName()] = adj[j].getDest().getInfo();
+				roadInfo[adj[j].getName()] = getVertexIndex(adj[j].getDest()->getInfo());
 			}
 		}
 	}

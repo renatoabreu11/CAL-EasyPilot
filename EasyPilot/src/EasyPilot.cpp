@@ -684,8 +684,8 @@ void EasyPilot::allowHighways(bool b)
 		}
 }
 
-std::map<string, int> EasyPilot::getRoadNames() const {
-	return graph.getEdgesNames();
+void EasyPilot::getRoadNames(std::map<string, int> &roadsInfo){
+	roadsInfo = graph.getEdgesNames();
 }
 
 /***UTILITY FUNCTIONS***/

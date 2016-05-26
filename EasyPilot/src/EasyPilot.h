@@ -61,7 +61,7 @@ public:
 	void setTollWeight(bool apply);
 	void allowHighways(bool b);
 
-	std::map <string, int> getRoadNames() const;
+	void getRoadNames(std::map<string, int> &roadsInfo);
 };
 
 /**
