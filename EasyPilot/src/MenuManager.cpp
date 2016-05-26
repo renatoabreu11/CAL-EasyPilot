@@ -287,11 +287,11 @@ void MenuManager::mapSelection(EasyPilot *gps) {
 	}
 }
 
-void MenuManager::ExactDistrictSelection(EasyPilot *gps){
+void MenuManager::ApproximateDistrictSelection(EasyPilot *gps){
 
 }
 
-void MenuManager::ApproximateDistrictSelection(EasyPilot *gps) {
+void MenuManager::ExactDistrictSelection(EasyPilot *gps) {
 	string typedDistrict;
 	vector<string> districts;
 
