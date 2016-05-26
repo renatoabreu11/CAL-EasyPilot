@@ -315,7 +315,7 @@ void MenuManager::ExactDestSelection(EasyPilot *gps) {
 	cout << "\nType the desired road name:\n>>";
 	getline(cin, typedRoadName);
 
-	if (algorithm->kmd(roadNames, typedRoadName)) {
+	if (algorithm->kmp(roadNames, typedRoadName)) {
 		it = roadInfo.find(typedRoadName);
 		gps->setsourceID(it->second);
 		cout << "You've set the origin to '" << it->first << "' road, node --> " << it->second << endl;
@@ -468,7 +468,7 @@ void MenuManager::ExactDistrictSelection(EasyPilot *gps) {
 	cout << "\nType the desired district:\n>> ";
 	cin >> typedDistrict;
 	StringAlgorithms *algorithm = new StringAlgorithms();
-	if (algorithm->kmd(districts, typedDistrict)) {
+	if (algorithm->kmp(districts, typedDistrict)) {
 		gps->setMap(typedDistrict);
 		cout << "\n" << gps->getMap() << " map is the choosen one.\n";
 	} else
