@@ -260,7 +260,6 @@ void MenuManager::ApproximateDestSelection(EasyPilot *gps) {
 	int dist = 0;
 	for (map<string, int>::iterator it = roads.begin(); it != roads.end(); ++it) {
 		dist = algorithm->editDistance(input, (*it).first);
-		cout << (*it).first << " : " << dist << "\n";
 		if (dist < 6) {
 			destinationsDist.insert(std::pair<int, string>(dist, (*it).first));
 		}

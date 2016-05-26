@@ -611,7 +611,7 @@ map<string, int> Graph<T>::getEdgesNames() const {
 	for(int i = 0; i < vertexSet.size(); i++) {
 		vector<Edge<T> > adj = vertexSet[i]->getAdj();
 		for(int j = 0; j < adj.size(); j++) {
-			if(!searchForDuplicate(roadInfo, adj[j].getName())) {
+			if(adj[j].getName() != "" && !searchForDuplicate(roadInfo, adj[j].getName())) {
 				roadInfo[adj[j].getName()] = getVertexIndex(adj[j].getDest()->getInfo());
 			}
 		}
