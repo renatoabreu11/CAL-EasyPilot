@@ -4,7 +4,7 @@ namespace std {
 
 MenuManager::MenuManager() {
 	mapSelecOption = 1;
-	destSelecOption = 1;
+	destSelecOption = 2;
 
 }
 
@@ -247,7 +247,7 @@ void MenuManager::navigationOptions(EasyPilot *gps) {
 void MenuManager::ApproximateDestSelection(EasyPilot *gps) {
 	string input;
 	cout << "\nType the desired destination:\n>> ";
-	cin >> input;
+	getline(cin, input);
 	bool destSelected = false;
 
 	StringAlgorithms *algorithm = new StringAlgorithms();
@@ -260,7 +260,8 @@ void MenuManager::ApproximateDestSelection(EasyPilot *gps) {
 	int dist = 0;
 	for (map<string, int>::iterator it = roads.begin(); it != roads.end(); ++it) {
 		dist = algorithm->editDistance(input, (*it).first);
-		if (dist < 8) {
+		cout << (*it).first << " : " << dist << "\n";
+		if (dist < 6) {
 			destinationsDist.insert(std::pair<int, string>(dist, (*it).first));
 		}
 	}
@@ -288,8 +289,8 @@ void MenuManager::ApproximateDestSelection(EasyPilot *gps) {
 			int selection = 0;
 			selection = menuOptions(suggestions);
 			if (selection == suggestions.size() - 1) {
-				cout << "\n" << gps->getdestinyID()
-						<< " node remains the choosen one.\n";
+				cout << "\nNode with id " << gps->getdestinyID()
+						<< " remains the choosen one.\n";
 			} else {
 				id = roads.find(suggestions[selection])->second;
 				gps->setdestinyID(id);

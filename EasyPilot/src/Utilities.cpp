@@ -60,57 +60,30 @@ int Toll::getWeightAdd() const {
  * @param s1 First string.
  * @param s2 Second string.
  */
-int StringAlgorithms::editDistance(string s1, string s2)
-{
-	// Converting from string to cstring (array of chars)
-	const char* cstr1 = s1.c_str();
-	const char* cstr2 = s2.c_str();
-
-	int cstr1_len = strlen(cstr1);
-	int cstr2_len = strlen(cstr2);
-
-	// If any of the strings is empty
-	if(cstr1_len == 0)
-		return cstr2_len;
-	if(cstr2_len == 0)
-		return cstr1_len;
-
-	// Array d[i][j] that'll store the EDIT DISTANCE between s1[i] and s2[j].
-	unsigned int distance[cstr1_len+1][cstr2_len+1];	// +1 so it would account for having an empty string
-
-	// Initializing the array
-	for (int i = 0; i <= cstr1_len; i++)
-	{
-		distance[i][0] = i;	// distance of first string to an EMPTY string
-	}
-
-	for (int j = 0; j <= cstr1_len; j++)
-	{
-		distance[0][j] = j;
-	}
-
-	// Calculating the distance
-
-	for (int j = 1; j <= cstr2_len; j++)
-	{
-		for (int i = 1; i <= cstr1_len; i++)
-		{
-			if (cstr1[i-1] == cstr2[j-1])	// no operation is needed
-				distance[i][j] = distance [i-1][j-1];
-			else
-			{
-				distance[i][j] = min(
-						distance[i-1][j] + 1, 	// deletion in csrt1 + cost
-						min(
-						distance[i][j-1] +1,	// insertion in cstr1 + cost
-						distance[i-1][j-1] + 1	// substitution in cstr1 + cost
-								 ));
-
+int StringAlgorithms::editDistance(string pattern, string text) {
+	int n = text.length();
+	vector<int> d(n + 1);
+	int old, neww;
+	for (int j = 0; j <= n; j++)
+		d[j] = j;
+	int m = pattern.length();
+	for (int i = 1; i <= m; i++) {
+		old = d[0];
+		d[0] = i;
+		for (int j = 1; j <= n; j++) {
+			if (pattern[i - 1] == text[j - 1])
+				neww = old;
+			else {
+				neww = min(old, d[j]);
+				neww = min(neww, d[j - 1]);
+				neww = neww + 1;
 			}
+			old = d[j];
+			d[j] = neww;
 		}
 	}
+	return d[n];
 
-	return distance[cstr1_len][cstr2_len];
 }
 
 bool StringAlgorithms::kmd(vector<string> toCompare, string toSearch) {
