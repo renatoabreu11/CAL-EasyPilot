@@ -10,11 +10,11 @@
 122091252;;False
 122091253;;False
 122049455;;False
-122091250;Rua João Paulo II;False
-122091254;Rua António Pinto Peixoto Vasconcelos;False
+122091250;Rua Joao Paulo II;False
+122091254;Rua Antonio Pinto Peixoto Vasconcelos;False
 122091247;;False
 122091256;Alameda da Europa;False
-122048361;Avenida Francisco Sá Carneiro;True
+122048361;Avenida Francisco Sa Carneiro;True
 122351772;;False
 122351776;;False
 122412330;;False
