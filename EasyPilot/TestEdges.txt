@@ -1,6 +1,0 @@
-53417796;;False
-151176871;Rua Senhora da Saúde;False
-151231063;;False
-107824994;;False
-240992530;Rua Rodrigues Faria;False
-265589975;Rua Rodrigues Faria;False

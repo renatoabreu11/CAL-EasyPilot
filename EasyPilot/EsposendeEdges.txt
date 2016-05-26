@@ -1,10 +1,10 @@
-24809544;;True
+﻿24809544;;True
 24809547;;True
 25338162;;False
 25338277;;False
 25338175;;False
 25338171;;False
-53411577;Rua Doutor Mário Viana;False
+53411577;Rua Doutor Mario Viana;False
 53417432;;True
 53417457;;True
 53417456;;True
@@ -12,8 +12,8 @@
 53417429;;True
 53417428;;True
 53417796;;False
-53425746;Avenida Engenheiro José Arantes e Oliveira;True
-56018160;Rua José Régio;True
+53425746;Avenida Engenheiro Jose Arantes e Oliveira;True
+56018160;Rua Jose Regio;True
 104687122;;True
 24809554;;True
 53411579;Rua Vasco da Gama;True
@@ -40,12 +40,12 @@
 107825001;;False
 107825003;;False
 53417458;;False
-53415051;Rua João Amândio;True
+53415051;Rua Joao Amandio;True
 53839892;;True
 122268136;;True
 122269025;;True
-122269220;Rua do Sítio da Cruz;True
-151176871;Rua Senhora da Saúde;False
+122269220;Rua do Sitio da Cruz;True
+151176871;Rua Senhora da Saude;False
 151231063;;False
 107824983;;False
 107824990;;True
@@ -58,7 +58,7 @@
 107824974;;False
 151427627;;False
 154778196;;False
-53415067;Avenida Rocha Gonçalves;False
+53415067;Avenida Rocha Goncalves;False
 104683798;;False
 53415055;;False
 158281380;Avenida Valentim Ribeiro;False
@@ -68,7 +68,7 @@
 170317491;;False
 107824994;;False
 176259740;Avenida de Goios;True
-176992825;Avenida Rocha Gonçalves;False
+176992825;Avenida Rocha Goncalves;False
 176992926;;False
 176992985;;False
 25338279;;False
@@ -85,22 +85,22 @@
 197709075;;False
 198064755;;False
 198064758;;False
-53417426;Rua Dom Sebastião;False
+53417426;Rua Dom Sebastiao;False
 170317500;;False
 240861397;;False
 240992530;Rua Rodrigues Faria;False
 262478865;;False
 209108456;Rua Rodrigues Faria;False
-151252922;Rua José Vieira;False
+151252922;Rua Jose Vieira;False
 263381466;;False
 263381467;;False
 263381469;;False
 265589975;Rua Rodrigues Faria;False
 274197692;;False
 198064753;Rua Vasco da Gama;False
-274197694;Rua Senhora da Saúde;False
+274197694;Rua Senhora da Saude;False
 274197719;;False
-274197695;Rua Senhora da Saúde;True
+274197695;Rua Senhora da Saude;True
 274297216;;True
 274463348;;False
 274463349;;False
@@ -108,12 +108,12 @@
 274297215;;False
 196172370;Rua 25 de Abril;False
 185293375;;False
-274197693;Rua João Amândio;True
+274197693;Rua Joao Amandio;True
 274689689;;True
 275514490;;True
 275514491;;True
 275514493;;True
-280667939;Rua João Amândio;True
+280667939;Rua Joao Amandio;True
 282557849;;True
 282557850;;True
 107976508;;True
@@ -124,9 +124,9 @@
 303655384;;True
 275514494;;True
 320984927;EN 103-1;False
-320984929;Rua Senhora da Saúde;False
+320984929;Rua Senhora da Saude;False
 320984928;EN 103-1;False
-320984930;Rua Senhora da Saúde;False
+320984930;Rua Senhora da Saude;False
 320985754;Avenida Doutor Henrique Barros Lima;False
 359163521;;False
 379564315;;False
