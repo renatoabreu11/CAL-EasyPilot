@@ -313,21 +313,14 @@ void MenuManager::ExactDestSelection(EasyPilot *gps) {
 		roadNames.push_back(it->first);
 
 	cout << "\nType the desired road name:\n>>";
-	cin >> typedRoadName;
+	getline(cin, typedRoadName);
 
 	if (algorithm->kmd(roadNames, typedRoadName)) {
 		it = roadInfo.find(typedRoadName);
-		if (it == roadInfo.end())
-			cout << "Falhou!\n";
-		else {
-			gps->setsourceID(it->second);
-			cout << "You've set the origin to '" << it->first
-					<< "' road, node --> " << it->second << endl;
-		}
+		gps->setsourceID(it->second);
+		cout << "You've set the origin to '" << it->first << "' road, node --> " << it->second << endl;
 	} else
-		cout << "Couldn't find '" << typedRoadName
-				<< "' road, please try again\n";
-
+		cout << "Couldn't find '" << typedRoadName << "' road, please try again\n";
 }
 
 void MenuManager::ApproximateDistrictSelection(EasyPilot *gps) {
