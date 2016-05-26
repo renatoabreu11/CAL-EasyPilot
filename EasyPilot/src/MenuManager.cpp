@@ -3,7 +3,8 @@
 namespace std {
 
 MenuManager::MenuManager() {
-	mapSelectionOption = 1;
+	mapSelecOption = 1;
+	destSelecOption = 1;
 
 }
 
@@ -31,7 +32,7 @@ void MenuManager::navigationOptions(EasyPilot *gps) {
 		options.push_back("Remove inaccessible point");
 		options.push_back("Type of route");
 		options.push_back("Allow Highways");
-		options.push_back("Write destination");
+		options.push_back("Destination options");
 		options.push_back("Back");
 		selection = menuOptions(options);
 		switch (selection) {
@@ -49,16 +50,24 @@ void MenuManager::navigationOptions(EasyPilot *gps) {
 			}
 			break;
 		case 2:
-			while (input == -1) {
-				try {
-					cout << "\nType the node ID from where to end:\n>>";
-					cin >> destNodeID;
-					input = gps->setdestinyID(destNodeID);
-				} catch (InvalidInput& e) {
-					cout << "\nInvalid Input. Try again";
-					cin.clear();
-					cin.ignore(1000, '\n');
+			if (destSelecOption == 1) {
+				while (input == -1) {
+					try {
+						cout << "\nType the node ID from where to end:\n>>";
+						cin >> destNodeID;
+						input = gps->setdestinyID(destNodeID);
+					} catch (InvalidInput& e) {
+						cout << "\nInvalid Input. Try again";
+						cin.clear();
+						cin.ignore(1000, '\n');
+					}
 				}
+			} else if (destSelecOption == 2) {
+				ApproximateDestSelection(gps);
+				break;
+			} else if (destSelecOption == 3) {
+				ExactDestSelection(gps);
+				break;
 			}
 			break;
 		case 3:
@@ -192,30 +201,40 @@ void MenuManager::navigationOptions(EasyPilot *gps) {
 			}
 			break;
 		case 10: {
-			string typedRoadName;
-			map<string, int> roadInfo;
-			vector<string> roadNames;
-
-			StringAlgorithms *algorithm = new StringAlgorithms();
-			gps->getRoadNames(roadInfo);
-
-			map<string, int>::iterator it;
-			for (it = roadInfo.begin(); it != roadInfo.end(); it++)
-				roadNames.push_back(it->first);
-
-			cout << "\nType the desired road name:\n>>";
-			cin >> typedRoadName;
-
-			if (algorithm->kmd(roadNames, typedRoadName)) {
-				it = roadInfo.find(typedRoadName);
-				if (it == roadInfo.end())
-					cout << "Falhou!\n";
-				else {
-					gps->setsourceID(it->second);
-					cout << "You've set the origin to '" << it->first << "' road, node --> " << it->second << endl;
+			int selection;
+			bool running = true;
+			while (running) {
+				vector<string> options;
+				options.push_back("\nDestination selection options:");
+				options.push_back("Default selection");
+				options.push_back("Approximate string matching");
+				options.push_back("Exact string matching");
+				options.push_back("Back");
+				selection = menuOptions(options);
+				switch (selection) {
+				case 1:
+					destSelecOption = 1;
+					cout
+							<< "\nDefault selection is now the current destination selection.\n";
+					running = false;
+					break;
+				case 2:
+					destSelecOption = 2;
+					cout
+							<< "\nApproximate string matching is now the current destination selection.\n";
+					running = false;
+					break;
+				case 3:
+					destSelecOption = 3;
+					cout
+							<< "\nExact string matching is now the current destination selection.\n";
+					running = false;
+					break;
+				case 4:
+					running = false;
+					break;
 				}
-			} else
-				cout << "Couldn't find '" << typedRoadName << "' road, please try again\n";
+			}
 		}
 			break;
 		case 11:
@@ -223,6 +242,92 @@ void MenuManager::navigationOptions(EasyPilot *gps) {
 			break;
 		}
 	}
+}
+
+void MenuManager::ApproximateDestSelection(EasyPilot *gps) {
+	string input;
+	cout << "\nType the desired destination:\n>> ";
+	cin >> input;
+	bool destSelected = false;
+
+	StringAlgorithms *algorithm = new StringAlgorithms();
+	vector<string> suggestions;
+	suggestions.push_back("\n Destination Suggestions:");
+	map<int, string, std::less<int> > destinationsDist;
+	map<string, int> roads;
+	gps->getRoadNames(roads);
+
+	int dist = 0;
+	for (map<string, int>::iterator it = roads.begin(); it != roads.end(); ++it) {
+		dist = algorithm->editDistance(input, (*it).first);
+		if (dist < 8) {
+			destinationsDist.insert(std::pair<int, string>(dist, (*it).first));
+		}
+	}
+
+	int id = 0;
+	for (map<int, string>::iterator it = destinationsDist.begin();
+			it != destinationsDist.end(); ++it) {
+		if ((*it).first == 0) {
+			id = roads.find((*it).second)->second;
+			cout << "\n" << (*it).second
+					<< " road with ID " << id << " is the choosen one.\n";
+			gps->setdestinyID(id);
+			destSelected = true;
+		} else {
+			suggestions.push_back((*it).second);
+		}
+	}
+
+	if (!destSelected) {
+		if (suggestions.size() == 1) {
+			cout
+					<< "\n There are no suggestions similar to the written road.\n";
+		} else {
+			suggestions.push_back("Back");
+			int selection = 0;
+			selection = menuOptions(suggestions);
+			if (selection == suggestions.size() - 1) {
+				cout << "\n" << gps->getdestinyID()
+						<< " node remains the choosen one.\n";
+			} else {
+				id = roads.find(suggestions[selection])->second;
+				gps->setdestinyID(id);
+				cout << "\n" << suggestions[selection]
+									<< " road with ID " << id << " is the choosen one.\n";
+			}
+		}
+	}
+}
+
+void MenuManager::ExactDestSelection(EasyPilot *gps) {
+	string typedRoadName;
+	map<string, int> roadInfo;
+	vector<string> roadNames;
+
+	StringAlgorithms *algorithm = new StringAlgorithms();
+	gps->getRoadNames(roadInfo);
+
+	map<string, int>::iterator it;
+	for (it = roadInfo.begin(); it != roadInfo.end(); it++)
+		roadNames.push_back(it->first);
+
+	cout << "\nType the desired road name:\n>>";
+	cin >> typedRoadName;
+
+	if (algorithm->kmd(roadNames, typedRoadName)) {
+		it = roadInfo.find(typedRoadName);
+		if (it == roadInfo.end())
+			cout << "Falhou!\n";
+		else {
+			gps->setsourceID(it->second);
+			cout << "You've set the origin to '" << it->first
+					<< "' road, node --> " << it->second << endl;
+		}
+	} else
+		cout << "Couldn't find '" << typedRoadName
+				<< "' road, please try again\n";
+
 }
 
 void MenuManager::ApproximateDistrictSelection(EasyPilot *gps) {
@@ -328,7 +433,7 @@ void MenuManager::navigation(EasyPilot *gps) {
 }
 
 void MenuManager::mapSelection(EasyPilot *gps) {
-	switch (mapSelectionOption) {
+	switch (mapSelecOption) {
 	case 1: {
 		int selection;
 		vector<string> maps;
@@ -390,19 +495,19 @@ void MenuManager::inputOptions(EasyPilot *gps) {
 		selection = menuOptions(options);
 		switch (selection) {
 		case 1:
-			mapSelectionOption = 1;
+			mapSelecOption = 1;
 			cout
 					<< "\nDefault map selection is now the current district selection.\n";
 			running = false;
 			break;
 		case 2:
-			mapSelectionOption = 2;
+			mapSelecOption = 2;
 			cout
 					<< "\nApproximate string matching is now the current district selection.\n";
 			running = false;
 			break;
 		case 3:
-			mapSelectionOption = 3;
+			mapSelecOption = 3;
 			cout
 					<< "\nExact string matching is now the current district selection.\n";
 			running = false;

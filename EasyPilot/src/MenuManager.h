@@ -12,7 +12,8 @@ namespace std {
 
 class MenuManager {
 private:
-	int mapSelectionOption;
+	int mapSelecOption;
+	int destSelecOption;
 public:
 	MenuManager();
 	virtual ~MenuManager();
@@ -22,6 +23,8 @@ public:
 	void mainMenu(EasyPilot *gps);
 	void ApproximateDistrictSelection(EasyPilot *gps);
 	void ExactDistrictSelection(EasyPilot *gps);
+	void ApproximateDestSelection(EasyPilot *gps);
+	void ExactDestSelection(EasyPilot *gps);
 	void inputOptions(EasyPilot *gps);
 	int menuOptions(vector<string> options);
 };
