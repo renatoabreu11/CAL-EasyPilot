@@ -287,8 +287,60 @@ void MenuManager::mapSelection(EasyPilot *gps) {
 	}
 }
 
-void MenuManager::ApproximateDistrictSelection(EasyPilot *gps){
+void MenuManager::ApproximateDistrictSelection(EasyPilot *gps) {
+	string input;
+	cout << "\nType the desired district:\n>> ";
+	cin >> input;
+	bool mapSelected = false;
 
+	StringAlgorithms *algorithm = new StringAlgorithms();
+	vector<string> suggestions;
+	suggestions.push_back("\n District Suggestions:");
+	map<int, string, std::less<int> > districtsDist;
+	districtsDist.insert(
+			std::pair<int, string>(algorithm->editDistance(input, "Esposende"),
+					"Esposende"));
+	districtsDist.insert(
+			std::pair<int, string>(
+					algorithm->editDistance(input, "Alpendorada"),
+					"Alpendorada"));
+	districtsDist.insert(
+			std::pair<int, string>(algorithm->editDistance(input, "Murtosa"),
+					"Murtosa"));
+
+
+
+	for (map<int, string>::iterator it = districtsDist.begin();
+			it != districtsDist.end(); ++it) {
+		if((*it).first == 0){
+			cout << "\n" << (*it).second  << " map is the choosen one.\n";
+			mapSelected = true;
+		}
+		else{
+			if((*it).first <= 3){
+				suggestions.push_back((*it).second);
+			}
+		}
+	}
+
+	if(!mapSelected){
+		if(suggestions.size() == 1){
+			cout << "\n There are no suggestions similar to the written district.\n";
+		}
+		else {
+			suggestions.push_back("Back");
+			int selection = 0;
+			selection = menuOptions(suggestions);
+			if (selection == suggestions.size() - 1) {
+				cout << "\n" << gps->getMap()
+						<< " map remains the choosen one.\n";
+			} else {
+				gps->setMap(suggestions[selection]);
+				cout << "\n" << gps->getMap()
+						<< " map is the choosen one.\n";
+			}
+		}
+	}
 }
 
 void MenuManager::ExactDistrictSelection(EasyPilot *gps) {
