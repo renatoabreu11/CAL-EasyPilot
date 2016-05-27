@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.10"/>
-<title>EasyPilot 1.0.0: Código-Fonte de C:/Users/josea/Documents/GitHub/CAL-Proj/EasyPilot/src/graphviewer.h</title>
+<title>EasyPilot 1.1.0: Código-Fonte de C:/Users/josea/Documents/GitHub/CAL-EasyPilot/EasyPilot/src/graphviewer.h</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -23,7 +23,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">EasyPilot 1.0.0
+   <div id="projectname">EasyPilot 1.1.0
    </div>
   </td>
  </tr>
@@ -38,6 +38,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Localizar');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Página&#160;principal</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Ficheiros</span></a></li>
       <li>
@@ -61,6 +62,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Localizar');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>Lista&#160;de&#160;ficheiros</span></a></li>
+      <li><a href="globals.html"><span>Membros&#160;dos&#160;Ficheiros</span></a></li>
     </ul>
   </div>
 <!-- window showing the filter options -->
@@ -79,7 +81,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Localizar');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_8ceffd4ee35c3518d4e8bdc7e638efe8.html">Users</a></li><li class="navelem"><a class="el" href="dir_c6329affb2fdf8eab958aada9d56625d.html">josea</a></li><li class="navelem"><a class="el" href="dir_5ff2310dc515c0cc10da36cb12e70834.html">Documents</a></li><li class="navelem"><a class="el" href="dir_cb6b521a0df0ca63d395618582697742.html">GitHub</a></li><li class="navelem"><a class="el" href="dir_72685eaeb6de082f401fd28238813571.html">CAL-Proj</a></li><li class="navelem"><a class="el" href="dir_d90be0ef63610d1c6b3f7427ae4c99b3.html">EasyPilot</a></li><li class="navelem"><a class="el" href="dir_2a0e6c479a746988d0cb2e19ad8740df.html">src</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_8ceffd4ee35c3518d4e8bdc7e638efe8.html">Users</a></li><li class="navelem"><a class="el" href="dir_c6329affb2fdf8eab958aada9d56625d.html">josea</a></li><li class="navelem"><a class="el" href="dir_5ff2310dc515c0cc10da36cb12e70834.html">Documents</a></li><li class="navelem"><a class="el" href="dir_cb6b521a0df0ca63d395618582697742.html">GitHub</a></li><li class="navelem"><a class="el" href="dir_107e653df6ca945c821f13c72fe737b2.html">CAL-EasyPilot</a></li><li class="navelem"><a class="el" href="dir_c80512eb6c01b03b5e448d8be5296f21.html">EasyPilot</a></li><li class="navelem"><a class="el" href="dir_0e410282432b1b70f5106df7bc6fe646.html">src</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -87,7 +89,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Localizar');
 <div class="title">graphviewer.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef _GRAPH_VIEWER_H_</span></div>
+<a href="graphviewer_8h.html">Ir para a documentação deste ficheiro.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef _GRAPH_VIEWER_H_</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define _GRAPH_VIEWER_H_</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#ifdef linux</span></div>
@@ -101,22 +103,22 @@ var searchBox = new SearchBox("searchBox", "search",false,'Localizar');
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;signal.h&gt;</span></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &quot;edgetype.h&quot;</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &quot;connection.h&quot;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="edgetype_8h.html">edgetype.h</a>&quot;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="connection_8h.html">connection.h</a>&quot;</span></div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#define BLUE &quot;BLUE&quot;</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#define RED &quot;RED&quot;</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#define PINK &quot;PINK&quot;</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#define BLACK &quot;BLACK&quot;</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#define WHITE &quot;WHITE&quot;</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#define ORANGE &quot;ORANGE&quot;</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#define YELLOW &quot;YELLOW&quot;</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#define GREEN &quot;GREEN&quot;</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#define CYAN &quot;CYAN&quot;</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#define GRAY &quot;GRAY&quot;</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#define DARK_GRAY &quot;DARK_GRAY&quot;</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#define LIGHT_GRAY &quot;LIGHT_GRAY&quot;</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#define MAGENTA &quot;MAGENTA&quot;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="graphviewer_8h.html#a79d10e672abb49ad63eeaa8aaef57c38">   18</a></span>&#160;<span class="preprocessor">#define BLUE &quot;BLUE&quot;</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="graphviewer_8h.html#a8d23feea868a983c8c2b661e1e16972f">   19</a></span>&#160;<span class="preprocessor">#define RED &quot;RED&quot;</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="graphviewer_8h.html#ada419fe3b48fcf19daed7cc57ccf1174">   20</a></span>&#160;<span class="preprocessor">#define PINK &quot;PINK&quot;</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="graphviewer_8h.html#a7b3b25cba33b07c303f3060fe41887f6">   21</a></span>&#160;<span class="preprocessor">#define BLACK &quot;BLACK&quot;</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="graphviewer_8h.html#a87b537f5fa5c109d3c05c13d6b18f382">   22</a></span>&#160;<span class="preprocessor">#define WHITE &quot;WHITE&quot;</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="graphviewer_8h.html#ac5b6e19bf06822021f35602c59658de3">   23</a></span>&#160;<span class="preprocessor">#define ORANGE &quot;ORANGE&quot;</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="graphviewer_8h.html#abf681265909adf3d3e8116c93c0ba179">   24</a></span>&#160;<span class="preprocessor">#define YELLOW &quot;YELLOW&quot;</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="graphviewer_8h.html#acfbc006ea433ad708fdee3e82996e721">   25</a></span>&#160;<span class="preprocessor">#define GREEN &quot;GREEN&quot;</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="graphviewer_8h.html#ad243f93c16bc4c1d3e0a13b84421d760">   26</a></span>&#160;<span class="preprocessor">#define CYAN &quot;CYAN&quot;</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="graphviewer_8h.html#ae5f70677050eecd8909e0248e07b9e73">   27</a></span>&#160;<span class="preprocessor">#define GRAY &quot;GRAY&quot;</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="graphviewer_8h.html#aca56870f2285abae489635f0ee4d65e3">   28</a></span>&#160;<span class="preprocessor">#define DARK_GRAY &quot;DARK_GRAY&quot;</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="graphviewer_8h.html#a9663e02e20b5b578e6a31adae265cb88">   29</a></span>&#160;<span class="preprocessor">#define LIGHT_GRAY &quot;LIGHT_GRAY&quot;</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="graphviewer_8h.html#a6f699060902f800f12aaae150f3a708e">   30</a></span>&#160;<span class="preprocessor">#define MAGENTA &quot;MAGENTA&quot;</span></div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div>
 <div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="class_graph_viewer.html">   36</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_graph_viewer.html">GraphViewer</a> {</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keyword">public</span>:</div>
@@ -196,6 +198,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Localizar');
 <div class="ttc" id="class_graph_viewer_html_af1adb6a361457187a820e01dcf0a34b7"><div class="ttname"><a href="class_graph_viewer.html#af1adb6a361457187a820e01dcf0a34b7">GraphViewer::defineVertexIcon</a></div><div class="ttdeci">bool defineVertexIcon(string filepath)</div><div class="ttdef"><b>Definition:</b> graphviewer.cpp:216</div></div>
 <div class="ttc" id="class_graph_viewer_html_a3009a66958686ccb7e78b68e37c3c423"><div class="ttname"><a href="class_graph_viewer.html#a3009a66958686ccb7e78b68e37c3c423">GraphViewer::rearrange</a></div><div class="ttdeci">bool rearrange()</div><div class="ttdef"><b>Definition:</b> graphviewer.cpp:265</div></div>
 <div class="ttc" id="class_graph_viewer_html_a85990c1eaac7feed3950960d4bd2fd4c"><div class="ttname"><a href="class_graph_viewer.html#a85990c1eaac7feed3950960d4bd2fd4c">GraphViewer::closeWindow</a></div><div class="ttdeci">bool closeWindow()</div><div class="ttdef"><b>Definition:</b> graphviewer.cpp:89</div></div>
+<div class="ttc" id="connection_8h_html"><div class="ttname"><a href="connection_8h.html">connection.h</a></div></div>
 <div class="ttc" id="class_graph_viewer_html_ac4b2a9fec74d38e64088aa79ca4b7d9b"><div class="ttname"><a href="class_graph_viewer.html#ac4b2a9fec74d38e64088aa79ca4b7d9b">GraphViewer::defineVertexSize</a></div><div class="ttdeci">bool defineVertexSize(int size)</div><div class="ttdef"><b>Definition:</b> graphviewer.cpp:230</div></div>
 <div class="ttc" id="class_graph_viewer_html_a8b542d7e09e81a45a74760c19233beb0"><div class="ttname"><a href="class_graph_viewer.html#a8b542d7e09e81a45a74760c19233beb0">GraphViewer::setVertexColor</a></div><div class="ttdeci">bool setVertexColor(int id, string color)</div><div class="ttdef"><b>Definition:</b> graphviewer.cpp:209</div></div>
 <div class="ttc" id="class_graph_viewer_html_a69eb065145063e4dea41961e92e35c8e"><div class="ttname"><a href="class_graph_viewer.html#a69eb065145063e4dea41961e92e35c8e">GraphViewer::setEdgeFlow</a></div><div class="ttdeci">bool setEdgeFlow(int id, int flow)</div><div class="ttdef"><b>Definition:</b> graphviewer.cpp:258</div></div>
@@ -205,6 +208,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Localizar');
 <div class="ttc" id="class_connection_html"><div class="ttname"><a href="class_connection.html">Connection</a></div><div class="ttdef"><b>Definition:</b> connection.h:22</div></div>
 <div class="ttc" id="class_graph_viewer_html_a07ccc96707efae4aa5f3ced3dca015af"><div class="ttname"><a href="class_graph_viewer.html#a07ccc96707efae4aa5f3ced3dca015af">GraphViewer::setEdgeColor</a></div><div class="ttdeci">bool setEdgeColor(int id, string color)</div><div class="ttdef"><b>Definition:</b> graphviewer.cpp:167</div></div>
 <div class="ttc" id="class_graph_viewer_html_a76de8676b7a93d72af514b84cdaa4d21"><div class="ttname"><a href="class_graph_viewer.html#a76de8676b7a93d72af514b84cdaa4d21">GraphViewer::defineVertexColor</a></div><div class="ttdeci">bool defineVertexColor(string color)</div><div class="ttdef"><b>Definition:</b> graphviewer.cpp:202</div></div>
+<div class="ttc" id="edgetype_8h_html"><div class="ttname"><a href="edgetype_8h.html">edgetype.h</a></div></div>
 <div class="ttc" id="class_graph_viewer_html_a07f598272fe3515455eab13be749604a"><div class="ttname"><a href="class_graph_viewer.html#a07f598272fe3515455eab13be749604a">GraphViewer::setEdgeThickness</a></div><div class="ttdeci">bool setEdgeThickness(int id, int thickness)</div><div class="ttdef"><b>Definition:</b> graphviewer.cpp:195</div></div>
 <div class="ttc" id="class_graph_viewer_html_a02437b5fecd8b90de24436068312d593"><div class="ttname"><a href="class_graph_viewer.html#a02437b5fecd8b90de24436068312d593">GraphViewer::setBackground</a></div><div class="ttdeci">bool setBackground(string path)</div><div class="ttdef"><b>Definition:</b> graphviewer.cpp:244</div></div>
 <div class="ttc" id="class_graph_viewer_html_a08f362be0e682d91e7506dca8caae1b8"><div class="ttname"><a href="class_graph_viewer.html#a08f362be0e682d91e7506dca8caae1b8">GraphViewer::defineEdgeCurved</a></div><div class="ttdeci">bool defineEdgeCurved(bool curved)</div><div class="ttdef"><b>Definition:</b> graphviewer.cpp:188</div></div>

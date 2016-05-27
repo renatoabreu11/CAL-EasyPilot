@@ -1,0 +1,63 @@
+\hypertarget{class_string_algorithms}{}\section{Referência à classe String\+Algorithms}
+\label{class_string_algorithms}\index{String\+Algorithms@{String\+Algorithms}}
+
+
+{\ttfamily \#include $<$Utilities.\+h$>$}
+
+
+
+Diagrama de colaboração para String\+Algorithms\+:
+% FIG 0
+\subsection*{Membros públicos}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{class_string_algorithms_a2598f03c37e8d4a0ceec7684859989c8}{edit\+Distance} (string s1, string s2)
+\begin{DoxyCompactList}\small\item\em Calculates the edit (Levenshtein) distance between two strings. This is the number of deletions, substitutions and/or insertions needed to make one string match the other. It implements Wagner-\/\+Fischer dynamic algorithm. \end{DoxyCompactList}\item 
+void \hyperlink{class_string_algorithms_aeb2df4d9aa271b56636f05ec792558d1}{pre\+\_\+kmp} (string to\+Search, vector$<$ int $>$ \&prefix)
+\item 
+bool \hyperlink{class_string_algorithms_a42b5bd09f0c960e53157aeeee47c8439}{kmp} (vector$<$ string $>$ to\+Compare, string to\+Search)
+\end{DoxyCompactItemize}
+
+
+\subsection{Documentação dos métodos}
+\hypertarget{class_string_algorithms_a2598f03c37e8d4a0ceec7684859989c8}{}\index{String\+Algorithms@{String\+Algorithms}!edit\+Distance@{edit\+Distance}}
+\index{edit\+Distance@{edit\+Distance}!String\+Algorithms@{String\+Algorithms}}
+\subsubsection[{edit\+Distance(string s1, string s2)}]{\setlength{\rightskip}{0pt plus 5cm}int String\+Algorithms\+::edit\+Distance (
+\begin{DoxyParamCaption}
+\item[{string}]{pattern, }
+\item[{string}]{text}
+\end{DoxyParamCaption}
+)}\label{class_string_algorithms_a2598f03c37e8d4a0ceec7684859989c8}
+
+
+Calculates the edit (Levenshtein) distance between two strings. This is the number of deletions, substitutions and/or insertions needed to make one string match the other. It implements Wagner-\/\+Fischer dynamic algorithm. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em s1} & First string. \\
+\hline
+{\em s2} & Second string. \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_string_algorithms_a42b5bd09f0c960e53157aeeee47c8439}{}\index{String\+Algorithms@{String\+Algorithms}!kmp@{kmp}}
+\index{kmp@{kmp}!String\+Algorithms@{String\+Algorithms}}
+\subsubsection[{kmp(vector$<$ string $>$ to\+Compare, string to\+Search)}]{\setlength{\rightskip}{0pt plus 5cm}bool String\+Algorithms\+::kmp (
+\begin{DoxyParamCaption}
+\item[{vector$<$ string $>$}]{to\+Compare, }
+\item[{string}]{to\+Search}
+\end{DoxyParamCaption}
+)}\label{class_string_algorithms_a42b5bd09f0c960e53157aeeee47c8439}
+\hypertarget{class_string_algorithms_aeb2df4d9aa271b56636f05ec792558d1}{}\index{String\+Algorithms@{String\+Algorithms}!pre\+\_\+kmp@{pre\+\_\+kmp}}
+\index{pre\+\_\+kmp@{pre\+\_\+kmp}!String\+Algorithms@{String\+Algorithms}}
+\subsubsection[{pre\+\_\+kmp(string to\+Search, vector$<$ int $>$ \&prefix)}]{\setlength{\rightskip}{0pt plus 5cm}void String\+Algorithms\+::pre\+\_\+kmp (
+\begin{DoxyParamCaption}
+\item[{string}]{to\+Search, }
+\item[{vector$<$ int $>$ \&}]{prefix}
+\end{DoxyParamCaption}
+)}\label{class_string_algorithms_aeb2df4d9aa271b56636f05ec792558d1}
+
+
+A documentação para esta classe foi gerada a partir dos seguintes ficheiros\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/josea/\+Documents/\+Git\+Hub/\+C\+A\+L-\/\+Easy\+Pilot/\+Easy\+Pilot/src/\hyperlink{_utilities_8h}{Utilities.\+h}\item 
+C\+:/\+Users/josea/\+Documents/\+Git\+Hub/\+C\+A\+L-\/\+Easy\+Pilot/\+Easy\+Pilot/src/\hyperlink{_utilities_8cpp}{Utilities.\+cpp}\end{DoxyCompactItemize}

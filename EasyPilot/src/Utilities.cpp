@@ -54,7 +54,6 @@ int Toll::getWeightAdd() const {
 }
 
 /**
- * @fn editDistance
  * @brief Calculates the edit (Levenshtein) distance between two strings. This is the number of deletions, substitutions and/or insertions needed
  * to make one string match the other.	It implements Wagner-Fischer dynamic algorithm.
  * @param s1 First string.

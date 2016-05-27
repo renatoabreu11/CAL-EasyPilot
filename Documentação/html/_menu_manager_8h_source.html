@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.10"/>
-<title>EasyPilot 1.0.0: Código-Fonte de C:/Users/josea/Documents/GitHub/CAL-Proj/EasyPilot/src/MenuManager.h</title>
+<title>EasyPilot 1.1.0: Código-Fonte de C:/Users/josea/Documents/GitHub/CAL-EasyPilot/EasyPilot/src/MenuManager.h</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -23,7 +23,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">EasyPilot 1.0.0
+   <div id="projectname">EasyPilot 1.1.0
    </div>
   </td>
  </tr>
@@ -38,6 +38,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Localizar');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Página&#160;principal</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Ficheiros</span></a></li>
       <li>
@@ -61,6 +62,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Localizar');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>Lista&#160;de&#160;ficheiros</span></a></li>
+      <li><a href="globals.html"><span>Membros&#160;dos&#160;Ficheiros</span></a></li>
     </ul>
   </div>
 <!-- window showing the filter options -->
@@ -79,7 +81,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Localizar');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_8ceffd4ee35c3518d4e8bdc7e638efe8.html">Users</a></li><li class="navelem"><a class="el" href="dir_c6329affb2fdf8eab958aada9d56625d.html">josea</a></li><li class="navelem"><a class="el" href="dir_5ff2310dc515c0cc10da36cb12e70834.html">Documents</a></li><li class="navelem"><a class="el" href="dir_cb6b521a0df0ca63d395618582697742.html">GitHub</a></li><li class="navelem"><a class="el" href="dir_72685eaeb6de082f401fd28238813571.html">CAL-Proj</a></li><li class="navelem"><a class="el" href="dir_d90be0ef63610d1c6b3f7427ae4c99b3.html">EasyPilot</a></li><li class="navelem"><a class="el" href="dir_2a0e6c479a746988d0cb2e19ad8740df.html">src</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_8ceffd4ee35c3518d4e8bdc7e638efe8.html">Users</a></li><li class="navelem"><a class="el" href="dir_c6329affb2fdf8eab958aada9d56625d.html">josea</a></li><li class="navelem"><a class="el" href="dir_5ff2310dc515c0cc10da36cb12e70834.html">Documents</a></li><li class="navelem"><a class="el" href="dir_cb6b521a0df0ca63d395618582697742.html">GitHub</a></li><li class="navelem"><a class="el" href="dir_107e653df6ca945c821f13c72fe737b2.html">CAL-EasyPilot</a></li><li class="navelem"><a class="el" href="dir_c80512eb6c01b03b5e448d8be5296f21.html">EasyPilot</a></li><li class="navelem"><a class="el" href="dir_0e410282432b1b70f5106df7bc6fe646.html">src</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -87,40 +89,64 @@ var searchBox = new SearchBox("searchBox", "search",false,'Localizar');
 <div class="title">MenuManager.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef SRC_MENUMANAGER_H_</span></div>
+<a href="_menu_manager_8h.html">Ir para a documentação deste ficheiro.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef SRC_MENUMANAGER_H_</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define SRC_MENUMANAGER_H_</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;windows.h&gt;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;EasyPilot.h&quot;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacestd.html">std</a> {</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;</div>
-<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="classstd_1_1_menu_manager.html">   12</a></span>&#160;<span class="keyword">class </span><a class="code" href="classstd_1_1_menu_manager.html">MenuManager</a> {</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <a class="code" href="classstd_1_1_menu_manager.html">MenuManager</a>();</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classstd_1_1_menu_manager.html">MenuManager</a>();</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keywordtype">void</span> navigationOptions(<a class="code" href="class_easy_pilot.html">EasyPilot</a> *gps);</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keywordtype">void</span> navigation(<a class="code" href="class_easy_pilot.html">EasyPilot</a> *gps);</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keywordtype">void</span> mapSelection(<a class="code" href="class_easy_pilot.html">EasyPilot</a> *gps);</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keywordtype">void</span> mainMenu(<a class="code" href="class_easy_pilot.html">EasyPilot</a> *gps);</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keywordtype">int</span> menuOptions(vector&lt;string&gt; options);</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;};</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
-<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="classstd_1_1_invalid_input.html">   23</a></span>&#160;<span class="keyword">class </span><a class="code" href="classstd_1_1_invalid_input.html">InvalidInput</a>{</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <a class="code" href="classstd_1_1_invalid_input.html">InvalidInput</a>(){};</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;};</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;} <span class="comment">/* namespace std */</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* SRC_MENUMANAGER_H_ */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_utilities_8h.html">Utilities.h</a>&quot;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_easy_pilot_8h.html">EasyPilot.h</a>&quot;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacestd.html">std</a> {</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;</div>
+<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="classstd_1_1_menu_manager.html">   13</a></span>&#160;<span class="keyword">class </span><a class="code" href="classstd_1_1_menu_manager.html">MenuManager</a> {</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keywordtype">int</span> mapSelecOption;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keywordtype">int</span> destSelecOption;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <a class="code" href="classstd_1_1_menu_manager.html#a0e57899dfa981f18aa39890638a0d131">MenuManager</a>();</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="classstd_1_1_menu_manager.html#a2e39acf092dd4a46e904ca141088bcd1">~MenuManager</a>();</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classstd_1_1_menu_manager.html#a6b49d6cd4fe3260d9642dbb20381f43c">navigationOptions</a>(<a class="code" href="class_easy_pilot.html">EasyPilot</a> *gps);</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classstd_1_1_menu_manager.html#a07bff9624aa3fc9104ec98c79b8c37a1">navigation</a>(<a class="code" href="class_easy_pilot.html">EasyPilot</a> *gps);</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classstd_1_1_menu_manager.html#a77cd2018d2592e12d39dd07eb6f21022">mapSelection</a>(<a class="code" href="class_easy_pilot.html">EasyPilot</a> *gps);</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classstd_1_1_menu_manager.html#a638c286f464bf2d495aa2b4fb213302e">mainMenu</a>(<a class="code" href="class_easy_pilot.html">EasyPilot</a> *gps);</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classstd_1_1_menu_manager.html#abed94057ed99af5fc35be97742359585">ApproximateDistrictSelection</a>(<a class="code" href="class_easy_pilot.html">EasyPilot</a> *gps);</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classstd_1_1_menu_manager.html#a9d27786670fa4ccfec164863eec87b4a">ExactDistrictSelection</a>(<a class="code" href="class_easy_pilot.html">EasyPilot</a> *gps);</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classstd_1_1_menu_manager.html#aa15f39e5d4c32479e5487be2e1b38d67">ApproximateDestSelection</a>(<a class="code" href="class_easy_pilot.html">EasyPilot</a> *gps);</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classstd_1_1_menu_manager.html#a2ffb71762aba39d2d9e0233e7bc88f92">ExactDestSelection</a>(<a class="code" href="class_easy_pilot.html">EasyPilot</a> *gps);</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classstd_1_1_menu_manager.html#a430a4b321213835da37750a9bd565865">inputOptions</a>(<a class="code" href="class_easy_pilot.html">EasyPilot</a> *gps);</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classstd_1_1_menu_manager.html#a1235a2b53d90aeb5f60c043be9caf62b">menuOptions</a>(vector&lt;string&gt; options);</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;};</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="classstd_1_1_invalid_input.html">   32</a></span>&#160;<span class="keyword">class </span><a class="code" href="classstd_1_1_invalid_input.html">InvalidInput</a>{</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="classstd_1_1_invalid_input.html#ad85ad7bbb3d6bbcaa3d8071f69cdcbd1">   34</a></span>&#160;    <a class="code" href="classstd_1_1_invalid_input.html#ad85ad7bbb3d6bbcaa3d8071f69cdcbd1">InvalidInput</a>(){};</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;};</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;} <span class="comment">/* namespace std */</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* SRC_MENUMANAGER_H_ */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="classstd_1_1_invalid_input_html_ad85ad7bbb3d6bbcaa3d8071f69cdcbd1"><div class="ttname"><a href="classstd_1_1_invalid_input.html#ad85ad7bbb3d6bbcaa3d8071f69cdcbd1">std::InvalidInput::InvalidInput</a></div><div class="ttdeci">InvalidInput()</div><div class="ttdef"><b>Definition:</b> MenuManager.h:34</div></div>
+<div class="ttc" id="classstd_1_1_menu_manager_html_aa15f39e5d4c32479e5487be2e1b38d67"><div class="ttname"><a href="classstd_1_1_menu_manager.html#aa15f39e5d4c32479e5487be2e1b38d67">std::MenuManager::ApproximateDestSelection</a></div><div class="ttdeci">void ApproximateDestSelection(EasyPilot *gps)</div><div class="ttdef"><b>Definition:</b> MenuManager.cpp:247</div></div>
+<div class="ttc" id="classstd_1_1_menu_manager_html_a07bff9624aa3fc9104ec98c79b8c37a1"><div class="ttname"><a href="classstd_1_1_menu_manager.html#a07bff9624aa3fc9104ec98c79b8c37a1">std::MenuManager::navigation</a></div><div class="ttdeci">void navigation(EasyPilot *gps)</div><div class="ttdef"><b>Definition:</b> MenuManager.cpp:382</div></div>
+<div class="ttc" id="classstd_1_1_menu_manager_html_a6b49d6cd4fe3260d9642dbb20381f43c"><div class="ttname"><a href="classstd_1_1_menu_manager.html#a6b49d6cd4fe3260d9642dbb20381f43c">std::MenuManager::navigationOptions</a></div><div class="ttdeci">void navigationOptions(EasyPilot *gps)</div><div class="ttdef"><b>Definition:</b> MenuManager.cpp:17</div></div>
+<div class="ttc" id="classstd_1_1_menu_manager_html_abed94057ed99af5fc35be97742359585"><div class="ttname"><a href="classstd_1_1_menu_manager.html#abed94057ed99af5fc35be97742359585">std::MenuManager::ApproximateDistrictSelection</a></div><div class="ttdeci">void ApproximateDistrictSelection(EasyPilot *gps)</div><div class="ttdef"><b>Definition:</b> MenuManager.cpp:326</div></div>
+<div class="ttc" id="classstd_1_1_menu_manager_html_a2e39acf092dd4a46e904ca141088bcd1"><div class="ttname"><a href="classstd_1_1_menu_manager.html#a2e39acf092dd4a46e904ca141088bcd1">std::MenuManager::~MenuManager</a></div><div class="ttdeci">virtual ~MenuManager()</div><div class="ttdef"><b>Definition:</b> MenuManager.cpp:11</div></div>
 <div class="ttc" id="class_easy_pilot_html"><div class="ttname"><a href="class_easy_pilot.html">EasyPilot</a></div><div class="ttdef"><b>Definition:</b> EasyPilot.h:21</div></div>
-<div class="ttc" id="namespacestd_html"><div class="ttname"><a href="namespacestd.html">std</a></div><div class="ttdef"><b>Definition:</b> MenuManager.cpp:4</div></div>
-<div class="ttc" id="classstd_1_1_menu_manager_html"><div class="ttname"><a href="classstd_1_1_menu_manager.html">std::MenuManager</a></div><div class="ttdef"><b>Definition:</b> MenuManager.h:12</div></div>
-<div class="ttc" id="classstd_1_1_invalid_input_html"><div class="ttname"><a href="classstd_1_1_invalid_input.html">std::InvalidInput</a></div><div class="ttdef"><b>Definition:</b> MenuManager.h:23</div></div>
+<div class="ttc" id="namespacestd_html"><div class="ttname"><a href="namespacestd.html">std</a></div><div class="ttdef"><b>Definition:</b> MenuManager.cpp:3</div></div>
+<div class="ttc" id="classstd_1_1_menu_manager_html_a430a4b321213835da37750a9bd565865"><div class="ttname"><a href="classstd_1_1_menu_manager.html#a430a4b321213835da37750a9bd565865">std::MenuManager::inputOptions</a></div><div class="ttdeci">void inputOptions(EasyPilot *gps)</div><div class="ttdef"><b>Definition:</b> MenuManager.cpp:478</div></div>
+<div class="ttc" id="classstd_1_1_menu_manager_html_a1235a2b53d90aeb5f60c043be9caf62b"><div class="ttname"><a href="classstd_1_1_menu_manager.html#a1235a2b53d90aeb5f60c043be9caf62b">std::MenuManager::menuOptions</a></div><div class="ttdeci">int menuOptions(vector&lt; string &gt; options)</div><div class="ttdef"><b>Definition:</b> MenuManager.cpp:544</div></div>
+<div class="ttc" id="classstd_1_1_menu_manager_html_a77cd2018d2592e12d39dd07eb6f21022"><div class="ttname"><a href="classstd_1_1_menu_manager.html#a77cd2018d2592e12d39dd07eb6f21022">std::MenuManager::mapSelection</a></div><div class="ttdeci">void mapSelection(EasyPilot *gps)</div><div class="ttdef"><b>Definition:</b> MenuManager.cpp:428</div></div>
+<div class="ttc" id="classstd_1_1_menu_manager_html"><div class="ttname"><a href="classstd_1_1_menu_manager.html">std::MenuManager</a></div><div class="ttdef"><b>Definition:</b> MenuManager.h:13</div></div>
+<div class="ttc" id="_easy_pilot_8h_html"><div class="ttname"><a href="_easy_pilot_8h.html">EasyPilot.h</a></div></div>
+<div class="ttc" id="_utilities_8h_html"><div class="ttname"><a href="_utilities_8h.html">Utilities.h</a></div></div>
+<div class="ttc" id="classstd_1_1_invalid_input_html"><div class="ttname"><a href="classstd_1_1_invalid_input.html">std::InvalidInput</a></div><div class="ttdef"><b>Definition:</b> MenuManager.h:32</div></div>
+<div class="ttc" id="classstd_1_1_menu_manager_html_a2ffb71762aba39d2d9e0233e7bc88f92"><div class="ttname"><a href="classstd_1_1_menu_manager.html#a2ffb71762aba39d2d9e0233e7bc88f92">std::MenuManager::ExactDestSelection</a></div><div class="ttdeci">void ExactDestSelection(EasyPilot *gps)</div><div class="ttdef"><b>Definition:</b> MenuManager.cpp:303</div></div>
+<div class="ttc" id="classstd_1_1_menu_manager_html_a9d27786670fa4ccfec164863eec87b4a"><div class="ttname"><a href="classstd_1_1_menu_manager.html#a9d27786670fa4ccfec164863eec87b4a">std::MenuManager::ExactDistrictSelection</a></div><div class="ttdeci">void ExactDistrictSelection(EasyPilot *gps)</div><div class="ttdef"><b>Definition:</b> MenuManager.cpp:460</div></div>
+<div class="ttc" id="classstd_1_1_menu_manager_html_a638c286f464bf2d495aa2b4fb213302e"><div class="ttname"><a href="classstd_1_1_menu_manager.html#a638c286f464bf2d495aa2b4fb213302e">std::MenuManager::mainMenu</a></div><div class="ttdeci">void mainMenu(EasyPilot *gps)</div><div class="ttdef"><b>Definition:</b> MenuManager.cpp:515</div></div>
+<div class="ttc" id="classstd_1_1_menu_manager_html_a0e57899dfa981f18aa39890638a0d131"><div class="ttname"><a href="classstd_1_1_menu_manager.html#a0e57899dfa981f18aa39890638a0d131">std::MenuManager::MenuManager</a></div><div class="ttdeci">MenuManager()</div><div class="ttdef"><b>Definition:</b> MenuManager.cpp:5</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

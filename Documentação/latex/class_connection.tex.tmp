@@ -1,0 +1,24 @@
+\hypertarget{class_connection}{}\section{Referência à classe Connection}
+\label{class_connection}\index{Connection@{Connection}}
+
+
+Diagrama de colaboração para Connection\+:
+% FIG 0
+\subsection*{Membros públicos}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_connection_a8089476d48ba545f44e691cd4bd0278d}{}{\bfseries Connection} (short port)\label{class_connection_a8089476d48ba545f44e691cd4bd0278d}
+
+\item 
+\hypertarget{class_connection_a4b9f6db1fb42fc9857f829fa0bc52e6e}{}bool {\bfseries send\+Msg} (string msg)\label{class_connection_a4b9f6db1fb42fc9857f829fa0bc52e6e}
+
+\item 
+\hypertarget{class_connection_a1df16b436751b686d96c24ca0c498659}{}string {\bfseries read\+Line} ()\label{class_connection_a1df16b436751b686d96c24ca0c498659}
+
+\end{DoxyCompactItemize}
+
+
+A documentação para esta classe foi gerada a partir dos seguintes ficheiros\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/josea/\+Documents/\+Git\+Hub/\+C\+A\+L-\/\+Easy\+Pilot/\+Easy\+Pilot/src/connection.\+h\item 
+C\+:/\+Users/josea/\+Documents/\+Git\+Hub/\+C\+A\+L-\/\+Easy\+Pilot/\+Easy\+Pilot/src/connection.\+cpp\end{DoxyCompactItemize}

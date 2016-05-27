@@ -1,0 +1,6 @@
+digraph "Graph&lt; T &gt;"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="{Graph\< T \>\n||+ addVertex()\l+ addEdge()\l+ removeVertex()\l+ removeEdge()\l+ dfs()\l+ bfs()\l+ maxNewChildren()\l+ getVertexSet()\l+ getNumVertex()\l+ getVertexIndex()\le 23 mais...\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+}

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['toll',['Toll',['../class_toll.html',1,'']]]
+  ['stringalgorithms',['StringAlgorithms',['../class_string_algorithms.html',1,'']]]
 ];

@@ -1,0 +1,13 @@
+digraph "C:/Users/josea/Documents" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_c6329affb2fdf8eab958aada9d56625d {
+    graph [ bgcolor="#ddddee", pencolor="black", label="josea" fontname="Helvetica", fontsize="10", URL="dir_c6329affb2fdf8eab958aada9d56625d.html"]
+  subgraph clusterdir_5ff2310dc515c0cc10da36cb12e70834 {
+    graph [ bgcolor="#eeeeff", pencolor="black", label="" URL="dir_5ff2310dc515c0cc10da36cb12e70834.html"];
+    dir_5ff2310dc515c0cc10da36cb12e70834 [shape=plaintext label="Documents"];
+    dir_cb6b521a0df0ca63d395618582697742 [shape=box label="GitHub" color="red" fillcolor="white" style="filled" URL="dir_cb6b521a0df0ca63d395618582697742.html"];
+  }
+  }
+}

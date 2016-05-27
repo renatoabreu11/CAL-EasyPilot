@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.10"/>
-<title>EasyPilot 1.0.0: Referência à classe GraphViewer</title>
+<title>EasyPilot 1.1.0: Referência à classe GraphViewer</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -23,7 +23,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">EasyPilot 1.0.0
+   <div id="projectname">EasyPilot 1.1.0
    </div>
   </td>
  </tr>
@@ -38,6 +38,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Localizar');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Página&#160;principal</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Ficheiros</span></a></li>
       <li>
@@ -95,8 +96,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Localizar');
 Diagrama de colaboração para GraphViewer:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_graph_viewer__coll__graph.png" border="0" usemap="#_graph_viewer_coll__map" alt="Collaboration graph"/></div>
-<map name="_graph_viewer_coll__map" id="_graph_viewer_coll__map">
-</map>
+<!-- MAP 0 -->
 </div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
@@ -296,7 +296,7 @@ Atributos Públicos Estáticos</h2></td></tr>
     <tr><td class="paramname">id</td><td>Identificador único da aresta. </td></tr>
     <tr><td class="paramname">v1</td><td>Identificador único do nó de origem da aresta. </td></tr>
     <tr><td class="paramname">v2</td><td>Identificador único do nó de destino da aresta. </td></tr>
-    <tr><td class="paramname">edgeType</td><td>EdgeType.DIRECTED caso a aresta seja unidirecional ou EdgeType.UNDIRECTED caso a aresta seja bidirecional. </td></tr>
+    <tr><td class="paramname">edgeType</td><td><a class="el" href="class_edge_type.html#a903017a534f2818c2d17145e4ae0321c">EdgeType.DIRECTED</a> caso a aresta seja unidirecional ou <a class="el" href="class_edge_type.html#a6533cc56d05c288a550b9980b66c9317">EdgeType.UNDIRECTED</a> caso a aresta seja bidirecional. </td></tr>
   </table>
   </dd>
 </dl>
@@ -433,7 +433,7 @@ Atributos Públicos Estáticos</h2></td></tr>
 <p>Função que define a cor global das arestas. Exemplo, para um apontador gv onde foi instanciada a classe <a class="el" href="class_graph_viewer.html">GraphViewer</a>: gv-&gt;defineEdgeColor(GRAY); modifica a cor por defeito das arestas para cinzento</p>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
-    <tr><td class="paramname">color</td><td>Nova cor das arestas, utilizar as constantes definidas no <a class="el" href="graphviewer_8h_source.html">graphviewer.h</a> para conveniência. </td></tr>
+    <tr><td class="paramname">color</td><td>Nova cor das arestas, utilizar as constantes definidas no <a class="el" href="graphviewer_8h.html">graphviewer.h</a> para conveniência. </td></tr>
   </table>
   </dd>
 </dl>
@@ -502,7 +502,7 @@ Atributos Públicos Estáticos</h2></td></tr>
 <p>Função que define a cor global dos nós. Exemplo, para um apontador gv onde foi instanciada a classe <a class="el" href="class_graph_viewer.html">GraphViewer</a>: gv-&gt;defineVertexColor(RED); modifica a cor por defeito dos nós para vermelho</p>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
-    <tr><td class="paramname">color</td><td>Nova cor dos nós, utilizar as constantes definidas no <a class="el" href="graphviewer_8h_source.html">graphviewer.h</a> para conveniência. </td></tr>
+    <tr><td class="paramname">color</td><td>Nova cor dos nós, utilizar as constantes definidas no <a class="el" href="graphviewer_8h.html">graphviewer.h</a> para conveniência. </td></tr>
   </table>
   </dd>
 </dl>
@@ -548,7 +548,7 @@ Atributos Públicos Estáticos</h2></td></tr>
 <p>Função que define o tamanho global dos nós. Exemplo, para um apontador gv onde foi instanciada a classe <a class="el" href="class_graph_viewer.html">GraphViewer</a>: gv-&gt;defineVertexSize(20); modifica o tamanho por defeito dos nós para 20</p>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
-    <tr><td class="paramname">size</td><td>Nova cor dos nós, utilizar as constantes definidas no <a class="el" href="graphviewer_8h_source.html">graphviewer.h</a> para conveniência. </td></tr>
+    <tr><td class="paramname">size</td><td>Nova cor dos nós, utilizar as constantes definidas no <a class="el" href="graphviewer_8h.html">graphviewer.h</a> para conveniência. </td></tr>
   </table>
   </dd>
 </dl>
@@ -667,7 +667,7 @@ Atributos Públicos Estáticos</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">id</td><td>Identificador único da aresta com a cor a alterar. </td></tr>
-    <tr><td class="paramname">color</td><td>Nova cor da aresta, utilizar as constantes definidas no <a class="el" href="graphviewer_8h_source.html">graphviewer.h</a> para conveniência. </td></tr>
+    <tr><td class="paramname">color</td><td>Nova cor da aresta, utilizar as constantes definidas no <a class="el" href="graphviewer_8h.html">graphviewer.h</a> para conveniência. </td></tr>
   </table>
   </dd>
 </dl>
@@ -701,7 +701,7 @@ Atributos Públicos Estáticos</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">id</td><td>Identificador único da aresta com a cor a alterar. </td></tr>
-    <tr><td class="paramname">dashed</td><td>Nova cor da aresta, utilizar as constantes definidas no <a class="el" href="graphviewer_8h_source.html">graphviewer.h</a> para conveniência. </td></tr>
+    <tr><td class="paramname">dashed</td><td>Nova cor da aresta, utilizar as constantes definidas no <a class="el" href="graphviewer_8h.html">graphviewer.h</a> para conveniência. </td></tr>
   </table>
   </dd>
 </dl>
@@ -871,7 +871,7 @@ Atributos Públicos Estáticos</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">id</td><td>Identificador único do nó com a cor a alterar. </td></tr>
-    <tr><td class="paramname">color</td><td>Nova cor do nó, utilizar as constantes definidas no <a class="el" href="graphviewer_8h_source.html">graphviewer.h</a> para conveniência. </td></tr>
+    <tr><td class="paramname">color</td><td>Nova cor do nó, utilizar as constantes definidas no <a class="el" href="graphviewer_8h.html">graphviewer.h</a> para conveniência. </td></tr>
   </table>
   </dd>
 </dl>
@@ -1003,8 +1003,8 @@ Atributos Públicos Estáticos</h2></td></tr>
 </div>
 </div>
 <hr/>A documentação para esta classe foi gerada a partir dos seguintes ficheiros:<ul>
-<li>C:/Users/josea/Documents/GitHub/CAL-Proj/EasyPilot/src/<a class="el" href="graphviewer_8h_source.html">graphviewer.h</a></li>
-<li>C:/Users/josea/Documents/GitHub/CAL-Proj/EasyPilot/src/graphviewer.cpp</li>
+<li>C:/Users/josea/Documents/GitHub/CAL-EasyPilot/EasyPilot/src/<a class="el" href="graphviewer_8h_source.html">graphviewer.h</a></li>
+<li>C:/Users/josea/Documents/GitHub/CAL-EasyPilot/EasyPilot/src/<a class="el" href="graphviewer_8cpp.html">graphviewer.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

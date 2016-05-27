@@ -1,0 +1,6 @@
+digraph "std::MenuManager"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="{std::MenuManager\n||+ MenuManager()\l+ ~MenuManager()\l+ navigationOptions()\l+ navigation()\l+ mapSelection()\l+ mainMenu()\l+ ApproximateDistrictSelection()\l+ ExactDistrictSelection()\l+ ApproximateDestSelection()\l+ ExactDestSelection()\l+ inputOptions()\l+ menuOptions()\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+}

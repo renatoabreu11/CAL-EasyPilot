@@ -1,5 +1,11 @@
 var searchData=
 [
-  ['graphinfotogv',['graphInfoToGV',['../class_easy_pilot.html#a1390dbc215f3376a9954f89c52c3cc32',1,'EasyPilot']]],
-  ['graphviewer',['GraphViewer',['../class_graph_viewer.html#a8adc614f4fc290a3efcec7d7ceb1c58a',1,'GraphViewer::GraphViewer(int width, int height, bool dynamic)'],['../class_graph_viewer.html#ad9d7b1d8b4ba8ef18517eae0e68568a2',1,'GraphViewer::GraphViewer(int width, int height, bool dynamic, int port_n)']]]
+  ['defineedgecolor',['defineEdgeColor',['../class_graph_viewer.html#a4102580b69826ba83251ef7bb262f8be',1,'GraphViewer']]],
+  ['defineedgecurved',['defineEdgeCurved',['../class_graph_viewer.html#a08f362be0e682d91e7506dca8caae1b8',1,'GraphViewer']]],
+  ['defineedgedashed',['defineEdgeDashed',['../class_graph_viewer.html#af785279b5c204df0e274b20c36276fc3',1,'GraphViewer']]],
+  ['definevertexcolor',['defineVertexColor',['../class_graph_viewer.html#a76de8676b7a93d72af514b84cdaa4d21',1,'GraphViewer']]],
+  ['definevertexicon',['defineVertexIcon',['../class_graph_viewer.html#af1adb6a361457187a820e01dcf0a34b7',1,'GraphViewer']]],
+  ['definevertexsize',['defineVertexSize',['../class_graph_viewer.html#ac4b2a9fec74d38e64088aa79ca4b7d9b',1,'GraphViewer']]],
+  ['dfs',['dfs',['../class_graph.html#a3f62ba0e37c5c011299c93d60e3a8be3',1,'Graph']]],
+  ['dijkstrashortestpath',['dijkstraShortestPath',['../class_graph.html#a445a38cf4045797198eae2b818b602de',1,'Graph']]]
 ];

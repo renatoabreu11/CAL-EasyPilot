@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.10"/>
-<title>EasyPilot 1.0.0: Referência à classe Template Graph&lt; T &gt;</title>
+<title>EasyPilot 1.1.0: Referência à classe Template Graph&lt; T &gt;</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -23,7 +23,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">EasyPilot 1.0.0
+   <div id="projectname">EasyPilot 1.1.0
    </div>
   </td>
  </tr>
@@ -38,6 +38,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Localizar');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Página&#160;principal</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Ficheiros</span></a></li>
       <li>
@@ -88,110 +89,178 @@ var searchBox = new SearchBox("searchBox", "search",false,'Localizar');
 <div class="title">Referência à classe Template Graph&lt; T &gt;</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="_graph_8h_source.html">Graph.h</a>&gt;</code></p>
 <div class="dynheader">
 Diagrama de colaboração para Graph&lt; T &gt;:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_graph__coll__graph.png" border="0" usemap="#_graph_3_01_t_01_4_coll__map" alt="Collaboration graph"/></div>
-<map name="_graph_3_01_t_01_4_coll__map" id="_graph_3_01_t_01_4_coll__map">
-</map>
+<!-- MAP 0 -->
 </div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Membros públicos</h2></td></tr>
-<tr class="memitem:a6283650774199e3dc971f226eb35cf50"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6283650774199e3dc971f226eb35cf50"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>addVertex</b> (const T &amp;in, double longitude, double latitude)</td></tr>
+<tr class="memitem:a6283650774199e3dc971f226eb35cf50"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#a6283650774199e3dc971f226eb35cf50">addVertex</a> (const T &amp;in, double longitude, double latitude)</td></tr>
 <tr class="separator:a6283650774199e3dc971f226eb35cf50"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:add7835e0874b6bb515980db864e39a86"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="add7835e0874b6bb515980db864e39a86"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>addEdge</b> (const T &amp;sourc, const T &amp;dest, double w, bool tw, bool blocked, T id, string name)</td></tr>
+<tr class="memitem:add7835e0874b6bb515980db864e39a86"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#add7835e0874b6bb515980db864e39a86">addEdge</a> (const T &amp;sourc, const T &amp;dest, double w, bool tw, bool blocked, T id, string name)</td></tr>
 <tr class="separator:add7835e0874b6bb515980db864e39a86"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af9c903104ad69a7782979fa9caedf163"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af9c903104ad69a7782979fa9caedf163"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>removeVertex</b> (const T &amp;in)</td></tr>
+<tr class="memitem:af9c903104ad69a7782979fa9caedf163"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#af9c903104ad69a7782979fa9caedf163">removeVertex</a> (const T &amp;in)</td></tr>
 <tr class="separator:af9c903104ad69a7782979fa9caedf163"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1106092a37366486cf55576f9ec01692"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1106092a37366486cf55576f9ec01692"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>removeEdge</b> (const T &amp;sourc, const T &amp;dest)</td></tr>
+<tr class="memitem:a1106092a37366486cf55576f9ec01692"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#a1106092a37366486cf55576f9ec01692">removeEdge</a> (const T &amp;sourc, const T &amp;dest)</td></tr>
 <tr class="separator:a1106092a37366486cf55576f9ec01692"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3f62ba0e37c5c011299c93d60e3a8be3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3f62ba0e37c5c011299c93d60e3a8be3"></a>
-vector&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>dfs</b> () const </td></tr>
+<tr class="memitem:a3f62ba0e37c5c011299c93d60e3a8be3"><td class="memItemLeft" align="right" valign="top">vector&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#a3f62ba0e37c5c011299c93d60e3a8be3">dfs</a> () const </td></tr>
 <tr class="separator:a3f62ba0e37c5c011299c93d60e3a8be3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0e9598b98be2570eb432690411a577e8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0e9598b98be2570eb432690411a577e8"></a>
-vector&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>bfs</b> (<a class="el" href="class_vertex.html">Vertex</a>&lt; T &gt; *v) const </td></tr>
+<tr class="memitem:a0e9598b98be2570eb432690411a577e8"><td class="memItemLeft" align="right" valign="top">vector&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#a0e9598b98be2570eb432690411a577e8">bfs</a> (<a class="el" href="class_vertex.html">Vertex</a>&lt; T &gt; *v) const </td></tr>
 <tr class="separator:a0e9598b98be2570eb432690411a577e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab8fd74c3cf8dca6eaa82d39fd1216f52"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab8fd74c3cf8dca6eaa82d39fd1216f52"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>maxNewChildren</b> (<a class="el" href="class_vertex.html">Vertex</a>&lt; T &gt; *v, T &amp;inf) const </td></tr>
+<tr class="memitem:ab8fd74c3cf8dca6eaa82d39fd1216f52"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#ab8fd74c3cf8dca6eaa82d39fd1216f52">maxNewChildren</a> (<a class="el" href="class_vertex.html">Vertex</a>&lt; T &gt; *v, T &amp;inf) const </td></tr>
 <tr class="separator:ab8fd74c3cf8dca6eaa82d39fd1216f52"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab7dc5ec1c34df811d560021b726e95ec"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab7dc5ec1c34df811d560021b726e95ec"></a>
-vector&lt; <a class="el" href="class_vertex.html">Vertex</a>&lt; T &gt; * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getVertexSet</b> () const </td></tr>
+<tr class="memitem:ab7dc5ec1c34df811d560021b726e95ec"><td class="memItemLeft" align="right" valign="top">vector&lt; <a class="el" href="class_vertex.html">Vertex</a>&lt; T &gt; * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#ab7dc5ec1c34df811d560021b726e95ec">getVertexSet</a> () const </td></tr>
 <tr class="separator:ab7dc5ec1c34df811d560021b726e95ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a295932f117d92c825a97ec458e0fb332"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a295932f117d92c825a97ec458e0fb332"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>getNumVertex</b> () const </td></tr>
+<tr class="memitem:a295932f117d92c825a97ec458e0fb332"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#a295932f117d92c825a97ec458e0fb332">getNumVertex</a> () const </td></tr>
 <tr class="separator:a295932f117d92c825a97ec458e0fb332"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a98ad6f08d48ceb7527cb37433c0efc56"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a98ad6f08d48ceb7527cb37433c0efc56"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>getVertexIndex</b> (const T &amp;v) const </td></tr>
+<tr class="memitem:a98ad6f08d48ceb7527cb37433c0efc56"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#a98ad6f08d48ceb7527cb37433c0efc56">getVertexIndex</a> (const T &amp;v) const </td></tr>
 <tr class="separator:a98ad6f08d48ceb7527cb37433c0efc56"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a41708134b9e518beea032e6e62d84bef"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#a41708134b9e518beea032e6e62d84bef">calculateEdgeWeight</a> (T id1, T id2) const </td></tr>
 <tr class="separator:a41708134b9e518beea032e6e62d84bef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7b9a7f15067572593b8be54c59ac1b32"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#a7b9a7f15067572593b8be54c59ac1b32">applyTollWeight</a> (<a class="el" href="class_toll.html">Toll</a> &amp;t, <a class="el" href="class_graph_viewer.html">GraphViewer</a> *gv)</td></tr>
 <tr class="memdesc:a7b9a7f15067572593b8be54c59ac1b32"><td class="mdescLeft">&#160;</td><td class="mdescRight">Takes a toll and applies a change of weight to all its adjacent edges, according to its cost. It adds 100*cost to the weight of the edge.  <a href="#a7b9a7f15067572593b8be54c59ac1b32">Mais...</a><br /></td></tr>
 <tr class="separator:a7b9a7f15067572593b8be54c59ac1b32"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adbb6e61a997bdd22911d5f38361d38bd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adbb6e61a997bdd22911d5f38361d38bd"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>removeTollWeight</b> (<a class="el" href="class_toll.html">Toll</a> &amp;t, <a class="el" href="class_graph_viewer.html">GraphViewer</a> *gv)</td></tr>
+<tr class="memitem:adbb6e61a997bdd22911d5f38361d38bd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#adbb6e61a997bdd22911d5f38361d38bd">removeTollWeight</a> (<a class="el" href="class_toll.html">Toll</a> &amp;t, <a class="el" href="class_graph_viewer.html">GraphViewer</a> *gv)</td></tr>
 <tr class="separator:adbb6e61a997bdd22911d5f38361d38bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a08a95472b0d9bd7321660940807af060"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a08a95472b0d9bd7321660940807af060"></a>
-<a class="el" href="class_vertex.html">Vertex</a>&lt; T &gt; *&#160;</td><td class="memItemRight" valign="bottom"><b>getVertex</b> (const T &amp;v) const </td></tr>
+<tr class="memitem:a08a95472b0d9bd7321660940807af060"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_vertex.html">Vertex</a>&lt; T &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#a08a95472b0d9bd7321660940807af060">getVertex</a> (const T &amp;v) const </td></tr>
 <tr class="separator:a08a95472b0d9bd7321660940807af060"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a45b90c42b1fd441a721cb3af43d07f07"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a45b90c42b1fd441a721cb3af43d07f07"></a>
-<a class="el" href="class_edge.html">Edge</a>&lt; T &gt; *&#160;</td><td class="memItemRight" valign="bottom"><b>getEdge</b> (const T &amp;v) const </td></tr>
+<tr class="memitem:a45b90c42b1fd441a721cb3af43d07f07"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_edge.html">Edge</a>&lt; T &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#a45b90c42b1fd441a721cb3af43d07f07">getEdge</a> (const T &amp;v) const </td></tr>
 <tr class="separator:a45b90c42b1fd441a721cb3af43d07f07"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af34eb86d804272e6e3e221a9ed688c53"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af34eb86d804272e6e3e221a9ed688c53"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>resetIndegrees</b> ()</td></tr>
+<tr class="memitem:af34eb86d804272e6e3e221a9ed688c53"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#af34eb86d804272e6e3e221a9ed688c53">resetIndegrees</a> ()</td></tr>
 <tr class="separator:af34eb86d804272e6e3e221a9ed688c53"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa1a3c754f51a888e25dff2b26dfb85fc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa1a3c754f51a888e25dff2b26dfb85fc"></a>
-vector&lt; <a class="el" href="class_vertex.html">Vertex</a>&lt; T &gt; * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getSources</b> () const </td></tr>
+<tr class="memitem:aa1a3c754f51a888e25dff2b26dfb85fc"><td class="memItemLeft" align="right" valign="top">vector&lt; <a class="el" href="class_vertex.html">Vertex</a>&lt; T &gt; * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#aa1a3c754f51a888e25dff2b26dfb85fc">getSources</a> () const </td></tr>
 <tr class="separator:aa1a3c754f51a888e25dff2b26dfb85fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a694dff81073c38b669057f0c6bd4cbb1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a694dff81073c38b669057f0c6bd4cbb1"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>getNumCycles</b> ()</td></tr>
+<tr class="memitem:a694dff81073c38b669057f0c6bd4cbb1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#a694dff81073c38b669057f0c6bd4cbb1">getNumCycles</a> ()</td></tr>
 <tr class="separator:a694dff81073c38b669057f0c6bd4cbb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2e75512c089c3916dda9cf61e1185d9d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2e75512c089c3916dda9cf61e1185d9d"></a>
-vector&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>topologicalOrder</b> ()</td></tr>
+<tr class="memitem:a2e75512c089c3916dda9cf61e1185d9d"><td class="memItemLeft" align="right" valign="top">vector&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#a2e75512c089c3916dda9cf61e1185d9d">topologicalOrder</a> ()</td></tr>
 <tr class="separator:a2e75512c089c3916dda9cf61e1185d9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab4054ca572c10669dd3e05d6d41c116c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab4054ca572c10669dd3e05d6d41c116c"></a>
-vector&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getPath</b> (const T &amp;origin, const T &amp;dest)</td></tr>
+<tr class="memitem:ab4054ca572c10669dd3e05d6d41c116c"><td class="memItemLeft" align="right" valign="top">vector&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#ab4054ca572c10669dd3e05d6d41c116c">getPath</a> (const T &amp;origin, const T &amp;dest)</td></tr>
 <tr class="separator:ab4054ca572c10669dd3e05d6d41c116c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae5264597aacaf4f45819e96a6d6c89aa"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae5264597aacaf4f45819e96a6d6c89aa"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>unweightedShortestPath</b> (const T &amp;v)</td></tr>
+<tr class="memitem:ae5264597aacaf4f45819e96a6d6c89aa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#ae5264597aacaf4f45819e96a6d6c89aa">unweightedShortestPath</a> (const T &amp;v)</td></tr>
 <tr class="separator:ae5264597aacaf4f45819e96a6d6c89aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab49d07c2bd6b8b30d5ae82bc558b821a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab49d07c2bd6b8b30d5ae82bc558b821a"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>isDAG</b> ()</td></tr>
+<tr class="memitem:ab49d07c2bd6b8b30d5ae82bc558b821a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#ab49d07c2bd6b8b30d5ae82bc558b821a">isDAG</a> ()</td></tr>
 <tr class="separator:ab49d07c2bd6b8b30d5ae82bc558b821a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1d6769b79beaa76f78fd9c9209833bef"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1d6769b79beaa76f78fd9c9209833bef"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>bellmanFordShortestPath</b> (const T &amp;s)</td></tr>
+<tr class="memitem:a1d6769b79beaa76f78fd9c9209833bef"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#a1d6769b79beaa76f78fd9c9209833bef">bellmanFordShortestPath</a> (const T &amp;s)</td></tr>
 <tr class="separator:a1d6769b79beaa76f78fd9c9209833bef"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a445a38cf4045797198eae2b818b602de"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a445a38cf4045797198eae2b818b602de"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>dijkstraShortestPath</b> (const T &amp;s)</td></tr>
+<tr class="memitem:a445a38cf4045797198eae2b818b602de"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#a445a38cf4045797198eae2b818b602de">dijkstraShortestPath</a> (const T &amp;s)</td></tr>
 <tr class="separator:a445a38cf4045797198eae2b818b602de"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae5161f4408bf1ead2b29d19d67fb04ee"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae5161f4408bf1ead2b29d19d67fb04ee"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>floydWarshallShortestPath</b> ()</td></tr>
+<tr class="memitem:ae5161f4408bf1ead2b29d19d67fb04ee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#ae5161f4408bf1ead2b29d19d67fb04ee">floydWarshallShortestPath</a> ()</td></tr>
 <tr class="separator:ae5161f4408bf1ead2b29d19d67fb04ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7e137f1ef838395ac1044a944fa54448"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7e137f1ef838395ac1044a944fa54448"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>edgeCost</b> (int vOrigIndex, int vDestIndex)</td></tr>
+<tr class="memitem:a7e137f1ef838395ac1044a944fa54448"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#a7e137f1ef838395ac1044a944fa54448">edgeCost</a> (int vOrigIndex, int vDestIndex)</td></tr>
 <tr class="separator:a7e137f1ef838395ac1044a944fa54448"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab23d1dae92a7f2b29dcb91a94336674c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab23d1dae92a7f2b29dcb91a94336674c"></a>
-vector&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getfloydWarshallPath</b> (const T &amp;origin, const T &amp;dest)</td></tr>
+<tr class="memitem:ab23d1dae92a7f2b29dcb91a94336674c"><td class="memItemLeft" align="right" valign="top">vector&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#ab23d1dae92a7f2b29dcb91a94336674c">getfloydWarshallPath</a> (const T &amp;origin, const T &amp;dest)</td></tr>
 <tr class="separator:ab23d1dae92a7f2b29dcb91a94336674c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aad1eda4beb8425d03ed1f3b8af397563"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aad1eda4beb8425d03ed1f3b8af397563"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>getfloydWarshallPathAux</b> (int index1, int index2, vector&lt; T &gt; &amp;res)</td></tr>
+<tr class="memitem:aad1eda4beb8425d03ed1f3b8af397563"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#aad1eda4beb8425d03ed1f3b8af397563">getfloydWarshallPathAux</a> (int index1, int index2, vector&lt; T &gt; &amp;res)</td></tr>
 <tr class="separator:aad1eda4beb8425d03ed1f3b8af397563"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad10eead5afadfb05a78fd8dd606238f8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad10eead5afadfb05a78fd8dd606238f8"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>getNumEdge</b> () const </td></tr>
+<tr class="memitem:ad10eead5afadfb05a78fd8dd606238f8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#ad10eead5afadfb05a78fd8dd606238f8">getNumEdge</a> () const </td></tr>
 <tr class="separator:ad10eead5afadfb05a78fd8dd606238f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a18b0ca37a9f279089a71aa5c3ba16e1e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a18b0ca37a9f279089a71aa5c3ba16e1e"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>clearGraph</b> ()</td></tr>
+<tr class="memitem:a18b0ca37a9f279089a71aa5c3ba16e1e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#a18b0ca37a9f279089a71aa5c3ba16e1e">clearGraph</a> ()</td></tr>
 <tr class="separator:a18b0ca37a9f279089a71aa5c3ba16e1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a338f11555225fc082d5f5777cfd2e01d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a338f11555225fc082d5f5777cfd2e01d"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setEdgeBlocked</b> (const T &amp;v, bool b)</td></tr>
+<tr class="memitem:a338f11555225fc082d5f5777cfd2e01d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#a338f11555225fc082d5f5777cfd2e01d">setEdgeBlocked</a> (const T &amp;v, bool b)</td></tr>
 <tr class="separator:a338f11555225fc082d5f5777cfd2e01d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01596fd3f6172ec6bc08735f12d2f5d6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#a01596fd3f6172ec6bc08735f12d2f5d6">searchForDuplicate</a> (map&lt; string, int &gt; roadInfo, string roadName) const </td></tr>
+<tr class="separator:a01596fd3f6172ec6bc08735f12d2f5d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8742da873834a14c11c35b9089f33e97"><td class="memItemLeft" align="right" valign="top">map&lt; string, int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#a8742da873834a14c11c35b9089f33e97">getEdgesNames</a> () const </td></tr>
+<tr class="separator:a8742da873834a14c11c35b9089f33e97"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Documentação dos métodos</h2>
+<a class="anchor" id="add7835e0874b6bb515980db864e39a86"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="class_graph.html">Graph</a>&lt; T &gt;::addEdge </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>sourc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>dest</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>w</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>tw</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>blocked</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>name</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a6283650774199e3dc971f226eb35cf50"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="class_graph.html">Graph</a>&lt; T &gt;::addVertex </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>longitude</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>latitude</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a7b9a7f15067572593b8be54c59ac1b32"></a>
 <div class="memitem">
 <div class="memproto">
@@ -225,6 +294,42 @@ template&lt;class T &gt; </div>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a class="anchor" id="a1d6769b79beaa76f78fd9c9209833bef"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_graph.html">Graph</a>&lt; T &gt;::bellmanFordShortestPath </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>s</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a0e9598b98be2570eb432690411a577e8"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">vector&lt; T &gt; <a class="el" href="class_graph.html">Graph</a>&lt; T &gt;::bfs </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_vertex.html">Vertex</a>&lt; T &gt; *&#160;</td>
+          <td class="paramname"><em>v</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -264,8 +369,578 @@ template&lt;class T&gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="a18b0ca37a9f279089a71aa5c3ba16e1e"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_graph.html">Graph</a>&lt; T &gt;::clearGraph </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a3f62ba0e37c5c011299c93d60e3a8be3"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">vector&lt; T &gt; <a class="el" href="class_graph.html">Graph</a>&lt; T &gt;::dfs </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a445a38cf4045797198eae2b818b602de"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_graph.html">Graph</a>&lt; T &gt;::dijkstraShortestPath </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>s</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a7e137f1ef838395ac1044a944fa54448"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="class_graph.html">Graph</a>&lt; T &gt;::edgeCost </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>vOrigIndex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>vDestIndex</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ae5161f4408bf1ead2b29d19d67fb04ee"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_graph.html">Graph</a>&lt; T &gt;::floydWarshallShortestPath </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a45b90c42b1fd441a721cb3af43d07f07"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_edge.html">Edge</a>&lt;T&gt;* <a class="el" href="class_graph.html">Graph</a>&lt; T &gt;::getEdge </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>v</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a8742da873834a14c11c35b9089f33e97"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">map&lt; string, int &gt; <a class="el" href="class_graph.html">Graph</a>&lt; T &gt;::getEdgesNames </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ab23d1dae92a7f2b29dcb91a94336674c"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">vector&lt; T &gt; <a class="el" href="class_graph.html">Graph</a>&lt; T &gt;::getfloydWarshallPath </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>origin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>dest</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aad1eda4beb8425d03ed1f3b8af397563"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_graph.html">Graph</a>&lt; T &gt;::getfloydWarshallPathAux </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>index1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>index2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">vector&lt; T &gt; &amp;&#160;</td>
+          <td class="paramname"><em>res</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a694dff81073c38b669057f0c6bd4cbb1"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="class_graph.html">Graph</a>&lt; T &gt;::getNumCycles </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ad10eead5afadfb05a78fd8dd606238f8"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="class_graph.html">Graph</a>&lt; T &gt;::getNumEdge </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a295932f117d92c825a97ec458e0fb332"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="class_graph.html">Graph</a>&lt; T &gt;::getNumVertex </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ab4054ca572c10669dd3e05d6d41c116c"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">vector&lt; T &gt; <a class="el" href="class_graph.html">Graph</a>&lt; T &gt;::getPath </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>origin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>dest</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aa1a3c754f51a888e25dff2b26dfb85fc"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">vector&lt; <a class="el" href="class_vertex.html">Vertex</a>&lt; T &gt; * &gt; <a class="el" href="class_graph.html">Graph</a>&lt; T &gt;::getSources </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a08a95472b0d9bd7321660940807af060"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_vertex.html">Vertex</a>&lt; T &gt; * <a class="el" href="class_graph.html">Graph</a>&lt; T &gt;::getVertex </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>v</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a98ad6f08d48ceb7527cb37433c0efc56"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="class_graph.html">Graph</a>&lt; T &gt;::getVertexIndex </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>v</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ab7dc5ec1c34df811d560021b726e95ec"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">vector&lt; <a class="el" href="class_vertex.html">Vertex</a>&lt; T &gt; * &gt; <a class="el" href="class_graph.html">Graph</a>&lt; T &gt;::getVertexSet </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ab49d07c2bd6b8b30d5ae82bc558b821a"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="class_graph.html">Graph</a>&lt; T &gt;::isDAG </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ab8fd74c3cf8dca6eaa82d39fd1216f52"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="class_graph.html">Graph</a>&lt; T &gt;::maxNewChildren </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_vertex.html">Vertex</a>&lt; T &gt; *&#160;</td>
+          <td class="paramname"><em>v</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T &amp;&#160;</td>
+          <td class="paramname"><em>inf</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a1106092a37366486cf55576f9ec01692"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="class_graph.html">Graph</a>&lt; T &gt;::removeEdge </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>sourc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>dest</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="adbb6e61a997bdd22911d5f38361d38bd"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_graph.html">Graph</a>&lt; T &gt;::removeTollWeight </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_toll.html">Toll</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_graph_viewer.html">GraphViewer</a> *&#160;</td>
+          <td class="paramname"><em>gv</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="af9c903104ad69a7782979fa9caedf163"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="class_graph.html">Graph</a>&lt; T &gt;::removeVertex </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>in</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="af34eb86d804272e6e3e221a9ed688c53"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_graph.html">Graph</a>&lt; T &gt;::resetIndegrees </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a01596fd3f6172ec6bc08735f12d2f5d6"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="class_graph.html">Graph</a>&lt; T &gt;::searchForDuplicate </td>
+          <td>(</td>
+          <td class="paramtype">map&lt; string, int &gt;&#160;</td>
+          <td class="paramname"><em>roadInfo</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>roadName</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a338f11555225fc082d5f5777cfd2e01d"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_graph.html">Graph</a>&lt; T &gt;::setEdgeBlocked </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>v</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>b</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a2e75512c089c3916dda9cf61e1185d9d"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">vector&lt; T &gt; <a class="el" href="class_graph.html">Graph</a>&lt; T &gt;::topologicalOrder </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ae5264597aacaf4f45819e96a6d6c89aa"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_graph.html">Graph</a>&lt; T &gt;::unweightedShortestPath </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>v</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <hr/>A documentação para esta classe foi gerada a partir do seguinte ficheiro:<ul>
-<li>C:/Users/josea/Documents/GitHub/CAL-Proj/EasyPilot/src/<a class="el" href="_graph_8h_source.html">Graph.h</a></li>
+<li>C:/Users/josea/Documents/GitHub/CAL-EasyPilot/EasyPilot/src/<a class="el" href="_graph_8h_source.html">Graph.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
