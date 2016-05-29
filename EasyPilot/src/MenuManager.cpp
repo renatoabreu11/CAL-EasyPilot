@@ -317,8 +317,8 @@ void MenuManager::ExactDestSelection(EasyPilot *gps) {
 
 	if (algorithm->kmp(roadNames, typedRoadName)) {
 		it = roadInfo.find(typedRoadName);
-		gps->setsourceID(it->second);
-		cout << "You've set the origin to '" << it->first << "' road, node --> " << it->second << endl;
+		gps->setdestinyID(it->second);
+		cout << "You've set the destination to '" << it->first << "' road, node --> " << it->second << endl;
 	} else
 		cout << "Couldn't find '" << typedRoadName << "' road, please try again\n";
 }
