@@ -1,6 +1,0 @@
-digraph "EasyPilot"
-{
-  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
-  node [fontname="Helvetica",fontsize="10",shape=record];
-  Node1 [label="{EasyPilot\n||+ EasyPilot()\l+ ~EasyPilot()\l+ readOSM()\l+ graphInfoToGV()\l+ highlightNode()\l+ highlightEdge()\l+ getWeightOfPath()\l+ sortPOIsByWeight()\l+ highlightPath()\l+ HighLightShortestPath()\le 19 mais...\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
-}
