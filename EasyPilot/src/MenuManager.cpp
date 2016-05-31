@@ -315,8 +315,22 @@ void MenuManager::ExactDestSelection(EasyPilot *gps) {
 	cout << "\nType the desired road name:\n>>";
 	getline(cin, typedRoadName);
 
-	if (algorithm->kmp(roadNames, typedRoadName)) {
-		it = roadInfo.find(typedRoadName);
+	vector<string> matches = algorithm->kmp(roadNames, typedRoadName);
+
+	if (matches.size() != 0) {
+		for(int i = 0; i < matches.size(); i++)
+		{
+			cout << i + 1 << "-" << matches[i] << endl;
+		}
+
+		int chosen;
+
+		cout << ">>";
+		cin >> chosen;
+		cout << endl;
+
+		it = roadInfo.find(matches[chosen-1]);
+
 		gps->setdestinyID(it->second);
 		cout << "You've set the destination to '" << it->first << "' road, node --> " << it->second << endl;
 	} else
@@ -468,11 +482,27 @@ void MenuManager::ExactDistrictSelection(EasyPilot *gps) {
 	cout << "\nType the desired district:\n>> ";
 	cin >> typedDistrict;
 	StringAlgorithms *algorithm = new StringAlgorithms();
-	if (algorithm->kmp(districts, typedDistrict)) {
-		gps->setMap(typedDistrict);
-		cout << "\n" << gps->getMap() << " map is the choosen one.\n";
-	} else
-		cout << "There's no district named '" << typedDistrict << "' in the database...\n";
+
+	vector<string> matches = algorithm->kmp(districts, typedDistrict);
+
+		if (matches.size() != 0) {
+
+			for(int i = 0; i < matches.size(); i++)
+			{
+				cout << i + 1 << "-" << matches[i] << endl;
+			}
+
+			int chosen;
+
+			cout << ">>";
+			cin >> chosen;
+			cout << endl;
+
+			gps->setMap(matches[chosen-1]);
+
+			cout << "\n" << gps->getMap() << " is the chosen map.\n";
+		} else
+			cout << "There's no map of " << typedDistrict<< "in the database...\n";
 }
 
 void MenuManager::inputOptions(EasyPilot *gps) {

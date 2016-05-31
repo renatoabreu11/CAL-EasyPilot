@@ -54,6 +54,7 @@ int Toll::getWeightAdd() const {
 }
 
 /**
+ * @fn editDistance
  * @brief Calculates the edit (Levenshtein) distance between two strings. This is the number of deletions, substitutions and/or insertions needed
  * to make one string match the other.	It implements Wagner-Fischer dynamic algorithm.
  * @param s1 First string.
@@ -97,11 +98,13 @@ void StringAlgorithms::pre_kmp(string toSearch, vector<int> & prefix) {
 	}
 }
 
-bool StringAlgorithms::kmp(vector<string> toCompare, string toSearch) {
+vector<string> StringAlgorithms::kmp(vector<string> toCompare, string toSearch) {
 	int num = 0;
 	int m = toSearch.length();
 	vector<int> prefix(m);
 	pre_kmp(toSearch, prefix);
+
+	vector<string> ret;
 
 	int n;
 	for (int k = 0; k < toCompare.size(); k++) {
@@ -114,9 +117,9 @@ bool StringAlgorithms::kmp(vector<string> toCompare, string toSearch) {
 			if (toSearch[q + 1] == toCompare[k][i])
 				q++;
 			if (q == m - 1)
-				return true;
+				ret.push_back(toCompare[k]);
 		}
 	}
 
-	return false;
+	return ret;
 }

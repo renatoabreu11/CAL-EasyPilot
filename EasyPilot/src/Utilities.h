@@ -18,7 +18,7 @@ class StringAlgorithms{
 public:
 	int editDistance(string s1, string s2);
 	void pre_kmp(string toSearch, vector<int> & prefix);
-	bool kmp(vector<string> toCompare, string toSearch);
+	vector<string> kmp(vector<string> toCompare, string toSearch);
 };
 
 //stores the initial node ID and the last node ID. The edge between those points is inaccessible
