@@ -1,0 +1,223 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.10"/>
+<title>EasyPilot 1.1.0: Código-Fonte de C:/Users/josea/Documents/GitHub/CAL-EasyPilot/EasyPilot/src/EasyPilot.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">EasyPilot 1.1.0
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Gerado por Doxygen 1.8.10 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Localizar');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Página&#160;principal</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
+      <li><a href="annotated.html"><span>Classes</span></a></li>
+      <li class="current"><a href="files.html"><span>Ficheiros</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Localizar" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Lista&#160;de&#160;ficheiros</span></a></li>
+      <li><a href="globals.html"><span>Membros&#160;dos&#160;Ficheiros</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_8ceffd4ee35c3518d4e8bdc7e638efe8.html">Users</a></li><li class="navelem"><a class="el" href="dir_c6329affb2fdf8eab958aada9d56625d.html">josea</a></li><li class="navelem"><a class="el" href="dir_5ff2310dc515c0cc10da36cb12e70834.html">Documents</a></li><li class="navelem"><a class="el" href="dir_cb6b521a0df0ca63d395618582697742.html">GitHub</a></li><li class="navelem"><a class="el" href="dir_107e653df6ca945c821f13c72fe737b2.html">CAL-EasyPilot</a></li><li class="navelem"><a class="el" href="dir_c80512eb6c01b03b5e448d8be5296f21.html">EasyPilot</a></li><li class="navelem"><a class="el" href="dir_0e410282432b1b70f5106df7bc6fe646.html">src</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">EasyPilot.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="_easy_pilot_8h.html">Ir para a documentação deste ficheiro.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#ifndef SRC_EASYPILOT_H_</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#define SRC_EASYPILOT_H_</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_graph_8h.html">Graph.h</a>&quot;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="graphviewer_8h.html">graphviewer.h</a>&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;iostream&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;fstream&quot;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;sstream&quot;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;string&quot;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;float.h&gt;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;algorithm&gt;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_utilities_8h.html">Utilities.h</a>&quot;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;</div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="_easy_pilot_8h.html#a3b77efb639fa4f8b27aa6cf5e536d15a">   15</a></span>&#160;<span class="preprocessor">#define EDGE_THICKNESS 10</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="_easy_pilot_8h.html#aaf5601e52219ab6735bb2b8826b69ce1">   16</a></span>&#160;<span class="preprocessor">#define DEFAULT_EDGE_THICKNESS 1</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="_easy_pilot_8h.html#a0dfe0e13e911d80ff4a4ca95245895c9">   18</a></span>&#160;<span class="preprocessor">#define GV_WINDOW_WIDTH 1600    // graph viewer x resolution</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="_easy_pilot_8h.html#a4ca9c19e6fd706090e0f6138b3673537">   19</a></span>&#160;<span class="preprocessor">#define GV_WINDOW_HEIGHT 700    // gv y resolution</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
+<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="class_easy_pilot.html">   21</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_easy_pilot.html">EasyPilot</a> {</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <a class="code" href="class_graph.html">Graph&lt;unsigned&gt;</a> graph;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <a class="code" href="class_graph_viewer.html">GraphViewer</a> * gv;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordtype">string</span> map;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordtype">int</span> sourceID;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">int</span> destinyID;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordtype">int</span> POIsNavigationMethod;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    vector&lt;int&gt; nodePath;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    vector&lt;int&gt; edgePath;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    vector&lt;int&gt; pointsOfInterest;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    vector&lt;InaccessibleZone&gt; inaccessibleZones;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    vector&lt;Toll&gt; Tolls;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <a class="code" href="class_easy_pilot.html#a724cc31f52fb07f5f86a3f71592ceed6">EasyPilot</a>();</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="class_easy_pilot.html#af9dbdf328d32b3aa70de94f973335d6d">~EasyPilot</a>();</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_easy_pilot.html#a64817c638d599dc3b8d9c833a7ce33fc">readOSM</a>();</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_easy_pilot.html#a1390dbc215f3376a9954f89c52c3cc32">graphInfoToGV</a>();</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_easy_pilot.html#a640864406bf361499e587764410c87e2">highlightNode</a>(<span class="keywordtype">int</span> <span class="keywordtype">id</span>, <span class="keywordtype">string</span> color);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_easy_pilot.html#a1a020d88e153d05a4e68a258b420eaa3">highlightEdge</a>(<span class="keywordtype">int</span> <span class="keywordtype">id</span>, <span class="keywordtype">string</span> color, <span class="keywordtype">int</span> thickness);</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordtype">double</span> <a class="code" href="class_easy_pilot.html#a93f291c61c81fc5dbb46bfff63eb65ed">getWeightOfPath</a>(<span class="keywordtype">unsigned</span> nodeStartID, <span class="keywordtype">unsigned</span> nodeDestinationID);</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    vector&lt;int&gt; <a class="code" href="class_easy_pilot.html#a457e255691b25063652a589b598e1ae5">sortPOIsByWeight</a>(<span class="keyword">const</span> vector&lt;<a class="code" href="class_vertex.html">Vertex&lt;unsigned&gt;</a> *&gt; &amp;g);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_easy_pilot.html#a4e992fbc635e8505a3b9596a017455d4">highlightPath</a>(<span class="keywordtype">unsigned</span> nodeStartID, <span class="keywordtype">unsigned</span> nodeDestinationID);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_easy_pilot.html#a8470b9065378edc35c6ef71fff45affb">HighLightShortestPath</a>();</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_easy_pilot.html#ae885f727e3d2af5713f795a5b94d1472">eraseMap</a>();</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_easy_pilot.html#a14b0155023bbf1318c2f033d3c015102">updateMap</a>();</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordtype">string</span> <a class="code" href="class_easy_pilot.html#aed5bc5d07b19f6c4ed75738c85fd9cd0">getMap</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_easy_pilot.html#ad39f859cf5dcc2b1d8c97e1cb098b1af">setMap</a>(<span class="keywordtype">string</span> m);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_easy_pilot.html#a41d023b67a6e3d2ee303cc8e65b326ed">getsourceID</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_easy_pilot.html#a883991b124225932e5b683c2d09ce464">setsourceID</a>(<span class="keywordtype">int</span> <span class="keywordtype">id</span>);</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_easy_pilot.html#acd4716401c9b31adcc121311361f516d">getdestinyID</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_easy_pilot.html#a16a15fa19114daf0b59a40f976fcc5a1">setdestinyID</a>(<span class="keywordtype">int</span> <span class="keywordtype">id</span>);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_easy_pilot.html#a66c58ddfc69633955e44f81ed206a7c9">addPointOfInterest</a>(<span class="keywordtype">int</span> <span class="keywordtype">id</span>);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_easy_pilot.html#a24988647f06c8ebfb208775e491a2549">removePointOfInterest</a>(<span class="keywordtype">int</span> <span class="keywordtype">id</span>);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_easy_pilot.html#a462212efecccb55922602dda01f35e01">setPOIsNavigation</a>(<span class="keywordtype">int</span> method);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_easy_pilot.html#aaf295c560bda9154e7246b22525d44f7">addInaccessibleZone</a>(<span class="keywordtype">int</span> firstID, <span class="keywordtype">int</span> lastID);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_easy_pilot.html#a317650cbaa0b9d460bb3298b6b75ac40">removeInaccessibleZone</a>(<span class="keywordtype">int</span> <span class="keywordtype">id</span>);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    vector&lt;string&gt; <a class="code" href="class_easy_pilot.html#a5421dd20a6a8a5f29014087fd8323b62">getInaccessibleZones</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_easy_pilot.html#a74db0871ef17ad333bf22d8b261fbe2f">resetPath</a>();</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    vector&lt;string&gt; <a class="code" href="class_easy_pilot.html#a07b3d6386b5e59df00df536c123d56fb">getPointsOfInterest</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_easy_pilot.html#aaed66da7454f6181e445f0219ceda0bb">setTollWeight</a>(<span class="keywordtype">bool</span> apply);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_easy_pilot.html#ad7a6abdd782c33e553b0fa08d2119d8b">allowHighways</a>(<span class="keywordtype">bool</span> b);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_easy_pilot.html#a0711a7d369215006690e6265a34f092b">getRoadNames</a>(std::map&lt;string, int&gt; &amp;roadsInfo);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;};</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;</div>
+<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="struct_limit_coords.html">   70</a></span>&#160;<span class="keyword">struct </span><a class="code" href="struct_limit_coords.html">LimitCoords</a></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;{</div>
+<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="struct_limit_coords.html#a9a0fcf9e011923cb568a1c584a51f654">   72</a></span>&#160;    <span class="keywordtype">double</span> <a class="code" href="struct_limit_coords.html#a9a0fcf9e011923cb568a1c584a51f654">maxLat</a>;</div>
+<div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="struct_limit_coords.html#a1a647ec24500cd353ef30d0de159f0be">   73</a></span>&#160;    <span class="keywordtype">double</span> <a class="code" href="struct_limit_coords.html#a1a647ec24500cd353ef30d0de159f0be">minLat</a>;</div>
+<div class="line"><a name="l00074"></a><span class="lineno"><a class="line" href="struct_limit_coords.html#aeaddaee7845266a6f234ffd50f748ae4">   74</a></span>&#160;    <span class="keywordtype">double</span> <a class="code" href="struct_limit_coords.html#aeaddaee7845266a6f234ffd50f748ae4">maxLong</a>;</div>
+<div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="struct_limit_coords.html#a3ef4041cf2ffec8011de8ff137180895">   75</a></span>&#160;    <span class="keywordtype">double</span> <a class="code" href="struct_limit_coords.html#a3ef4041cf2ffec8011de8ff137180895">minLong</a>;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;};</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<a class="code" href="struct_limit_coords.html">LimitCoords</a> <a class="code" href="_easy_pilot_8h.html#aa816e6d4f19c6bdb30347badd078b2e0">getLimitCoords</a>(<a class="code" href="class_graph.html">Graph&lt;unsigned&gt;</a> g);</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="keywordtype">int</span> <a class="code" href="_easy_pilot_8h.html#ac26c43b10324d35cb357650d6dbae179">resizeLat</a>(<span class="keywordtype">double</span> lat, <a class="code" href="struct_limit_coords.html">LimitCoords</a> l, <span class="keywordtype">float</span> windowH);</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="keywordtype">int</span> <a class="code" href="_easy_pilot_8h.html#a710003c90db650ee83598ad056528bcc">resizeLong</a>(<span class="keywordtype">double</span> lon, <a class="code" href="struct_limit_coords.html">LimitCoords</a> l, <span class="keywordtype">float</span> windowW);</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* SRC_EASYPILOT_H_ */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="class_easy_pilot_html_a457e255691b25063652a589b598e1ae5"><div class="ttname"><a href="class_easy_pilot.html#a457e255691b25063652a589b598e1ae5">EasyPilot::sortPOIsByWeight</a></div><div class="ttdeci">vector&lt; int &gt; sortPOIsByWeight(const vector&lt; Vertex&lt; unsigned &gt; * &gt; &amp;g)</div><div class="ttdef"><b>Definition:</b> EasyPilot.cpp:339</div></div>
+<div class="ttc" id="class_easy_pilot_html_a16a15fa19114daf0b59a40f976fcc5a1"><div class="ttname"><a href="class_easy_pilot.html#a16a15fa19114daf0b59a40f976fcc5a1">EasyPilot::setdestinyID</a></div><div class="ttdeci">int setdestinyID(int id)</div><div class="ttdef"><b>Definition:</b> EasyPilot.cpp:520</div></div>
+<div class="ttc" id="class_easy_pilot_html_a5421dd20a6a8a5f29014087fd8323b62"><div class="ttname"><a href="class_easy_pilot.html#a5421dd20a6a8a5f29014087fd8323b62">EasyPilot::getInaccessibleZones</a></div><div class="ttdeci">vector&lt; string &gt; getInaccessibleZones() const </div><div class="ttdef"><b>Definition:</b> EasyPilot.cpp:643</div></div>
+<div class="ttc" id="class_vertex_html"><div class="ttname"><a href="class_vertex.html">Vertex</a></div><div class="ttdef"><b>Definition:</b> Graph.h:35</div></div>
+<div class="ttc" id="class_easy_pilot_html_af9dbdf328d32b3aa70de94f973335d6d"><div class="ttname"><a href="class_easy_pilot.html#af9dbdf328d32b3aa70de94f973335d6d">EasyPilot::~EasyPilot</a></div><div class="ttdeci">virtual ~EasyPilot()</div><div class="ttdef"><b>Definition:</b> EasyPilot.cpp:11</div></div>
+<div class="ttc" id="class_easy_pilot_html_ae885f727e3d2af5713f795a5b94d1472"><div class="ttname"><a href="class_easy_pilot.html#ae885f727e3d2af5713f795a5b94d1472">EasyPilot::eraseMap</a></div><div class="ttdeci">void eraseMap()</div><div class="ttdef"><b>Definition:</b> EasyPilot.cpp:274</div></div>
+<div class="ttc" id="class_easy_pilot_html_a07b3d6386b5e59df00df536c123d56fb"><div class="ttname"><a href="class_easy_pilot.html#a07b3d6386b5e59df00df536c123d56fb">EasyPilot::getPointsOfInterest</a></div><div class="ttdeci">vector&lt; string &gt; getPointsOfInterest() const </div><div class="ttdef"><b>Definition:</b> EasyPilot.cpp:578</div></div>
+<div class="ttc" id="class_easy_pilot_html"><div class="ttname"><a href="class_easy_pilot.html">EasyPilot</a></div><div class="ttdef"><b>Definition:</b> EasyPilot.h:21</div></div>
+<div class="ttc" id="class_easy_pilot_html_aaed66da7454f6181e445f0219ceda0bb"><div class="ttname"><a href="class_easy_pilot.html#aaed66da7454f6181e445f0219ceda0bb">EasyPilot::setTollWeight</a></div><div class="ttdeci">void setTollWeight(bool apply)</div><div class="ttdoc">If apply is TRUE, the toll weights will be applied to the map. Otherwise, they won&#39;t. </div><div class="ttdef"><b>Definition:</b> EasyPilot.cpp:656</div></div>
+<div class="ttc" id="graphviewer_8h_html"><div class="ttname"><a href="graphviewer_8h.html">graphviewer.h</a></div></div>
+<div class="ttc" id="class_easy_pilot_html_a317650cbaa0b9d460bb3298b6b75ac40"><div class="ttname"><a href="class_easy_pilot.html#a317650cbaa0b9d460bb3298b6b75ac40">EasyPilot::removeInaccessibleZone</a></div><div class="ttdeci">void removeInaccessibleZone(int id)</div><div class="ttdef"><b>Definition:</b> EasyPilot.cpp:625</div></div>
+<div class="ttc" id="class_easy_pilot_html_a93f291c61c81fc5dbb46bfff63eb65ed"><div class="ttname"><a href="class_easy_pilot.html#a93f291c61c81fc5dbb46bfff63eb65ed">EasyPilot::getWeightOfPath</a></div><div class="ttdeci">double getWeightOfPath(unsigned nodeStartID, unsigned nodeDestinationID)</div><div class="ttdef"><b>Definition:</b> EasyPilot.cpp:286</div></div>
+<div class="ttc" id="class_easy_pilot_html_a1a020d88e153d05a4e68a258b420eaa3"><div class="ttname"><a href="class_easy_pilot.html#a1a020d88e153d05a4e68a258b420eaa3">EasyPilot::highlightEdge</a></div><div class="ttdeci">int highlightEdge(int id, string color, int thickness)</div><div class="ttdef"><b>Definition:</b> EasyPilot.cpp:259</div></div>
+<div class="ttc" id="class_graph_html"><div class="ttname"><a href="class_graph.html">Graph&lt; unsigned &gt;</a></div></div>
+<div class="ttc" id="class_easy_pilot_html_a0711a7d369215006690e6265a34f092b"><div class="ttname"><a href="class_easy_pilot.html#a0711a7d369215006690e6265a34f092b">EasyPilot::getRoadNames</a></div><div class="ttdeci">void getRoadNames(std::map&lt; string, int &gt; &amp;roadsInfo)</div><div class="ttdef"><b>Definition:</b> EasyPilot.cpp:687</div></div>
+<div class="ttc" id="class_easy_pilot_html_aed5bc5d07b19f6c4ed75738c85fd9cd0"><div class="ttname"><a href="class_easy_pilot.html#aed5bc5d07b19f6c4ed75738c85fd9cd0">EasyPilot::getMap</a></div><div class="ttdeci">string getMap() const </div><div class="ttdef"><b>Definition:</b> EasyPilot.cpp:471</div></div>
+<div class="ttc" id="class_easy_pilot_html_ad7a6abdd782c33e553b0fa08d2119d8b"><div class="ttname"><a href="class_easy_pilot.html#ad7a6abdd782c33e553b0fa08d2119d8b">EasyPilot::allowHighways</a></div><div class="ttdeci">void allowHighways(bool b)</div><div class="ttdef"><b>Definition:</b> EasyPilot.cpp:667</div></div>
+<div class="ttc" id="class_easy_pilot_html_aaf295c560bda9154e7246b22525d44f7"><div class="ttname"><a href="class_easy_pilot.html#aaf295c560bda9154e7246b22525d44f7">EasyPilot::addInaccessibleZone</a></div><div class="ttdeci">int addInaccessibleZone(int firstID, int lastID)</div><div class="ttdef"><b>Definition:</b> EasyPilot.cpp:600</div></div>
+<div class="ttc" id="class_easy_pilot_html_a64817c638d599dc3b8d9c833a7ce33fc"><div class="ttname"><a href="class_easy_pilot.html#a64817c638d599dc3b8d9c833a7ce33fc">EasyPilot::readOSM</a></div><div class="ttdeci">bool readOSM()</div><div class="ttdef"><b>Definition:</b> EasyPilot.cpp:15</div></div>
+<div class="ttc" id="class_easy_pilot_html_a8470b9065378edc35c6ef71fff45affb"><div class="ttname"><a href="class_easy_pilot.html#a8470b9065378edc35c6ef71fff45affb">EasyPilot::HighLightShortestPath</a></div><div class="ttdeci">void HighLightShortestPath()</div><div class="ttdef"><b>Definition:</b> EasyPilot.cpp:369</div></div>
+<div class="ttc" id="class_easy_pilot_html_a74db0871ef17ad333bf22d8b261fbe2f"><div class="ttname"><a href="class_easy_pilot.html#a74db0871ef17ad333bf22d8b261fbe2f">EasyPilot::resetPath</a></div><div class="ttdeci">void resetPath()</div><div class="ttdef"><b>Definition:</b> EasyPilot.cpp:432</div></div>
+<div class="ttc" id="class_easy_pilot_html_a4e992fbc635e8505a3b9596a017455d4"><div class="ttname"><a href="class_easy_pilot.html#a4e992fbc635e8505a3b9596a017455d4">EasyPilot::highlightPath</a></div><div class="ttdeci">void highlightPath(unsigned nodeStartID, unsigned nodeDestinationID)</div><div class="ttdef"><b>Definition:</b> EasyPilot.cpp:308</div></div>
+<div class="ttc" id="class_easy_pilot_html_acd4716401c9b31adcc121311361f516d"><div class="ttname"><a href="class_easy_pilot.html#acd4716401c9b31adcc121311361f516d">EasyPilot::getdestinyID</a></div><div class="ttdeci">int getdestinyID() const </div><div class="ttdef"><b>Definition:</b> EasyPilot.cpp:516</div></div>
+<div class="ttc" id="_utilities_8h_html"><div class="ttname"><a href="_utilities_8h.html">Utilities.h</a></div></div>
+<div class="ttc" id="struct_limit_coords_html_aeaddaee7845266a6f234ffd50f748ae4"><div class="ttname"><a href="struct_limit_coords.html#aeaddaee7845266a6f234ffd50f748ae4">LimitCoords::maxLong</a></div><div class="ttdeci">double maxLong</div><div class="ttdef"><b>Definition:</b> EasyPilot.h:74</div></div>
+<div class="ttc" id="struct_limit_coords_html_a3ef4041cf2ffec8011de8ff137180895"><div class="ttname"><a href="struct_limit_coords.html#a3ef4041cf2ffec8011de8ff137180895">LimitCoords::minLong</a></div><div class="ttdeci">double minLong</div><div class="ttdef"><b>Definition:</b> EasyPilot.h:75</div></div>
+<div class="ttc" id="class_easy_pilot_html_a14b0155023bbf1318c2f033d3c015102"><div class="ttname"><a href="class_easy_pilot.html#a14b0155023bbf1318c2f033d3c015102">EasyPilot::updateMap</a></div><div class="ttdeci">void updateMap()</div><div class="ttdef"><b>Definition:</b> EasyPilot.cpp:270</div></div>
+<div class="ttc" id="class_easy_pilot_html_a41d023b67a6e3d2ee303cc8e65b326ed"><div class="ttname"><a href="class_easy_pilot.html#a41d023b67a6e3d2ee303cc8e65b326ed">EasyPilot::getsourceID</a></div><div class="ttdeci">int getsourceID() const </div><div class="ttdef"><b>Definition:</b> EasyPilot.cpp:479</div></div>
+<div class="ttc" id="class_easy_pilot_html_ad39f859cf5dcc2b1d8c97e1cb098b1af"><div class="ttname"><a href="class_easy_pilot.html#ad39f859cf5dcc2b1d8c97e1cb098b1af">EasyPilot::setMap</a></div><div class="ttdeci">void setMap(string m)</div><div class="ttdef"><b>Definition:</b> EasyPilot.cpp:475</div></div>
+<div class="ttc" id="class_graph_viewer_html"><div class="ttname"><a href="class_graph_viewer.html">GraphViewer</a></div><div class="ttdef"><b>Definition:</b> graphviewer.h:36</div></div>
+<div class="ttc" id="class_easy_pilot_html_a462212efecccb55922602dda01f35e01"><div class="ttname"><a href="class_easy_pilot.html#a462212efecccb55922602dda01f35e01">EasyPilot::setPOIsNavigation</a></div><div class="ttdeci">int setPOIsNavigation(int method)</div><div class="ttdef"><b>Definition:</b> EasyPilot.cpp:592</div></div>
+<div class="ttc" id="_easy_pilot_8h_html_aa816e6d4f19c6bdb30347badd078b2e0"><div class="ttname"><a href="_easy_pilot_8h.html#aa816e6d4f19c6bdb30347badd078b2e0">getLimitCoords</a></div><div class="ttdeci">LimitCoords getLimitCoords(Graph&lt; unsigned &gt; g)</div><div class="ttdef"><b>Definition:</b> EasyPilot.cpp:693</div></div>
+<div class="ttc" id="_graph_8h_html"><div class="ttname"><a href="_graph_8h.html">Graph.h</a></div></div>
+<div class="ttc" id="class_easy_pilot_html_a66c58ddfc69633955e44f81ed206a7c9"><div class="ttname"><a href="class_easy_pilot.html#a66c58ddfc69633955e44f81ed206a7c9">EasyPilot::addPointOfInterest</a></div><div class="ttdeci">int addPointOfInterest(int id)</div><div class="ttdef"><b>Definition:</b> EasyPilot.cpp:540</div></div>
+<div class="ttc" id="_easy_pilot_8h_html_a710003c90db650ee83598ad056528bcc"><div class="ttname"><a href="_easy_pilot_8h.html#a710003c90db650ee83598ad056528bcc">resizeLong</a></div><div class="ttdeci">int resizeLong(double lon, LimitCoords l, float windowW)</div><div class="ttdef"><b>Definition:</b> EasyPilot.cpp:731</div></div>
+<div class="ttc" id="struct_limit_coords_html_a1a647ec24500cd353ef30d0de159f0be"><div class="ttname"><a href="struct_limit_coords.html#a1a647ec24500cd353ef30d0de159f0be">LimitCoords::minLat</a></div><div class="ttdeci">double minLat</div><div class="ttdef"><b>Definition:</b> EasyPilot.h:73</div></div>
+<div class="ttc" id="struct_limit_coords_html"><div class="ttname"><a href="struct_limit_coords.html">LimitCoords</a></div><div class="ttdef"><b>Definition:</b> EasyPilot.h:70</div></div>
+<div class="ttc" id="class_easy_pilot_html_a640864406bf361499e587764410c87e2"><div class="ttname"><a href="class_easy_pilot.html#a640864406bf361499e587764410c87e2">EasyPilot::highlightNode</a></div><div class="ttdeci">int highlightNode(int id, string color)</div><div class="ttdef"><b>Definition:</b> EasyPilot.cpp:249</div></div>
+<div class="ttc" id="struct_limit_coords_html_a9a0fcf9e011923cb568a1c584a51f654"><div class="ttname"><a href="struct_limit_coords.html#a9a0fcf9e011923cb568a1c584a51f654">LimitCoords::maxLat</a></div><div class="ttdeci">double maxLat</div><div class="ttdef"><b>Definition:</b> EasyPilot.h:72</div></div>
+<div class="ttc" id="class_easy_pilot_html_a883991b124225932e5b683c2d09ce464"><div class="ttname"><a href="class_easy_pilot.html#a883991b124225932e5b683c2d09ce464">EasyPilot::setsourceID</a></div><div class="ttdeci">int setsourceID(int id)</div><div class="ttdef"><b>Definition:</b> EasyPilot.cpp:483</div></div>
+<div class="ttc" id="_easy_pilot_8h_html_ac26c43b10324d35cb357650d6dbae179"><div class="ttname"><a href="_easy_pilot_8h.html#ac26c43b10324d35cb357650d6dbae179">resizeLat</a></div><div class="ttdeci">int resizeLat(double lat, LimitCoords l, float windowH)</div><div class="ttdef"><b>Definition:</b> EasyPilot.cpp:726</div></div>
+<div class="ttc" id="class_easy_pilot_html_a724cc31f52fb07f5f86a3f71592ceed6"><div class="ttname"><a href="class_easy_pilot.html#a724cc31f52fb07f5f86a3f71592ceed6">EasyPilot::EasyPilot</a></div><div class="ttdeci">EasyPilot()</div><div class="ttdef"><b>Definition:</b> EasyPilot.cpp:3</div></div>
+<div class="ttc" id="class_easy_pilot_html_a24988647f06c8ebfb208775e491a2549"><div class="ttname"><a href="class_easy_pilot.html#a24988647f06c8ebfb208775e491a2549">EasyPilot::removePointOfInterest</a></div><div class="ttdeci">int removePointOfInterest(int id)</div><div class="ttdef"><b>Definition:</b> EasyPilot.cpp:566</div></div>
+<div class="ttc" id="class_easy_pilot_html_a1390dbc215f3376a9954f89c52c3cc32"><div class="ttname"><a href="class_easy_pilot.html#a1390dbc215f3376a9954f89c52c3cc32">EasyPilot::graphInfoToGV</a></div><div class="ttdeci">void graphInfoToGV()</div><div class="ttdef"><b>Definition:</b> EasyPilot.cpp:187</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Gerado por &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.10
+</small></address>
+</body>
+</html>
