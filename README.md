@@ -20,6 +20,10 @@ The goal of this project was to implement a program that identifies the path to 
 
 ## Gallery
 
+| [<img src="/res/GraphVisualization.png" width="256" heigth="256">](/res/GraphVisualization.png)                                                           | [<img src="/res/Path.png" width="256" heigth="256">](/res/Path.png)                                                   | [<img src="/res/PathWithPOI.png" width="256" heigth="256">](/res/PathWithPOI.png) |
+|:---:|:---:|:---:|
+| Graph | Path Src-Dst | Path with POI's |
+
 ## How To Run 
 1. Create an empty C++ project, using MinGW as ToolChain. 
 2. Add all EasyPilot files to the project. 
